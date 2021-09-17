@@ -2,7 +2,7 @@
 
 
 
-[toc]
+[TOC]
 
 
 
@@ -107,12 +107,12 @@
 ### 依赖
 
 ```xml
-        <!--快照版本-->
-		<dependency>
-            <groupId>com.phaeris.scindapsus</groupId>
-            <artifactId>scindapsus</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+<!--快照版本-->
+<dependency>
+    <groupId>com.phaeris.scindapsus</groupId>
+    <artifactId>scindapsus-spring-boot-starter</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
 ```
 
 

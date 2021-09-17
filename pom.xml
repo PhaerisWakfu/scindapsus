@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.phaeris.scindapsus</groupId>
-    <artifactId>scindapsus</artifactId>
+    <artifactId>scindapsus-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <developers>
