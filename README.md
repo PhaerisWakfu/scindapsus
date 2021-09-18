@@ -2,7 +2,7 @@
 
 
 
-[TOC]
+[toc]
 
 
 
@@ -113,6 +113,15 @@
     <artifactId>scindapsus-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
+<!--redis琐实现-->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+<dependency>
+<groupId>org.springframework.integration</groupId>
+<artifactId>spring-integration-redis</artifactId>
+</dependency>
 ```
 
 
@@ -146,7 +155,7 @@ public class LockService {
 
     /**
      * 因为使用AOP实现,标注注解的方法需是public,并且不支持加注解的方法之间嵌套
-     * 
+     *
      * @name: regionName
      * @key: key，name与key拼成最终的lockName，支持spel表达式（如#key、#key.length()、#p0、#a0）
      * <p>spel更多详见

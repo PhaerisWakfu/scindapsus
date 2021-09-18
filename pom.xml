@@ -100,28 +100,4 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <finalName>scindapsus</finalName>
-        <plugins>
-            <!--打包方式-->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.scandalous.ScandalousApplication</mainClass>
-                    <executable>true</executable>
-                    <classifier>exec</classifier>
-                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

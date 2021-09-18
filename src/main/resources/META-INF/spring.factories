@@ -1,4 +1,4 @@
 # Auto Configuration
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.scindapsus.lock.config.LockConfiguration,\
-com.scindapsus.lock.config.RedisLockConfiguration
+com.scindapsus.lock.config.AutowireStaticSmartInitialization

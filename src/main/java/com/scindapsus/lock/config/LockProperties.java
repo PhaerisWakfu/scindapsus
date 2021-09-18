@@ -9,9 +9,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author wyh
  * @since 1.0
  */
-@ConfigurationProperties(prefix = LockProperties.PREFIX)
 @Getter
 @Setter
+@ConfigurationProperties(prefix = LockProperties.PREFIX)
 public class LockProperties {
 
     public static final String PREFIX = "scindapsus.lock";
@@ -27,7 +27,7 @@ public class LockProperties {
     private String registryKey = "scindapsus";
 
     /**
-     * 默认过期时间
+     * 默认过期时间(milliseconds)
      */
-    private long expire = 6000;
+    private long expire = 300000;
 }

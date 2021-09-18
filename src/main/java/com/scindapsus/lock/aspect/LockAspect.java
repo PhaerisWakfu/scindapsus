@@ -31,7 +31,7 @@ import java.util.concurrent.locks.Lock;
 @AllArgsConstructor
 public class LockAspect {
 
-    private final LockRegistryFactory<?> lockRegistryFactory;
+    private final LockRegistryFactory lockRegistryFactory;
 
     private final KeyPrefixGenerator keyPrefixGenerator;
 
