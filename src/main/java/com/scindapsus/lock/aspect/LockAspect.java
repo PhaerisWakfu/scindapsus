@@ -69,7 +69,7 @@ public class LockAspect {
             locked = retryDuration > 0
                     ? obtain.tryLock(retryDuration, TimeUnit.MILLISECONDS)
                     : obtain.tryLock();
-            log.info("end of lock, lockName: [{}], locked: [{}]", lockName, locked);
+            log.debug("Try lock, lockName: [{}], locked: [{}].", lockName, locked);
 
             //加锁失败回调
             if (!locked) {
@@ -82,14 +82,14 @@ public class LockAspect {
         } catch (Throwable e) {
             //失败回调
             this.invokeFallback(callback, methodSignature, args);
-            throw new DistributedLockException("try lock proceed failed", e);
+            throw new DistributedLockException("Failed to try to lock.", e);
         } finally {
             if (locked) {
                 try {
                     obtain.unlock();
-                    log.info("release lock: [{}]", lockName);
+                    log.debug("Release lock: [{}].", lockName);
                 } catch (Exception e) {
-                    log.warn("release lock failed", e);
+                    log.debug("Release lock failed.", e);
                 }
             }
         }
@@ -108,13 +108,13 @@ public class LockAspect {
                 Method method = fallback.getMethod(methodSignature.getName(), methodSignature.getParameterTypes());
                 method.invoke(fallback.newInstance(), args);
             } catch (NoSuchMethodException e) {
-                throw new DistributedLockException("cannot find fallback method", e);
+                throw new DistributedLockException("Cannot find fallback method.", e);
             } catch (InstantiationException e) {
-                throw new DistributedLockException("fallback method must be have a empty construct", e);
+                throw new DistributedLockException("Fallback method must be have a empty construct.", e);
             } catch (IllegalAccessException e) {
-                throw new DistributedLockException("fallback method must be public", e);
+                throw new DistributedLockException("Fallback method must be public.", e);
             } catch (InvocationTargetException e) {
-                throw new DistributedLockException("invoke fallback failed", e);
+                throw new DistributedLockException("Invoke fallback failed.", e);
             }
         }
     }
@@ -134,18 +134,18 @@ public class LockAspect {
                                     Object target, Object[] args) {
         String name = null;
         if (!ObjectUtils.isEmpty(inputName)) {
-            name = parseWithExpression(inputName, methodSignature, target, args);
+            name = explainWithExpression(inputName, methodSignature, target, args);
         }
 
         String key = ObjectUtils.isEmpty(inputKey)
                 ? defaultLockKey(methodSignature)
-                : parseWithExpression(inputKey, methodSignature, target, args);
+                : explainWithExpression(inputKey, methodSignature, target, args);
 
         return keyPrefixGenerator.compute(name, key);
     }
 
     /**
-     * parse from spring expression language
+     * explain from spring expression language
      *
      * @param expression      表达式
      * @param methodSignature 方法签名
@@ -154,10 +154,10 @@ public class LockAspect {
      * @return spring expression language explain
      * @throws DistributedLockException
      */
-    private String parseWithExpression(String expression, MethodSignature methodSignature, Object target, Object[] args) {
+    private String explainWithExpression(String expression, MethodSignature methodSignature, Object target, Object[] args) {
         String parse = SpringExpressionLangParser.parse(target, expression, methodSignature.getMethod(), args);
-        log.info("expression: [{}], parse result: [{}]", expression, parse);
-        return Optional.ofNullable(parse).orElseThrow(() -> new DistributedLockException("explain expression failed"));
+        log.debug("Lock field expression: [{}], explain result: [{}].", expression, parse);
+        return Optional.ofNullable(parse).orElseThrow(() -> new DistributedLockException("Explain expression failed."));
     }
 
     /**
