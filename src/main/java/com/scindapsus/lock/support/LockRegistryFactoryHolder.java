@@ -1,12 +1,15 @@
-package com.scindapsus.lock;
+package com.scindapsus.lock.support;
 
+import com.scindapsus.lock.LockRegistryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.support.locks.LockRegistry;
 
 
 /**
+ * 手动获取琐工具类
+ *
  * @author wyh
- * @date 2021/1/7 17:56
+ * @since 1.0
  */
 public class LockRegistryFactoryHolder {
 

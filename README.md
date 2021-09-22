@@ -171,9 +171,17 @@ public class LockService {
     }
 
     @Slf4j
-    public class Fallback {
-        public void lock(Person person) {
-            log.info(">>>>fallback->{}", person);
+    public class Fallback implements LockFallback<LockService>{
+
+        @Override
+        public LockService create(Throwable cause) {
+            return new LockService() {
+                @Override
+                public void lock(Person person) {
+                    log.error("reason->", cause);
+                    log.info(">>>>fallback->{}", person);
+                }
+            };
         }
     }
 

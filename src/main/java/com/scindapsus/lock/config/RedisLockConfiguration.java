@@ -11,7 +11,7 @@ import org.springframework.integration.redis.util.RedisLockRegistry;
 import org.springframework.integration.support.locks.LockRegistry;
 
 /**
- * redis琐的实现与bean注册
+ * redis琐的实现
  *
  * @author wyh
  * @since 1.0

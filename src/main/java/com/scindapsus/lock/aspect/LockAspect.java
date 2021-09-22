@@ -1,9 +1,10 @@
 package com.scindapsus.lock.aspect;
 
+import com.scindapsus.lock.LockFallback;
 import com.scindapsus.lock.LockRegistryFactory;
 import com.scindapsus.lock.annotation.DistributedLock;
 import com.scindapsus.lock.exception.DistributedLockException;
-import com.scindapsus.lock.support.KeyPrefixGenerator;
+import com.scindapsus.lock.KeyPrefixGenerator;
 import com.scindapsus.lock.support.SpringExpressionLangParser;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.context.ApplicationContext;
 import org.springframework.integration.support.locks.LockRegistry;
 import org.springframework.util.ObjectUtils;
 
@@ -35,6 +37,8 @@ public class LockAspect {
 
     private final KeyPrefixGenerator keyPrefixGenerator;
 
+    private final ApplicationContext applicationContext;
+
     /**
      * try lock
      *
@@ -54,15 +58,14 @@ public class LockAspect {
         String key = lock.key();
         long expire = lock.expire();
         long retryDuration = lock.retryDuration();
-        Class<?> callback = lock.fallback();
+        Class<? extends LockFallback> fallback = lock.fallback();
 
         //生成实际锁名称
         String lockName = this.generateLockName(name, key, methodSignature, target, args);
-
+        //是否加锁成功
+        boolean locked = false;
         //生成工厂对应的lockRegistry实例
         LockRegistry lockRegistry = lockRegistryFactory.generate(expire);
-
-        boolean locked = false;
         Lock obtain = lockRegistry.obtain(lockName);
         try {
             //加锁
@@ -70,19 +73,15 @@ public class LockAspect {
                     ? obtain.tryLock(retryDuration, TimeUnit.MILLISECONDS)
                     : obtain.tryLock();
             log.debug("Try lock, lockName: [{}], locked: [{}].", lockName, locked);
-
             //加锁失败回调
             if (!locked) {
-                this.invokeFallback(callback, methodSignature, args);
-                return null;
+                return invokeFallback(fallback, methodSignature, args);
             }
-
             //继续执行业务逻辑
             return point.proceed();
         } catch (Throwable e) {
-            //失败回调
-            this.invokeFallback(callback, methodSignature, args);
-            throw new DistributedLockException("Failed to try to lock.", e);
+            //报错回调
+            return invokeFallback(fallback, methodSignature, args, e);
         } finally {
             if (locked) {
                 try {
@@ -101,21 +100,37 @@ public class LockAspect {
      *
      * @param fallback        回调类
      * @param methodSignature 方法签名
+     * @param args            方法参数
      */
-    private void invokeFallback(Class<?> fallback, MethodSignature methodSignature, Object[] args) {
-        if (fallback != void.class) {
-            try {
-                Method method = fallback.getMethod(methodSignature.getName(), methodSignature.getParameterTypes());
-                method.invoke(fallback.newInstance(), args);
-            } catch (NoSuchMethodException e) {
-                throw new DistributedLockException("Cannot find fallback method.", e);
-            } catch (InstantiationException e) {
-                throw new DistributedLockException("Fallback method must be have a empty construct.", e);
-            } catch (IllegalAccessException e) {
-                throw new DistributedLockException("Fallback method must be public.", e);
-            } catch (InvocationTargetException e) {
-                throw new DistributedLockException("Invoke fallback failed.", e);
-            }
+    private Object invokeFallback(Class<? extends LockFallback> fallback, MethodSignature methodSignature, Object[] args) {
+        return invokeFallback(fallback, methodSignature, args, null);
+    }
+
+    /**
+     * invoke client provide same method
+     *
+     * @param fallback        回调类
+     * @param methodSignature 方法签名
+     * @param args            方法参数
+     * @param throwable       加锁报错异常（如有）
+     */
+    private Object invokeFallback(Class<? extends LockFallback> fallback, MethodSignature methodSignature, Object[] args,
+                                  Throwable throwable) {
+        try {
+            //获取失败回调工厂
+            LockFallback target = applicationContext.getBean(fallback);
+            //获取失败回调类
+            Object create = target.create(throwable);
+            //调用回调方法
+            Method method = create.getClass().getMethod(methodSignature.getName(), methodSignature.getParameterTypes());
+            method.setAccessible(true);
+            return method.invoke(create, args);
+        } catch (NoSuchMethodException e) {
+            throw new DistributedLockException("Cannot find fallback method.", e);
+        } catch (IllegalAccessException e) {
+            throw new DistributedLockException("Fallback method must be public.", e);
+        } catch (InvocationTargetException e) {
+            throw new DistributedLockException("Invoke fallback.", e);
         }
     }
 

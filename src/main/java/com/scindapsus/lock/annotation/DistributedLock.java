@@ -1,5 +1,6 @@
 package com.scindapsus.lock.annotation;
 
+import com.scindapsus.lock.LockFallback;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
@@ -42,7 +43,7 @@ public @interface DistributedLock {
     long retryDuration() default -1;
 
     /**
-     * locked callback, must provide a same signature method
+     * locked callback, must implements {@link LockFallback}
      */
-    Class<?> fallback() default void.class;
+    Class<? extends LockFallback> fallback() default LockFallback.DefaultLockFallback.class;
 }
