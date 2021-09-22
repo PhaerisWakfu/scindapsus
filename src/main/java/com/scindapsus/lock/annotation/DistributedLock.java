@@ -34,7 +34,7 @@ public @interface DistributedLock {
     /**
      * expire time(milliseconds)
      */
-    long expire() default 60000;
+    long expire() default -1;
 
     /**
      * retry duration(milliseconds)
