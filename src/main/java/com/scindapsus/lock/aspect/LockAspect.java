@@ -156,7 +156,7 @@ public class LockAspect {
      */
     private String explainWithExpression(String expression, MethodSignature methodSignature, Object target, Object[] args) {
         String parse = SpringExpressionLangParser.parse(target, expression, methodSignature.getMethod(), args);
-        log.debug("Lock field expression: [{}], explain result: [{}].", expression, parse);
+        log.debug("Lock expression: [{}], explain result: [{}].", expression, parse);
         return Optional.ofNullable(parse).orElseThrow(() -> new DistributedLockException("Explain expression failed."));
     }
 
