@@ -2,7 +2,7 @@ package com.scindapsus.lock;
 
 
 /**
- * key前缀生成器,可自行实现自己的前缀生成器（如拼接租户等）
+ * key前缀生成器,可自行实现自己的前缀生成器(如拼接租户等)
  *
  * @author wyh
  * @since 1.0

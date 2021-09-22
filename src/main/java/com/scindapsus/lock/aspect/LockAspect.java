@@ -112,7 +112,7 @@ public class LockAspect {
      * @param fallback        回调类
      * @param methodSignature 方法签名
      * @param args            方法参数
-     * @param throwable       加锁报错异常（如有）
+     * @param throwable       加锁报错异常(如有)
      */
     private Object invokeFallback(Class<? extends LockFallback> fallback, MethodSignature methodSignature, Object[] args,
                                   Throwable throwable) {

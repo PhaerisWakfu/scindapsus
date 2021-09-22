@@ -3,7 +3,6 @@ package com.scindapsus.lock.config;
 import com.scindapsus.lock.LockFallback;
 import com.scindapsus.lock.LockRegistryFactory;
 import com.scindapsus.lock.aspect.LockAspect;
-import com.scindapsus.lock.exception.DistributedLockException;
 import com.scindapsus.lock.KeyPrefixGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -11,6 +10,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.support.locks.DefaultLockRegistry;
 
 import java.util.Optional;
 
@@ -47,8 +47,6 @@ public class LockConfiguration {
     @Bean
     @ConditionalOnMissingBean(LockRegistryFactory.class)
     public LockRegistryFactory defaultLockRegistryFactory() {
-        return expire -> {
-            throw new DistributedLockException("Please set an available lockRegistry");
-        };
+        return expire -> new DefaultLockRegistry();
     }
 }

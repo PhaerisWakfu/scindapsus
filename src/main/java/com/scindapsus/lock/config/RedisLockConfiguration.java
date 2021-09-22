@@ -42,7 +42,8 @@ public class RedisLockConfiguration {
 
         @Override
         public LockRegistry generate(long expire) {
-            return new RedisLockRegistry(connectionFactory, properties.getRegistryKey(), expire > 0 ? expire : properties.getExpire());
+            return new RedisLockRegistry(connectionFactory, properties.getRedis().getRegistryKey(),
+                    expire > 0 ? expire : properties.getRedis().getExpire());
         }
     }
 }
