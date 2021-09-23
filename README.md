@@ -115,12 +115,12 @@
 </dependency>
 <!--redis琐实现-->
 <dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-data-redis</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
 </dependency>
 <dependency>
-<groupId>org.springframework.integration</groupId>
-<artifactId>spring-integration-redis</artifactId>
+    <groupId>org.springframework.integration</groupId>
+    <artifactId>spring-integration-redis</artifactId>
 </dependency>
 ```
 
