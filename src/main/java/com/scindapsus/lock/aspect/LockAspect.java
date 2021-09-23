@@ -56,7 +56,6 @@ public class LockAspect {
 
         String name = lock.name();
         String key = lock.key();
-        long expire = lock.expire();
         long retryDuration = lock.retryDuration();
         Class<? extends LockFallback> fallback = lock.fallback();
 
@@ -65,7 +64,7 @@ public class LockAspect {
         //是否加锁成功
         boolean locked = false;
         //生成工厂对应的lockRegistry实例
-        LockRegistry lockRegistry = lockRegistryFactory.generate(expire);
+        LockRegistry lockRegistry = lockRegistryFactory.generate();
         Lock obtain = lockRegistry.obtain(lockName);
         try {
             //加锁

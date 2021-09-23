@@ -28,6 +28,12 @@ public class LockProperties {
     @NestedConfigurationProperty
     private Redis redis = new Redis();
 
+    /**
+     * zk琐额外配置
+     */
+    @NestedConfigurationProperty
+    private Zookeeper zookeeper = new Zookeeper();
+
 
     @Getter
     @Setter
@@ -39,9 +45,33 @@ public class LockProperties {
         private String registryKey = "scindapsus";
 
         /**
-         * 默认过期时间(milliseconds)
+         * 琐过期时间,没注解优先级高(milliseconds)
          */
         private long expire = 60000;
     }
 
+    @Getter
+    @Setter
+    public static class Zookeeper {
+
+        /**
+         * zk连接
+         */
+        private String connectionString = "127.0.0.1:2181";
+
+        /**
+         * the path root (no trailing /).
+         */
+        private String root;
+
+        /**
+         * 连接重试之间等待的初始时间(milliseconds)
+         */
+        private int baseSleepTimeMs = 1000;
+
+        /**
+         * 连接最大重试次数
+         */
+        private int maxRetries = 3;
+    }
 }

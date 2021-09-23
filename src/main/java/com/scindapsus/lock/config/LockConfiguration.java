@@ -47,6 +47,6 @@ public class LockConfiguration {
     @Bean
     @ConditionalOnMissingBean(LockRegistryFactory.class)
     public LockRegistryFactory defaultLockRegistryFactory() {
-        return expire -> new DefaultLockRegistry();
+        return DefaultLockRegistry::new;
     }
 }

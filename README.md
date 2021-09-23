@@ -113,14 +113,14 @@
     <artifactId>scindapsus-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
-<!--redis琐实现-->
+        <!--redis琐实现-->
 <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-redis</artifactId>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-data-redis</artifactId>
 </dependency>
 <dependency>
-    <groupId>org.springframework.integration</groupId>
-    <artifactId>spring-integration-redis</artifactId>
+<groupId>org.springframework.integration</groupId>
+<artifactId>spring-integration-redis</artifactId>
 </dependency>
 ```
 
@@ -133,10 +133,20 @@ scindapsus:
   lock:
     #锁类型
     type: redis
-#spring redis相关配置
+    redis:
+      #琐过期时间
+      expire: 60000
+      #琐前缀
+      registry-key: test
 spring:
   redis:
-  	...
+    database: 0
+    host: localhost
+    port: 6379
+
+logging:
+  level:
+    com.scindapsus: debug
 ```
 
 
@@ -161,11 +171,10 @@ public class LockService {
      * <p>spel更多详见
      * <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#expressions">SPEL</a>
      * </p>
-     * @fallback: 失败回调类，类中必须含有无参构造器，并且含有与添加注解方法同签名的公有方法
-     * @expire: 过期时间（毫秒），默认60000
+     * @fallback: 失败回调类
      * @retryDuration: 获取锁失败重试时间（毫秒），默认不重试
      */
-    @DistributedLock(name = "#p0.firstName", key = "#a0.lastName", fallback = Fallback.class, expire = 30000, retryDuration = 10000)
+    @DistributedLock(name = "#p0.firstName", key = "#a0.lastName", fallback = Fallback.class, retryDuration = 10000)
     public void lock(Person person) {
         //do something
     }
@@ -201,6 +210,54 @@ public class LockService {
 }
 ```
 
+
+
 ## Zookeeper
 
-//TODO
+
+
+### 依赖
+
+```xml
+<!--快照版本-->
+<dependency>
+    <groupId>com.phaeris.scindapsus</groupId>
+    <artifactId>scindapsus-spring-boot-starter</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+<!--zk琐实现-->
+<dependency>
+    <groupId>org.springframework.integration</groupId>
+    <artifactId>spring-integration-zookeeper</artifactId>
+</dependency>
+```
+
+
+
+### 配置
+
+```yaml
+scindapsus:
+  lock:
+  	#锁类型
+    type: zookeeper
+    zookeeper:
+      #zk连接
+      connection-string: 127.0.0.1:2181
+      #根路径
+      root: /test
+      #连接重试之间等待的初始时间(milliseconds)
+      base-sleep-time-ms: 1000
+      #连接最大重试次数
+      max-retries: 3
+
+logging:
+  level:
+    com.scindapsus: debug
+```
+
+
+
+### 使用
+
+同Redis

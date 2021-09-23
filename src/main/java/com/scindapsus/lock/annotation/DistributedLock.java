@@ -33,11 +33,6 @@ public @interface DistributedLock {
     String key() default "";
 
     /**
-     * expire time(milliseconds)
-     */
-    long expire() default -1;
-
-    /**
      * retry duration(milliseconds)
      */
     long retryDuration() default -1;

@@ -14,8 +14,7 @@ public interface LockRegistryFactory {
     /**
      * 生成lock registry
      *
-     * @param expire 过期时间，根据不同组件适配(milliseconds)
      * @return {@link LockRegistry}
      */
-    LockRegistry generate(long expire);
+    LockRegistry generate();
 }

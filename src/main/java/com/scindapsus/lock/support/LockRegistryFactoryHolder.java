@@ -23,10 +23,9 @@ public class LockRegistryFactoryHolder {
     /**
      * 获取琐注册器
      *
-     * @param expire expire 过期时间，根据不同注册器适配(milliseconds)
      * @return 琐注册器
      */
-    public static LockRegistry getLock(long expire) {
-        return lockRegistryFactory.generate(expire);
+    public static LockRegistry getLock() {
+        return lockRegistryFactory.generate();
     }
 }
