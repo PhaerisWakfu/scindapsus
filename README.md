@@ -113,7 +113,7 @@
     <artifactId>scindapsus-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
-        <!--redis琐实现-->
+<!--redis琐实现-->
 <dependency>
 <groupId>org.springframework.boot</groupId>
 <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -239,7 +239,7 @@ public class LockService {
 ```yaml
 scindapsus:
   lock:
-  	#锁类型
+  #锁类型
     type: zookeeper
     zookeeper:
       #zk连接
