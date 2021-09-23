@@ -151,7 +151,53 @@ logging:
 
 
 
-### 使用
+## Zookeeper
+
+
+
+### 依赖
+
+```xml
+<!--快照版本-->
+<dependency>
+    <groupId>com.phaeris.scindapsus</groupId>
+    <artifactId>scindapsus-spring-boot-starter</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+<!--zk琐实现-->
+<dependency>
+    <groupId>org.springframework.integration</groupId>
+    <artifactId>spring-integration-zookeeper</artifactId>
+</dependency>
+```
+
+
+
+### 配置
+
+```yaml
+scindapsus:
+  lock:
+  #锁类型
+    type: zookeeper
+    zookeeper:
+      #zk连接
+      connection-string: 127.0.0.1:2181
+      #根路径
+      root: /test
+      #连接重试之间等待的初始时间(milliseconds)
+      base-sleep-time-ms: 1000
+      #连接最大重试次数
+      max-retries: 3
+
+logging:
+  level:
+    com.scindapsus: debug
+```
+
+
+
+## 使用
 
 添加注解@DistributedLock
 
@@ -209,55 +255,3 @@ public class LockService {
     }
 }
 ```
-
-
-
-## Zookeeper
-
-
-
-### 依赖
-
-```xml
-<!--快照版本-->
-<dependency>
-    <groupId>com.phaeris.scindapsus</groupId>
-    <artifactId>scindapsus-spring-boot-starter</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</dependency>
-<!--zk琐实现-->
-<dependency>
-    <groupId>org.springframework.integration</groupId>
-    <artifactId>spring-integration-zookeeper</artifactId>
-</dependency>
-```
-
-
-
-### 配置
-
-```yaml
-scindapsus:
-  lock:
-  #锁类型
-    type: zookeeper
-    zookeeper:
-      #zk连接
-      connection-string: 127.0.0.1:2181
-      #根路径
-      root: /test
-      #连接重试之间等待的初始时间(milliseconds)
-      base-sleep-time-ms: 1000
-      #连接最大重试次数
-      max-retries: 3
-
-logging:
-  level:
-    com.scindapsus: debug
-```
-
-
-
-### 使用
-
-同Redis
