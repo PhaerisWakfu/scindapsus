@@ -19,6 +19,10 @@ import java.lang.reflect.Method;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SpringExpressionLangParser {
 
+    private static final ExpressionParser PARSER = new SpelExpressionParser();
+
+    private static final LocalVariableTableParameterNameDiscoverer NAME_DISCOVERER = new LocalVariableTableParameterNameDiscoverer();
+
 
     /**
      * @param rootObject method所在的对象
@@ -28,16 +32,14 @@ public class SpringExpressionLangParser {
      * @return 解析后的字符串
      */
     public static String parse(Object rootObject, String expression, Method method, Object[] args) {
-        LocalVariableTableParameterNameDiscoverer nameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
-        String[] paraNameArr = nameDiscoverer.getParameterNames(method);
+        String[] paraNameArr = NAME_DISCOVERER.getParameterNames(method);
         if (paraNameArr == null) {
             return null;
         }
-        ExpressionParser parser = new SpelExpressionParser();
-        StandardEvaluationContext context = new MethodBasedEvaluationContext(rootObject, method, args, nameDiscoverer);
+        StandardEvaluationContext context = new MethodBasedEvaluationContext(rootObject, method, args, NAME_DISCOVERER);
         for (int i = 0; i < paraNameArr.length; i++) {
             context.setVariable(paraNameArr[i], args[i]);
         }
-        return parser.parseExpression(expression).getValue(context, String.class);
+        return PARSER.parseExpression(expression).getValue(context, String.class);
     }
 }
