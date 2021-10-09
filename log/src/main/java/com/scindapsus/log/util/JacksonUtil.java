@@ -23,6 +23,6 @@ public class JacksonUtil {
 
     @SneakyThrows
     public static String toJSONString(Object obj) {
-        return OBJECT_MAPPER.writeValueAsString(obj);
+        return OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
     }
 }
