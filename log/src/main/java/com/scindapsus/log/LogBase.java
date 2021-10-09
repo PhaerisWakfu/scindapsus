@@ -27,10 +27,10 @@ public class LogBase {
     private String traceId;
 
     /**
-     * 结果消息
+     * C端用户id
      */
     @JsonProperty(index = 3)
-    private String msg;
+    private Object userId;
 
     /**
      * 接口响应时间
@@ -39,28 +39,22 @@ public class LogBase {
     private long costTime;
 
     /**
-     * C端用户id
+     * 接口请求入参
+     */
+    @JsonProperty(index = 5)
+    private Object request;
+
+    /**
+     * 接口返回值
      */
     @JsonProperty(index = 6)
-    private Object userId;
+    private Object response;
 
     /**
      * 其他业务参数
      */
     @JsonProperty(index = 7)
     private Object others;
-
-    /**
-     * 接口请求入参
-     */
-    @JsonProperty(index = 8)
-    private Object request;
-
-    /**
-     * 接口返回值
-     */
-    @JsonProperty(index = 9)
-    private Object response;
 
 
     /**
