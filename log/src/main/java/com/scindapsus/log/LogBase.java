@@ -1,9 +1,12 @@
 package com.scindapsus.log;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scindapsus.log.util.JacksonUtil;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author wyh
@@ -13,6 +16,8 @@ import lombok.Setter;
 @Setter
 @Builder
 public class LogBase {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogBase.class);
 
     /**
      * 事件名称,一般就是业务方法名称
@@ -58,30 +63,45 @@ public class LogBase {
 
 
     /**
-     * 用debug日志打印自己
+     * 日志打印
      */
     public void print() {
-        LogTemplate.debug(this);
+        debugPrint();
     }
 
     /**
-     * 用info日志打印自己
+     * 用debug日志打印
+     */
+    public void debugPrint() {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(JacksonUtil.toJSONString(this));
+        }
+    }
+
+    /**
+     * 用info日志打印
      */
     public void infoPrint() {
-        LogTemplate.debug(this);
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info(JacksonUtil.toJSONString(this));
+        }
     }
 
     /**
-     * 用warn日志打印自己
+     * 用warn日志打印
      */
     public void warnPrint() {
-        LogTemplate.debug(this);
+        if (LOGGER.isWarnEnabled()) {
+            LOGGER.warn(JacksonUtil.toJSONString(this));
+        }
     }
 
     /**
-     * 用error日志打印自己
+     * 用error日志打印
      */
     public void errorPrint() {
-        LogTemplate.debug(this);
+        if (LOGGER.isErrorEnabled()) {
+            LOGGER.error(JacksonUtil.toJSONString(this));
+        }
     }
 }
