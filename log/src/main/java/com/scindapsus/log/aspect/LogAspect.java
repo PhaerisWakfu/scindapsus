@@ -3,14 +3,15 @@ package com.scindapsus.log.aspect;
 import com.scindapsus.log.LogBase;
 import com.scindapsus.log.trace.ScindapsusTracer;
 import com.scindapsus.log.user.UserProvider;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.util.StopWatch;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.lang.reflect.Method;
 import java.util.Optional;
 
 /**
@@ -19,16 +20,13 @@ import java.util.Optional;
  */
 @Slf4j
 @Aspect
+@AllArgsConstructor
 public class LogAspect {
 
     private final ScindapsusTracer tracer;
 
     private final UserProvider<?> user;
 
-    public LogAspect(ScindapsusTracer tracer, UserProvider user) {
-        this.tracer = tracer;
-        this.user = user;
-    }
 
     @Around("@annotation(com.scindapsus.log.annotation.OPLog)")
     public Object around(ProceedingJoinPoint point) throws Throwable {
@@ -39,10 +37,11 @@ public class LogAspect {
         Object result = point.proceed();
         stopWatch.stop();
         try {
-            MethodSignature signature = (MethodSignature) point.getSignature();
-            Method currentMethod = point.getTarget().getClass().getMethod(signature.getName(), signature.getParameterTypes());
             LogBase.builder()
-                    .eventName(currentMethod.getName())
+                    .path(Optional.ofNullable(((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()))
+                            .map(x -> x.getRequest().getServletPath())
+                            .orElse(null))
+                    .eventName(point.getSignature().toShortString())
                     .costTime(stopWatch.getTotalTimeMillis())
                     .request(point.getArgs())
                     .response(result)

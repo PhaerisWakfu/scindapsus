@@ -20,6 +20,12 @@ public class LogBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogBase.class);
 
     /**
+     * 请求路径
+     */
+    @JsonProperty(index = 0)
+    private String path;
+
+    /**
      * 事件名称,一般就是业务方法名称
      */
     @JsonProperty(index = 1)
