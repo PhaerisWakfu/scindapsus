@@ -1,7 +1,7 @@
 package com.scindapsus.log;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.scindapsus.log.util.JacksonUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,49 +22,49 @@ public class LogBase {
     /**
      * 请求路径
      */
-    @JsonProperty(index = 0)
+    @JSONField
     private String path;
 
     /**
      * 事件名称,一般就是业务方法名称
      */
-    @JsonProperty(index = 1)
+    @JSONField(ordinal = 1)
     private String eventName;
 
     /**
      * 调用链id
      */
-    @JsonProperty(index = 2)
+    @JSONField(ordinal = 2)
     private String traceId;
 
     /**
      * C端用户id
      */
-    @JsonProperty(index = 3)
+    @JSONField(ordinal = 3)
     private Object userId;
 
     /**
      * 接口响应时间
      */
-    @JsonProperty(index = 4)
+    @JSONField(ordinal = 4)
     private long costTime;
 
     /**
      * 接口请求入参
      */
-    @JsonProperty(index = 5)
+    @JSONField(ordinal = 5)
     private Object request;
 
     /**
      * 接口返回值
      */
-    @JsonProperty(index = 6)
+    @JSONField(ordinal = 6)
     private Object response;
 
     /**
      * 其他业务参数
      */
-    @JsonProperty(index = 7)
+    @JSONField(ordinal = 7)
     private Object others;
 
 
@@ -80,7 +80,7 @@ public class LogBase {
      */
     public void debugPrint() {
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(JacksonUtil.toJSONString(this));
+            LOGGER.debug(JSON.toJSONString(this));
         }
     }
 
@@ -89,7 +89,7 @@ public class LogBase {
      */
     public void infoPrint() {
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info(JacksonUtil.toJSONString(this));
+            LOGGER.info(JSON.toJSONString(this));
         }
     }
 
@@ -98,7 +98,7 @@ public class LogBase {
      */
     public void warnPrint() {
         if (LOGGER.isWarnEnabled()) {
-            LOGGER.warn(JacksonUtil.toJSONString(this));
+            LOGGER.warn(JSON.toJSONString(this));
         }
     }
 
@@ -107,7 +107,7 @@ public class LogBase {
      */
     public void errorPrint() {
         if (LOGGER.isErrorEnabled()) {
-            LOGGER.error(JacksonUtil.toJSONString(this));
+            LOGGER.error(JSON.toJSONString(this));
         }
     }
 }

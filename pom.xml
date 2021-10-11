@@ -24,6 +24,8 @@
     <properties>
         <spring-boot.version>2.5.5</spring-boot.version>
         <spring-cloud.version>2020.0.4</spring-cloud.version>
+        <hutool.version>5.7.11</hutool.version>
+        <fastjson.version>1.2.78</fastjson.version>
 
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -45,6 +47,18 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!--tools-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
