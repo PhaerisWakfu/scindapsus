@@ -22,49 +22,49 @@ public class LogBase {
     /**
      * 请求路径
      */
-    @JSONField
+    @JSONField(ordinal = 1)
     private String path;
 
     /**
      * 事件名称,一般就是业务方法名称
      */
-    @JSONField(ordinal = 1)
+    @JSONField(ordinal = 2)
     private String eventName;
 
     /**
      * 调用链id
      */
-    @JSONField(ordinal = 2)
+    @JSONField(ordinal = 3)
     private String traceId;
 
     /**
      * C端用户id
      */
-    @JSONField(ordinal = 3)
+    @JSONField(ordinal = 4)
     private Object userId;
 
     /**
      * 接口响应时间
      */
-    @JSONField(ordinal = 4)
+    @JSONField(ordinal = 5)
     private long costTime;
 
     /**
      * 接口请求入参
      */
-    @JSONField(ordinal = 5)
+    @JSONField(ordinal = 6)
     private Object request;
 
     /**
      * 接口返回值
      */
-    @JSONField(ordinal = 6)
+    @JSONField(ordinal = 7)
     private Object response;
 
     /**
      * 其他业务参数
      */
-    @JSONField(ordinal = 7)
+    @JSONField(ordinal = 8)
     private Object others;
 
 
