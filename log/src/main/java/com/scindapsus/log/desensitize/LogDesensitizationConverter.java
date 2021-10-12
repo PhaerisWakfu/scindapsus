@@ -7,6 +7,8 @@ import cn.hutool.core.util.DesensitizedUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONValidator;
+import com.alibaba.fastjson.parser.Feature;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -69,13 +71,23 @@ public class LogDesensitizationConverter extends MessageConverter {
      * @return 脱敏后的字符串
      */
     public String filterMessage(String message) {
-        Object json;
-        try {
-            json = JSON.parse(message);
-        } catch (Exception e) {
+        JSONValidator.Type type = JSONValidator.from(message).getType();
+        if (type == null) {
             //如果不是json返回原始字符串
             return message;
         }
+        JSON json;
+        switch (type) {
+            case Array:
+                json = JSON.parseArray(message);
+                break;
+            case Object:
+                json = JSON.parseObject(message, Feature.SortFeidFastMatch);
+                break;
+            default:
+                return message;
+        }
+
         //开始脱敏
         for (DesensitizeRule desensitizeRule : desensitizeRules) {
             desensitize(json, desensitizeRule);
