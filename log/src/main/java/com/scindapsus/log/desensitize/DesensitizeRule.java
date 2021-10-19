@@ -10,7 +10,13 @@ import lombok.Data;
 @Data
 public class DesensitizeRule {
 
+    /**
+     * 需要脱敏的字段
+     */
     private String fieldName;
 
+    /**
+     * 脱敏格式化规则
+     */
     private DesensitizedUtil.DesensitizedType format;
 }

@@ -2,7 +2,7 @@ package com.scindapsus.lock.enumeration;
 
 /**
  * @author wyh
- * @since 1.0
+ * @date  2021/10/9 10:49
  */
 public enum LockTypeEnum {
     REDIS, ZOOKEEPER

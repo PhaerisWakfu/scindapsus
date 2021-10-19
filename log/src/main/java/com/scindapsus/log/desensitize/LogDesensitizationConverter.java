@@ -18,7 +18,6 @@ import java.util.regex.Pattern;
 
 /**
  * 敏感信息数据转换器,目前仅支持json格式的脱敏
- * <p>手动脱敏可直接使用hutool的工具类{@link cn.hutool.core.util.DesensitizedUtil}
  *
  * @author wyh
  * @date 2020年12月23日 16:59:25

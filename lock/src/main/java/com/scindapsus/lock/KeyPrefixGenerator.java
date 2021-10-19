@@ -5,7 +5,7 @@ package com.scindapsus.lock;
  * key前缀生成器,可自行实现自己的前缀生成器(如拼接租户等)
  *
  * @author wyh
- * @since 1.0
+ * @date  2021/10/9 10:49
  */
 @FunctionalInterface
 public interface KeyPrefixGenerator {

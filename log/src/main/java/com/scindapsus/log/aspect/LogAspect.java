@@ -1,7 +1,7 @@
 package com.scindapsus.log.aspect;
 
 import com.scindapsus.log.LogBase;
-import com.scindapsus.log.trace.ScindapsusTracer;
+import com.scindapsus.log.trace.TracerProvider;
 import com.scindapsus.log.user.UserProvider;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +15,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import java.util.Optional;
 
 /**
+ * 请求日志打印切面
+ *
  * @author wyh
  * @date 2021/10/9 10:49
  */
@@ -23,7 +25,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class LogAspect {
 
-    private final ScindapsusTracer tracer;
+    private final TracerProvider tracer;
 
     private final UserProvider<?> user;
 
@@ -45,7 +47,7 @@ public class LogAspect {
                     .costTime(stopWatch.getTotalTimeMillis())
                     .request(point.getArgs())
                     .response(result)
-                    .traceId(Optional.ofNullable(tracer).map(ScindapsusTracer::getTraceId).orElse(null))
+                    .traceId(Optional.ofNullable(tracer).map(TracerProvider::getTraceId).orElse(null))
                     .userId(Optional.ofNullable(user).map(UserProvider::getUserId).orElse(null))
                     .build()
                     .print();

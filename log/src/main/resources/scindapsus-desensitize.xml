@@ -1,0 +1,30 @@
+<included>
+    <!--日志脱敏开关-->
+    <property scope="context" name="DesensitizeEnabled" value="false"/>
+    <!--脱敏规则-->
+    <!--format支持：
+        //用户id
+        USER_ID,
+        //中文名
+        CHINESE_NAME,
+        //身份证号
+        ID_CARD,
+        //座机号
+        FIXED_PHONE,
+        //手机号
+        MOBILE_PHONE,
+        //地址
+        ADDRESS,
+        //电子邮件
+        EMAIL,
+        //密码
+        PASSWORD,
+        //中国大陆车牌，包含普通车辆、新能源车辆
+        CAR_LICENSE,
+        //银行卡
+        BANK_CARD
+    -->
+    <property scope="context" name="SensitiveDataKeys" value='[]'/>
+    <!--自定义convert位置-->
+    <conversionRule conversionWord="msg" converterClass="com.scindapsus.log.desensitize.LogDesensitizationConverter"/>
+</included>

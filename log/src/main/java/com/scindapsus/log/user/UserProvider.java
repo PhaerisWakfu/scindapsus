@@ -1,6 +1,5 @@
 package com.scindapsus.log.user;
 
-
 /**
  * @author wyh
  * @date 2021/10/9 14:25

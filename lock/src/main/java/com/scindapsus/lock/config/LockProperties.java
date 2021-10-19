@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * @author wyh
- * @since 1.0
+ * @date  2021/10/9 10:49
  */
 @Getter
 @Setter
