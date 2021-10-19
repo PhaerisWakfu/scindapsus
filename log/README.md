@@ -2,10 +2,16 @@
 
 # Scindapsus Log
 
+[toc]
+
+
+
 ## 说明
 
 - 支持添加注解后统一格式打印请求日志功能(请求路径、出参、入参、响应时间、traceId、userId等)
 - 支持日志脱敏
+
+
 
 ## 开始使用
 
@@ -42,9 +48,20 @@
 ```
 
 
+
 ### 打印请求日志
 
-添加注解OPLog
+#### 添加配置
+
+```yaml
+logging:
+  level:
+    com.scindapsus.log: debug
+```
+
+
+
+#### 添加注解OPLog
 
 ```java
 /**
@@ -72,9 +89,9 @@ public class ScindapsusController {
 
 
 
-#### 支持SPI获取userId与traceId
+#### 支持SPI设置userId与traceId
 
-记录userId
+记录userId，实现UserProvider
 
 ```java
 import com.scindapsus.log.user.UserProvider;
@@ -96,13 +113,26 @@ public class MyUserProvider implements UserProvider<String> {
 }
 ```
 
-记录traceId只需引入sleuth包
+默认记录traceId只需引入sleuth包
 
 ```xml
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-sleuth</artifactId>
 </dependency>
+```
+
+自定义记录traceId,实现TracerProvider
+
+```java
+@Component
+public class SleuthTracer implements TracerProvider {
+
+    @Override
+    public String getTraceId() {
+        return UUID.randomUUID().toString();
+    }
+}
 ```
 
 
@@ -128,7 +158,7 @@ logback配置文件中添加配置
 
 ```xml
     <!--scindapsus日志脱敏-->
-    <include resource="logback-desensitize.xml"/>
+    <include resource="scindapsus-desensitize.xml"/>
     <!--开关,默认false-->
     <property scope="context" name="DesensitizeEnabled" value="true"/>
     <!--format支持:
