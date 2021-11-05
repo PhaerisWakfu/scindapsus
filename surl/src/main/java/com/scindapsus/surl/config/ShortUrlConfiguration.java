@@ -4,6 +4,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.scindapsus.surl.ShortUrl;
 import com.scindapsus.surl.UrlMappingService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 public class ShortUrlConfiguration {
 
     @Bean
+    @ConditionalOnMissingBean(UrlMappingService.class)
     public DefaultShortUrlServiceImpl defaultShortUrlService() {
         return new DefaultShortUrlServiceImpl();
     }
