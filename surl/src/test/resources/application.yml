@@ -1,4 +1,6 @@
 scindapsus:
   surl:
+    #是否打开默认提供的API(默认false)
     enabled: true
+    #默认提供的API路径,enabled为true时必填
     path: /surl
