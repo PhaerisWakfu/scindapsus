@@ -1,0 +1,8 @@
+### 长转短
+POST http://localhost:8080/surl
+Accept: application/json
+Content-Type: application/json
+
+{
+  "originalUrl": "www.baidu.com"
+}

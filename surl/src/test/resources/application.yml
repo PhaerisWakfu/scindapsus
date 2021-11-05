@@ -1,0 +1,4 @@
+scindapsus:
+  surl:
+    enabled: true
+    path: /surl

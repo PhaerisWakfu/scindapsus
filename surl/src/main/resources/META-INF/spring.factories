@@ -1,0 +1,5 @@
+# Auto Configuration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.scindapsus.surl.config.AutowireStaticSmartInitialization,\
+com.scindapsus.surl.config.ShortUrlConfiguration,\
+com.scindapsus.surl.RouteController
