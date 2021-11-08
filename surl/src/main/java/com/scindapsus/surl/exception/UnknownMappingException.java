@@ -5,4 +5,8 @@ package com.scindapsus.surl.exception;
  * @date 2021/11/4 19:26
  */
 public class UnknownMappingException extends RuntimeException {
+
+    public UnknownMappingException(String message) {
+        super(message);
+    }
 }

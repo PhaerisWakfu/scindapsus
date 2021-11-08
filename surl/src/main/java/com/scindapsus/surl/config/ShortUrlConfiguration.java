@@ -1,7 +1,7 @@
 package com.scindapsus.surl.config;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.scindapsus.surl.ShortUrl;
 import com.scindapsus.surl.UrlMappingService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -27,14 +27,18 @@ public class ShortUrlConfiguration {
 
 
     /**
-     * 默认使用guava cache实现短链存取
+     * 默认使用caffeine实现短链存取
      */
     public static class DefaultUrlMappingServiceImpl implements UrlMappingService {
 
         private static final Cache<String, String> shortUrlMapping =
-                CacheBuilder.newBuilder()
-                        //最后一次访问后7天过期
-                        .expireAfterAccess(Duration.ofDays(7))
+                Caffeine.newBuilder()
+                        //最后一次访问后1天过期
+                        .expireAfterAccess(Duration.ofDays(1))
+                        //弱引用key
+                        .weakKeys()
+                        //弱引用value
+                        .weakValues()
                         .build();
 
         @Override
@@ -47,5 +51,4 @@ public class ShortUrlConfiguration {
             return shortUrlMapping.getIfPresent(key);
         }
     }
-
 }

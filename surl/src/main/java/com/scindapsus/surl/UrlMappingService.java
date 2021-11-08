@@ -61,6 +61,6 @@ public interface UrlMappingService {
      * @return 原始URL
      */
     default String find(String key) {
-        return Optional.ofNullable(get(key)).orElseThrow(UnknownMappingException::new);
+        return Optional.ofNullable(get(key)).orElseThrow(() -> new UnknownMappingException(key));
     }
 }

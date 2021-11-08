@@ -1,6 +1,7 @@
 package com.scindapsus.surl;
 
 import com.scindapsus.surl.config.ShortUrlProperties;
+import com.scindapsus.surl.exception.UnknownMappingException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -36,6 +37,12 @@ public class RouteController {
     @GetMapping("${scindapsus.surl.path}/{key}")
     public void routing(@PathVariable String key) throws IOException {
         response.sendRedirect(urlMappingService.find(key));
+    }
+
+    @ExceptionHandler(UnknownMappingException.class)
+    @ResponseBody
+    public String handle(UnknownMappingException e) {
+        return String.format("The mapping of [%s] was not found.", e.getMessage());
     }
 
     @Data
