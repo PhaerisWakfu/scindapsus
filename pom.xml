@@ -28,6 +28,7 @@
         <hutool.version>5.7.11</hutool.version>
         <fastjson.version>1.2.78</fastjson.version>
         <guava.version>31.0.1-jre</guava.version>
+        <caffeine.version>2.9.2</caffeine.version>
 
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -66,6 +67,11 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
