@@ -21,15 +21,15 @@ public class ShortUrlConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(UrlMappingService.class)
-    public DefaultShortUrlServiceImpl defaultShortUrlService() {
-        return new DefaultShortUrlServiceImpl();
+    public DefaultUrlMappingServiceImpl defaultUrlMappingService() {
+        return new DefaultUrlMappingServiceImpl();
     }
 
 
     /**
      * 默认使用guava cache实现短链存取
      */
-    public static class DefaultShortUrlServiceImpl implements UrlMappingService {
+    public static class DefaultUrlMappingServiceImpl implements UrlMappingService {
 
         private static final Cache<String, String> shortUrlMapping =
                 CacheBuilder.newBuilder()
