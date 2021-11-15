@@ -20,6 +20,7 @@
         <module>lock</module>
         <module>log</module>
         <module>surl</module>
+        <module>drools</module>
     </modules>
 
     <properties>
