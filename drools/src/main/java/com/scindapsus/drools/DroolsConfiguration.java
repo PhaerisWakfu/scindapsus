@@ -2,8 +2,7 @@ package com.scindapsus.drools;
 
 import lombok.AllArgsConstructor;
 import org.kie.api.KieServices;
-import org.kie.api.builder.KieBuilder;
-import org.kie.api.builder.KieFileSystem;
+import org.kie.api.builder.*;
 import org.kie.api.runtime.KieContainer;
 import org.kie.internal.io.ResourceFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -32,9 +31,11 @@ public class DroolsConfiguration {
     @Bean
     public KieContainer kieContainer() throws IOException {
         KieServices kieServices = KieServices.Factory.get();
+        KieRepository kieRepository = kieServices.getRepository();
+        kieRepository.addKieModule(kieRepository::getDefaultReleaseId);
         //从配置的路径中读取规则文件
         recoverKieFileSystem(kieServices, properties.getRulesPath());
-        return kieServices.getKieClasspathContainer();
+        return kieServices.newKieContainer(kieRepository.getDefaultReleaseId());
     }
 
     /**
