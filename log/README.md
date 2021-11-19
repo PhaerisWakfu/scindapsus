@@ -60,6 +60,22 @@ logging:
 ```
 
 
+#### 添加@EnableLogPrint启用打印请求日志
+```java
+/**
+ * @author wyh
+ * @date 2021/11/19 15:34
+ */
+@EnableLogPrint
+@SpringBootApplication
+public class LogApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(LogApplication.class, args);
+    }
+}
+```
+
 
 #### 添加注解OPLog
 
