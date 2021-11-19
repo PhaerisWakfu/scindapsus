@@ -5,13 +5,11 @@ import com.scindapsus.log.trace.TracerProvider;
 import com.scindapsus.log.user.UserProvider;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author wyh
  * @date 2021/10/9 14:19
  */
-@Configuration
 public class LogConfiguration {
 
     /**
