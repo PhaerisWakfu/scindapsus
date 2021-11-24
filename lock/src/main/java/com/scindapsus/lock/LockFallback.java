@@ -12,8 +12,7 @@ import com.scindapsus.lock.exception.DistributedLockException;
 public interface LockFallback<T> {
 
     /**
-     * Define a fallback factory for the specified Feign client interface.
-     * <p>The fallback factory must be a valid spring bean.
+     * The fallback factory must be a valid spring bean.
      *
      * @param cause 报错原因
      * @return fallback处理结果

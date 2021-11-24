@@ -45,7 +45,7 @@ public class LockProperties {
         private String registryKey = "scindapsus";
 
         /**
-         * 琐过期时间,没注解优先级高(milliseconds)
+         * 琐过期时间(milliseconds)
          */
         private long expire = 60000;
     }

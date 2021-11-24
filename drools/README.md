@@ -23,7 +23,7 @@ scindapsus:
  */
 @RequestMapping("/drools")
 @RestController
-public class TestController {
+public class DroolsController {
 
     @GetMapping
     public Order test(Order order) {

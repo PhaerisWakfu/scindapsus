@@ -38,7 +38,7 @@ public @interface DistributedLock {
     long retryDuration() default -1;
 
     /**
-     * locked callback, must implements {@link LockFallback}
+     * locked fallback, must implements {@link LockFallback}
      */
     Class<? extends LockFallback> fallback() default LockFallback.DefaultLockFallback.class;
 }

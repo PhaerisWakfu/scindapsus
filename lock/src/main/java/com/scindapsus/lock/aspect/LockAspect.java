@@ -71,10 +71,10 @@ public class LockAspect {
             locked = retryDuration > 0
                     ? obtain.tryLock(retryDuration, TimeUnit.MILLISECONDS)
                     : obtain.tryLock();
-            log.debug("Try lock, lockName: [{}], locked: [{}].", lockName, locked);
-            //加锁失败回调
+            log.debug("Try lock [{}ms], lockName: [{}], locked: [{}].", retryDuration > 0 ? retryDuration : 0, lockName, locked);
+            //加锁失败抛错
             if (!locked) {
-                return invokeFallback(fallback, methodSignature, args);
+                throw new DistributedLockException("Try lock failed.");
             }
             //继续执行业务逻辑
             return point.proceed();
