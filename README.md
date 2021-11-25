@@ -8,6 +8,10 @@
 
 - [drools]：四个类封装drools,简化为工具类调用
 
+- [apt]：使用Java Annotation Processing Tool快速生成JPARepository
+
+- [graalvm]：使用graalvm调用其他语言方法
+
 [lock]:/lock/README.md
 
 [log]:/log/README.md
@@ -15,3 +19,7 @@
 [surl]:/surl/README.md
 
 [drools]:/drools/README.md
+
+[apt]:/apt/README.md
+
+[graalvm]:/graalvm/README.md
