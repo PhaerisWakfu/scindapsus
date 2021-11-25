@@ -24,6 +24,7 @@
         <module>drools</module>
         <module>apt</module>
         <module>dependencies</module>
+        <module>graalvm</module>
     </modules>
 
     <properties>
