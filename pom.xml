@@ -22,6 +22,8 @@
         <module>log</module>
         <module>surl</module>
         <module>drools</module>
+        <module>apt</module>
+        <module>dependencies</module>
     </modules>
 
     <properties>
@@ -31,6 +33,7 @@
         <fastjson.version>1.2.78</fastjson.version>
         <guava.version>31.0.1-jre</guava.version>
         <caffeine.version>2.9.2</caffeine.version>
+        <annotation-processor.version>1.0</annotation-processor.version>
 
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -74,6 +77,11 @@
                 <groupId>com.github.ben-manes.caffeine</groupId>
                 <artifactId>caffeine</artifactId>
                 <version>${caffeine.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.auto.service</groupId>
+                <artifactId>auto-service</artifactId>
+                <version>${annotation-processor.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
