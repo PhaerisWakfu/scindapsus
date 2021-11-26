@@ -24,7 +24,7 @@ import java.util.Optional;
 public class LockConfiguration {
 
     @Bean
-    public LockAspect octopusLockAspect(LockRegistryFactory lockRegistryFactory, KeyPrefixGenerator keyPrefixGenerator,
+    public LockAspect lockAspect(LockRegistryFactory lockRegistryFactory, KeyPrefixGenerator keyPrefixGenerator,
                                         ApplicationContext applicationContext) {
         return new LockAspect(lockRegistryFactory, keyPrefixGenerator, applicationContext);
     }
