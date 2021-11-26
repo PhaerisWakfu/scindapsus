@@ -4,7 +4,7 @@ import com.scindapsus.lock.LockFallback;
 import com.scindapsus.lock.LockRegistryFactory;
 import com.scindapsus.lock.annotation.DistributedLock;
 import com.scindapsus.lock.exception.DistributedLockException;
-import com.scindapsus.lock.KeyPrefixGenerator;
+import com.scindapsus.lock.LockKeyPrefixGenerator;
 import com.scindapsus.lock.support.SpringExpressionLangParser;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ public class LockAspect {
 
     private final LockRegistryFactory lockRegistryFactory;
 
-    private final KeyPrefixGenerator keyPrefixGenerator;
+    private final LockKeyPrefixGenerator lockKeyPrefixGenerator;
 
     private final ApplicationContext applicationContext;
 
@@ -155,7 +155,7 @@ public class LockAspect {
                 ? defaultLockKey(methodSignature)
                 : explainWithExpression(inputKey, methodSignature, target, args);
 
-        return keyPrefixGenerator.compute(name, key);
+        return lockKeyPrefixGenerator.compute(name, key);
     }
 
     /**

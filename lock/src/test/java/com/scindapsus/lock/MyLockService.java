@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class MyLockService {
 
     @SneakyThrows
-    @DistributedLock(name = "#p0", key = "#p1", fallback = MyFallbackFactory.class, retryDuration = 1000 * 5)
+    @DistributedLock(name = "#p0", key = "#a1", fallback = MyFallbackFactory.class, retryDuration = 1000 * 5)
     public String getName(String name, String age) {
         TimeUnit.SECONDS.sleep(10);
         return "ok";

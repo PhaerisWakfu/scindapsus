@@ -1,6 +1,6 @@
 package com.scindapsus.lock.config;
 
-import com.scindapsus.lock.support.LockRegistryFactoryHolder;
+import com.scindapsus.lock.LockRegistryFactoryHolder;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;

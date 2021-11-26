@@ -1,5 +1,6 @@
 package com.scindapsus.lock.config;
 
+import com.scindapsus.lock.LockKeyPrefixGenerator;
 import com.scindapsus.lock.enumeration.LockTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * @author wyh
- * @date  2021/10/9 10:49
+ * @date 2021/10/9 10:49
  */
 @Getter
 @Setter
@@ -40,7 +41,7 @@ public class LockProperties {
     public static class Redis {
 
         /**
-         * 锁前缀
+         * key的一级域,可配合{@link LockKeyPrefixGenerator}设置二级域
          */
         private String registryKey = "scindapsus";
 

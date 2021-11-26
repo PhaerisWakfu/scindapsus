@@ -3,7 +3,7 @@ package com.scindapsus.lock.config;
 import com.scindapsus.lock.LockFallback;
 import com.scindapsus.lock.LockRegistryFactory;
 import com.scindapsus.lock.aspect.LockAspect;
-import com.scindapsus.lock.KeyPrefixGenerator;
+import com.scindapsus.lock.LockKeyPrefixGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -24,9 +24,9 @@ import java.util.Optional;
 public class LockConfiguration {
 
     @Bean
-    public LockAspect lockAspect(LockRegistryFactory lockRegistryFactory, KeyPrefixGenerator keyPrefixGenerator,
+    public LockAspect lockAspect(LockRegistryFactory lockRegistryFactory, LockKeyPrefixGenerator lockKeyPrefixGenerator,
                                         ApplicationContext applicationContext) {
-        return new LockAspect(lockRegistryFactory, keyPrefixGenerator, applicationContext);
+        return new LockAspect(lockRegistryFactory, lockKeyPrefixGenerator, applicationContext);
     }
 
     @Bean
@@ -35,11 +35,11 @@ public class LockConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(KeyPrefixGenerator.class)
-    public KeyPrefixGenerator defaultKeyPrefixGenerator() {
+    @ConditionalOnMissingBean(LockKeyPrefixGenerator.class)
+    public LockKeyPrefixGenerator defaultKeyPrefixGenerator() {
         return (region, key) -> {
-            String regionName = Optional.ofNullable(region).map(x -> x + KeyPrefixGenerator.SEPARATOR)
-                    .orElse(KeyPrefixGenerator.EMPTY_STR);
+            String regionName = Optional.ofNullable(region).map(x -> x + LockKeyPrefixGenerator.SEPARATOR)
+                    .orElse(LockKeyPrefixGenerator.EMPTY_STR);
             return regionName + key;
         };
     }
