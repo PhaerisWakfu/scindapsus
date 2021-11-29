@@ -93,18 +93,6 @@ public class LockAspect {
         }
     }
 
-
-    /**
-     * invoke client provide same method
-     *
-     * @param fallback        回调类
-     * @param methodSignature 方法签名
-     * @param args            方法参数
-     */
-    private Object invokeFallback(Class<? extends LockFallback> fallback, MethodSignature methodSignature, Object[] args) {
-        return invokeFallback(fallback, methodSignature, args, null);
-    }
-
     /**
      * invoke client provide same method
      *
@@ -129,7 +117,7 @@ public class LockAspect {
         } catch (IllegalAccessException e) {
             throw new DistributedLockException("Fallback method must be public.", e);
         } catch (InvocationTargetException e) {
-            throw new DistributedLockException("Invoke fallback.", e);
+            throw new DistributedLockException("Invoke fallback exception.", e);
         }
     }
 

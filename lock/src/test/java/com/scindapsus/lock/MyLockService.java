@@ -31,8 +31,8 @@ public class MyLockService {
             return new MyLockService() {
                 @Override
                 public String getName(String name, String age) {
-                    log.error("回调cause ->", cause);
-                    throw new TryLockException("业务报错信息");
+                    log.error("回调cause {}", cause.getMessage());
+                    throw new TryLockException("业务报错信息", cause);
                 }
             };
         }
