@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  * 敏感信息数据转换器,目前仅支持json格式的脱敏
  *
  * @author wyh
- * @date 2020年12月23日 16:59:25
+ * @since 1.0
  */
 public class LogDesensitizationConverter extends MessageConverter {
 

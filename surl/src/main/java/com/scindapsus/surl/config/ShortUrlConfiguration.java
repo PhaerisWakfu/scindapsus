@@ -13,7 +13,7 @@ import java.time.Duration;
 
 /**
  * @author wyh
- * @date 2021/11/4 18:46
+ * @since 1.0
  */
 @Configuration
 @EnableConfigurationProperties(ShortUrlProperties.class)

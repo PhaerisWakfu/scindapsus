@@ -2,7 +2,7 @@ package com.scindapsus.log.user;
 
 /**
  * @author wyh
- * @date 2021/10/9 14:25
+ * @since 1.0
  */
 public interface UserProvider<T> {
 

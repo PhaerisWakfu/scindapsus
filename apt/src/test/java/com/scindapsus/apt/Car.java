@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 /**
  * @author wyh
- * @date 2021/6/9 14:15
+ * @since 1.0
  */
 @FastJPA
 @Data

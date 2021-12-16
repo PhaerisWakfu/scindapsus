@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.parallel.ExecutionMode.CONCURRENT;
 
 /**
  * @author wyh
- * @date 2021/11/29 11:06
+ * @since 1.0
  */
 @Execution(CONCURRENT)
 @ExtendWith(SpringExtension.class)

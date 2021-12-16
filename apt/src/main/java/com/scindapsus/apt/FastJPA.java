@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * 生成无需自定义方法的简单{@link org.springframework.data.jpa.repository.JpaRepository}
  *
  * @author wyh
- * @date 2021/6/2 15:50
+ * @since 1.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)

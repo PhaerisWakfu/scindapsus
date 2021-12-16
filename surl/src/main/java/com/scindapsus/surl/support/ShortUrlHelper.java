@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * 短网址长转短工具类
  *
  * @author wyh
- * @date 2021/11/4 16:20
+ * @since 1.0
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShortUrlHelper {

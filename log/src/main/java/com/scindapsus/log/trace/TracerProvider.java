@@ -2,7 +2,7 @@ package com.scindapsus.log.trace;
 
 /**
  * @author wyh
- * @date 2021/10/9 11:17
+ * @since 1.0
  */
 public interface TracerProvider {
 

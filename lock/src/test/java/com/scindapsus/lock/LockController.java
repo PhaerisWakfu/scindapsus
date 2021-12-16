@@ -1,15 +1,17 @@
 package com.scindapsus.lock;
 
-import com.scindapsus.lock.exception.DistributedLockException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 /**
  * @author wyh
- * @date 2021/9/18 17:15
+ * @since 1.0
  */
 @RestController
 @RequestMapping("/lock")

@@ -2,7 +2,7 @@ package com.scindapsus.lock;
 
 /**
  * @author wyh
- * @date 2021/11/24 11:24
+ * @since 1.0
  */
 public class TryLockException extends RuntimeException {
 

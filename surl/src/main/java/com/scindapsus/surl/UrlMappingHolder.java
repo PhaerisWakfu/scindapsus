@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 动态加载使用urlMappingSpi的静态工具
  *
  * @author wyh
- * @date 2021/11/4 16:20
+ * @since 1.0
  */
 public class UrlMappingHolder {
 

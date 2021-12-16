@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * 引入spring-cloud-starter-sleuth生效
  *
  * @author wyh
- * @date 2021/10/9 14:03
+ * @since 1.0
  */
 @Configuration
 @ConditionalOnClass(Tracer.class)

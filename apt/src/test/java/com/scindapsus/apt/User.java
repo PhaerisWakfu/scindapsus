@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * @author wyh
- * @date 2021/6/2 19:21
+ * @since 1.0
  */
 @FastJPA(basePackage = "com.scindapsus.apt.repository")
 @Entity

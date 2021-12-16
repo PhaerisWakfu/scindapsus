@@ -9,7 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * @author wyh
- * @date 2021/11/29 11:16
+ * @since 1.0
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = DroolsApplication.class)

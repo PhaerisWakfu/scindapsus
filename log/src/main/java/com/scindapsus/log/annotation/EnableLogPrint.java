@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  * 开启AOP日志打印
  *
  * @author wyh
- * @date 2021/11/19 15:31
+ * @since 1.0
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

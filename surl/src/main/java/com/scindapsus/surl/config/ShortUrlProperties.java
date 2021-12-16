@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author wyh
- * @date 2021/11/4 17:41
+ * @since 1.0
  */
 @Getter
 @Setter

@@ -14,7 +14,7 @@ import org.springframework.integration.support.locks.LockRegistry;
  * redis琐的实现
  *
  * @author wyh
- * @date  2021/10/9 10:49
+ * @since 1.0
  */
 @ConditionalOnClass({RedisConnectionFactory.class, RedisLockRegistry.class})
 @ConditionalOnProperty(prefix = LockProperties.PREFIX, name = "type", havingValue = "redis")

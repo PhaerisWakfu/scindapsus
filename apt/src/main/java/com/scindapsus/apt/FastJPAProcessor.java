@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  * 生成文件详见{@code /target/generated-sources}
  *
  * @author wyh
- * @date 2021/6/2 15:51
+ * @since 1.0
  */
 @AutoService(Processor.class)
 @SupportedAnnotationTypes({"com.scindapsus.apt.FastJPA"})

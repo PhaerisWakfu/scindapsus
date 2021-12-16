@@ -9,7 +9,7 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
  * 初始化所有静态操作bean的工具
  *
  * @author wyh
- * @date 2021/1/7 17:56
+ * @since 1.0
  */
 @AllArgsConstructor
 public class AutowireStaticSmartInitialization implements SmartInitializingSingleton {

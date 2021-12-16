@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author wyh
- * @date 2021/11/15 16:29
+ * @since 1.0
  */
 @SpringBootApplication
 public class DroolsApplication {

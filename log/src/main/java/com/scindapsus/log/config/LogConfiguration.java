@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 /**
  * @author wyh
- * @date 2021/10/9 14:19
+ * @since 1.0
  */
 public class LogConfiguration {
 
