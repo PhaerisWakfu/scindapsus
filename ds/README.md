@@ -46,6 +46,7 @@ scindapsus:
         username: admin
         password: GLBFGop0Zh6KF@16E6
         driver-class-name: com.mysql.cj.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
 ```
 
 ## 使用
