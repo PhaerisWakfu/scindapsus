@@ -36,17 +36,16 @@ scindapsus:
       first:
         #是否是默认数据源
         is-default: true
-        url: jdbc:mysql://101.200.128.253:3306/test-data?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT%2B8
-        username: admin
-        password: GLBFGop0Zh6KF@16E6
+        url: jdbc:mysql://localhost:3306/schema1?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT%2B8
+        username: xxx
+        password: xxx
         driver-class-name: com.mysql.cj.jdbc.Driver
         type: com.zaxxer.hikari.HikariDataSource
       second:
-        url: jdbc:mysql://101.200.128.253:3306/test-data2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT%2B8
-        username: admin
-        password: GLBFGop0Zh6KF@16E6
+        url: jdbc:mysql://localhost:3306/schema2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT%2B8
+        username: xxx
+        password: xxx
         driver-class-name: com.mysql.cj.jdbc.Driver
-        type: com.zaxxer.hikari.HikariDataSource
 ```
 
 ## 使用
