@@ -25,6 +25,7 @@
         <module>apt</module>
         <module>dependencies</module>
         <module>graalvm</module>
+        <module>ds</module>
     </modules>
 
     <properties>

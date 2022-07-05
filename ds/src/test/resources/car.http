@@ -1,0 +1,5 @@
+###数据源1
+GET http://localhost:8080/ds/1
+
+###数据源2
+GET http://localhost:8080/ds/2
