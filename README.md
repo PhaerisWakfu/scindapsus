@@ -26,4 +26,4 @@
 
 [graalvm]:/graalvm/README.md
 
-[ds]:/ds/README.md
+[multi-ds]:/multi-ds/README.md

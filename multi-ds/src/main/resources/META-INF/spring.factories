@@ -1,0 +1,4 @@
+# Auto Configuration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.scindapsus.ds.config.DatasourceProperties,\
+com.scindapsus.ds.config.DatasourceConfiguration
