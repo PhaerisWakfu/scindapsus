@@ -6,7 +6,7 @@
 
 - [surl]：一键配置短网址服务
 
-- [drools]：四个类封装Drools,简化为工具类调用
+- [drools]：四个类封装Drools规则引擎,简化为工具类调用
 
 - [apt]：使用Java Annotation Processing Tool快速生成JpaRepository
 
