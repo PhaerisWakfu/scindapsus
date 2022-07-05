@@ -1,8 +1,9 @@
 package com.scindapsus.graalvm;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
@@ -13,9 +14,10 @@ import java.io.File;
  * @author wyh
  * @since 1.0
  */
-@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GraalVMUtil {
+
+    private static final Logger log = LoggerFactory.getLogger(GraalVMUtil.class);
 
     /**
      * 执行指定脚本中的方法
