@@ -12,7 +12,7 @@
 
 - [graalvm]：使用GraalVM调用其他语言方法
 
-- [ds]：一个启动注解+数据源配置搞定多数据源
+- [multi-ds]：一个启动注解+数据源配置搞定多数据源
 
 [lock]:/lock/README.md
 
