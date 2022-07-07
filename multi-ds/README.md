@@ -1,5 +1,5 @@
 # Scindapsus DS
-根据<Java课代表>的文章《看透，Spring是如何支持多数据源的》(https://mp.weixin.qq.com/s/uR4FyEJKiU_75eGb4ynKiQ)
+根据<Java课代表>的文章[《看透，Spring是如何支持多数据源的》]
 封装成多数据源组件
 
 
@@ -90,3 +90,5 @@ public class CarService {
     }
 }
 ```
+
+[《看透，Spring是如何支持多数据源的》]:https://mp.weixin.qq.com/s/at-QJjpFi3PK7jyk0hCwcA
