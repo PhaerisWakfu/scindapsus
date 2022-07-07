@@ -5,6 +5,7 @@ import com.scindapsus.ds.exception.DatasourceException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
@@ -27,17 +28,27 @@ public class DatasourceImportBeanDefinitionRegistrar implements ImportBeanDefini
         Map<String, DatasourceProperties.DSProperty> datasourcePropertiesMap = datasourceProperties.getMulti();
         datasourcePropertiesMap.forEach((k, v) -> registerBean(k, v, registry));
         //额外注册一个默认的数据源
-        Optional<DatasourceProperties.DSProperty> defaultDS = datasourcePropertiesMap.values().stream().filter(DatasourceProperties.DSProperty::getIsDefault).findFirst();
-        if (!defaultDS.isPresent()) {
-            throw new DatasourceException("Must contain a default datasource");
+        Optional<DatasourceProperties.DSProperty> defaultOptional;
+        if (datasourcePropertiesMap.size() == 1) {
+            defaultOptional = datasourcePropertiesMap.values().stream().findFirst();
+        } else {
+            //如果数据源大于1
+            defaultOptional = datasourcePropertiesMap.values().stream().filter(DatasourceProperties.DSProperty::getIsDefault).findFirst();
         }
-        DatasourceProperties.DSProperty dsProperty = defaultDS.get();
+        //如果至少有一个以上的数据源但是没有默认数据源
+        if (!defaultOptional.isPresent()) {
+            throw new DatasourceException("Must contain a default datasource.");
+        }
+        DatasourceProperties.DSProperty dsProperty = defaultOptional.get();
         registerBean(DSConstants.DEFAULT_ROUTING_KEY, dsProperty, registry);
     }
 
     @Override
     public void setEnvironment(Environment environment) {
-        datasourceProperties = Binder.get(environment).bind(DatasourceProperties.PREFIX, DatasourceProperties.class).get();
+        BindResult<DatasourceProperties> bind = Binder.get(environment)
+                .bind(DatasourceProperties.PREFIX, DatasourceProperties.class);
+        //如果没有配置数据源
+        datasourceProperties = bind.orElseThrow(() -> new DatasourceException("Please provide at least one datasource."));
     }
 
     /**

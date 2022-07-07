@@ -49,7 +49,23 @@ scindapsus:
 ```
 
 ## 使用
+启动类添加启动多数据源的注解@EnableDS
+```java
+/**
+ * @author wyh
+ * @date 2022/7/5 10:18
+ */
+@MapperScan(basePackages = "com.scindapsus.ds.mapper")
+@SpringBootApplication
+@EnableDS
+public class DSApplication {
 
+    public static void main(String[] args) {
+        SpringApplication.run(DSApplication.class, args);
+    }
+}
+```
+在操作库的地方使用注解@WithDataSource指定数据源，不加注解或者不写value默认为isDefault为true的数据源(写多个isDefault默认取第一个)
 ```java
 /**
  * @author wyh

@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.sql.DataSource;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -22,7 +23,7 @@ public class DatasourceProperties {
     /**
      * 多数据源配置
      */
-    private Map<String, DSProperty> multi;
+    private Map<String, DSProperty> multi = new LinkedHashMap<>();
 
     @Data
     public static class DSProperty {
