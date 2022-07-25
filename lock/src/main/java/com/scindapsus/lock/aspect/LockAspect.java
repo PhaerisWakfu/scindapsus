@@ -1,17 +1,17 @@
 package com.scindapsus.lock.aspect;
 
 import com.scindapsus.lock.LockFallback;
+import com.scindapsus.lock.LockKeyPrefixGenerator;
 import com.scindapsus.lock.LockRegistryFactory;
 import com.scindapsus.lock.annotation.DistributedLock;
 import com.scindapsus.lock.exception.DistributedLockException;
-import com.scindapsus.lock.LockKeyPrefixGenerator;
 import com.scindapsus.lock.support.SpringExpressionLangParser;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.integration.support.locks.LockRegistry;
 import org.springframework.util.ObjectUtils;
@@ -28,16 +28,23 @@ import java.util.concurrent.locks.Lock;
  * @author wyh
  * @since 1.0
  */
-@Slf4j
 @Aspect
-@AllArgsConstructor
 public class LockAspect {
+
+    private static final Logger log = LoggerFactory.getLogger(LockAspect.class);
 
     private final LockRegistryFactory lockRegistryFactory;
 
     private final LockKeyPrefixGenerator lockKeyPrefixGenerator;
 
     private final ApplicationContext applicationContext;
+
+    public LockAspect(LockRegistryFactory lockRegistryFactory, LockKeyPrefixGenerator lockKeyPrefixGenerator,
+                      ApplicationContext applicationContext) {
+        this.lockRegistryFactory = lockRegistryFactory;
+        this.lockKeyPrefixGenerator = lockKeyPrefixGenerator;
+        this.applicationContext = applicationContext;
+    }
 
     /**
      * try lock

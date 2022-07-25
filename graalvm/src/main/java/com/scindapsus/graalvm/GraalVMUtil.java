@@ -1,9 +1,5 @@
 package com.scindapsus.graalvm;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
@@ -14,10 +10,10 @@ import java.io.File;
  * @author wyh
  * @since 1.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GraalVMUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(GraalVMUtil.class);
+    private GraalVMUtil() {
+    }
 
     /**
      * 执行指定脚本中的方法
@@ -33,8 +29,7 @@ public class GraalVMUtil {
             Value func = context.eval(lang, function);
             return func.canExecute() ? func.execute(args).as(responseType) : null;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return null;
+            throw new ExecuteException("执行失败", e);
         }
     }
 
@@ -58,8 +53,7 @@ public class GraalVMUtil {
             Value func = context.getBindings(lang).getMember(function);
             return func.canExecute() ? func.execute(args).as(responseType) : null;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return null;
+            throw new ExecuteException("执行失败", e);
         }
     }
 }

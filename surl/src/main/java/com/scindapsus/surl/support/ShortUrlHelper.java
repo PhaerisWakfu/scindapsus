@@ -4,8 +4,6 @@ import cn.hutool.bloomfilter.BloomFilter;
 import cn.hutool.bloomfilter.BloomFilterUtil;
 import cn.hutool.core.lang.hash.MurmurHash;
 import cn.hutool.core.util.RadixUtil;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 /**
  * 短网址长转短工具类
@@ -13,8 +11,10 @@ import lombok.NoArgsConstructor;
  * @author wyh
  * @since 1.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShortUrlHelper {
+
+    private ShortUrlHelper() {
+    }
 
     /**
      * 生成短key存在后原始key拼接字符串

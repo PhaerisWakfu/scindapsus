@@ -33,7 +33,7 @@ public class DatasourceImportBeanDefinitionRegistrar implements ImportBeanDefini
             defaultOptional = datasourcePropertiesMap.values().stream().findFirst();
         } else {
             //如果数据源大于1
-            defaultOptional = datasourcePropertiesMap.values().stream().filter(DatasourceProperties.DSProperty::getIsDefault).findFirst();
+            defaultOptional = datasourcePropertiesMap.values().stream().filter(DatasourceProperties.DSProperty::getDefault).findFirst();
         }
         //如果至少有一个以上的数据源但是没有默认数据源
         if (!defaultOptional.isPresent()) {

@@ -2,7 +2,6 @@ package com.scindapsus.ds.controller;
 
 import com.scindapsus.ds.model.Car;
 import com.scindapsus.ds.service.CarService;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,10 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2022/7/5 11:11
  */
 @RestController
-@AllArgsConstructor
 public class CarController {
 
     private final CarService carService;
+
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
 
     @GetMapping("/ds/1")
     public Car first() {

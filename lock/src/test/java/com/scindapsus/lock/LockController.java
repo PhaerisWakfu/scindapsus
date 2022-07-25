@@ -1,7 +1,5 @@
 package com.scindapsus.lock;
 
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/lock")
-@Slf4j
 public class LockController {
 
     @Autowired
@@ -28,13 +25,31 @@ public class LockController {
 
     @ExceptionHandler(TryLockException.class)
     public String bizException(TryLockException e) {
-        log.error("获取琐失败", e);
         return String.format("获取琐失败:%s", e.getMessage());
     }
 
-    @Data
     public static class Request {
+
         private String name;
+
         private String age;
+
+
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
+        }
     }
 }

@@ -2,9 +2,6 @@ package com.scindapsus.log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,9 +9,6 @@ import org.slf4j.LoggerFactory;
  * @author wyh
  * @since 1.0
  */
-@Getter
-@Setter
-@Builder
 public class LogBase {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogBase.class);
@@ -109,5 +103,82 @@ public class LogBase {
         if (LOGGER.isErrorEnabled()) {
             LOGGER.error(JSON.toJSONString(this));
         }
+    }
+
+
+    public static LogBase getInstance() {
+        return new LogBase();
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public LogBase setPath(String path) {
+        this.path = path;
+        return this;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public LogBase setEventName(String eventName) {
+        this.eventName = eventName;
+        return this;
+    }
+
+    public String getTraceId() {
+        return traceId;
+    }
+
+    public LogBase setTraceId(String traceId) {
+        this.traceId = traceId;
+        return this;
+    }
+
+    public Object getUserId() {
+        return userId;
+    }
+
+    public LogBase setUserId(Object userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public long getCostTime() {
+        return costTime;
+    }
+
+    public LogBase setCostTime(long costTime) {
+        this.costTime = costTime;
+        return this;
+    }
+
+    public Object getRequest() {
+        return request;
+    }
+
+    public LogBase setRequest(Object request) {
+        this.request = request;
+        return this;
+    }
+
+    public Object getResponse() {
+        return response;
+    }
+
+    public LogBase setResponse(Object response) {
+        this.response = response;
+        return this;
+    }
+
+    public Object getOthers() {
+        return others;
+    }
+
+    public LogBase setOthers(Object others) {
+        this.others = others;
+        return this;
     }
 }

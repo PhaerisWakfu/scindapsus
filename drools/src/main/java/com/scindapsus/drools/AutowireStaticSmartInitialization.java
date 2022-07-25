@@ -1,6 +1,5 @@
 package com.scindapsus.drools;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
@@ -10,10 +9,13 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
  * @author wyh
  * @since 1.0
  */
-@AllArgsConstructor
 public class AutowireStaticSmartInitialization implements SmartInitializingSingleton {
 
     private final AutowireCapableBeanFactory beanFactory;
+
+    public AutowireStaticSmartInitialization(AutowireCapableBeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
+    }
 
     /**
      * 当所有的单例Bean初始化完成后，对static静态成员进行赋值

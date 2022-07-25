@@ -1,14 +1,10 @@
 package com.scindapsus.surl;
 
-import lombok.Builder;
-import lombok.Data;
 
 /**
  * @author wyh
  * @since 1.0
  */
-@Data
-@Builder
 public class ShortUrl {
 
     /**
@@ -20,4 +16,27 @@ public class ShortUrl {
      * 原始URL
      */
     private String originalUrl;
+
+
+    public static ShortUrl getInstance() {
+        return new ShortUrl();
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public ShortUrl setKey(String key) {
+        this.key = key;
+        return this;
+    }
+
+    public String getOriginalUrl() {
+        return originalUrl;
+    }
+
+    public ShortUrl setOriginalUrl(String originalUrl) {
+        this.originalUrl = originalUrl;
+        return this;
+    }
 }

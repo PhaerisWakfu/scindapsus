@@ -1,8 +1,9 @@
 package com.scindapsus.lock;
 
 import com.scindapsus.lock.annotation.DistributedLock;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+import com.scindapsus.lock.exception.DistributedLockException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -15,16 +16,20 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class MyLockService {
 
-    @SneakyThrows
     @DistributedLock(name = "#p0", key = "#a1", fallback = MyFallbackFactory.class, retryDuration = 1000 * 5)
     public String getName(String name, String age) {
-        TimeUnit.SECONDS.sleep(10);
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            throw new DistributedLockException("sleep interrupted exception");
+        }
         return "ok";
     }
 
-    @Slf4j
     @Component
     public static class MyFallbackFactory implements LockFallback<MyLockService> {
+
+        private static final Logger log = LoggerFactory.getLogger(MyFallbackFactory.class);
 
         @Override
         public MyLockService create(Throwable cause) {

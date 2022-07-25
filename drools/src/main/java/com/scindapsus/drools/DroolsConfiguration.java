@@ -1,8 +1,9 @@
 package com.scindapsus.drools;
 
-import lombok.AllArgsConstructor;
 import org.kie.api.KieServices;
-import org.kie.api.builder.*;
+import org.kie.api.builder.KieBuilder;
+import org.kie.api.builder.KieFileSystem;
+import org.kie.api.builder.KieRepository;
 import org.kie.api.runtime.KieContainer;
 import org.kie.internal.io.ResourceFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -22,11 +23,14 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 @Configuration
-@AllArgsConstructor
 @EnableConfigurationProperties(DroolsProperties.class)
 public class DroolsConfiguration {
 
     private final DroolsProperties properties;
+
+    public DroolsConfiguration(DroolsProperties properties) {
+        this.properties = properties;
+    }
 
     @Bean
     public KieContainer kieContainer() throws IOException {

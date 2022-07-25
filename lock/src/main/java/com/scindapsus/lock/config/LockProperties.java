@@ -2,8 +2,6 @@ package com.scindapsus.lock.config;
 
 import com.scindapsus.lock.LockKeyPrefixGenerator;
 import com.scindapsus.lock.enumeration.LockTypeEnum;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -11,8 +9,6 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
  * @author wyh
  * @since 1.0
  */
-@Getter
-@Setter
 @ConfigurationProperties(prefix = LockProperties.PREFIX)
 public class LockProperties {
 
@@ -36,8 +32,31 @@ public class LockProperties {
     private Zookeeper zookeeper = new Zookeeper();
 
 
-    @Getter
-    @Setter
+
+    public LockTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(LockTypeEnum type) {
+        this.type = type;
+    }
+
+    public Redis getRedis() {
+        return redis;
+    }
+
+    public void setRedis(Redis redis) {
+        this.redis = redis;
+    }
+
+    public Zookeeper getZookeeper() {
+        return zookeeper;
+    }
+
+    public void setZookeeper(Zookeeper zookeeper) {
+        this.zookeeper = zookeeper;
+    }
+
     public static class Redis {
 
         /**
@@ -49,10 +68,26 @@ public class LockProperties {
          * 琐过期时间(milliseconds)
          */
         private long expire = 60000;
+
+
+
+        public String getRegistryKey() {
+            return registryKey;
+        }
+
+        public void setRegistryKey(String registryKey) {
+            this.registryKey = registryKey;
+        }
+
+        public long getExpire() {
+            return expire;
+        }
+
+        public void setExpire(long expire) {
+            this.expire = expire;
+        }
     }
 
-    @Getter
-    @Setter
     public static class Zookeeper {
 
         /**
@@ -74,5 +109,39 @@ public class LockProperties {
          * 连接最大重试次数
          */
         private int maxRetries = 3;
+
+
+
+        public String getConnectionString() {
+            return connectionString;
+        }
+
+        public void setConnectionString(String connectionString) {
+            this.connectionString = connectionString;
+        }
+
+        public String getRoot() {
+            return root;
+        }
+
+        public void setRoot(String root) {
+            this.root = root;
+        }
+
+        public int getBaseSleepTimeMs() {
+            return baseSleepTimeMs;
+        }
+
+        public void setBaseSleepTimeMs(int baseSleepTimeMs) {
+            this.baseSleepTimeMs = baseSleepTimeMs;
+        }
+
+        public int getMaxRetries() {
+            return maxRetries;
+        }
+
+        public void setMaxRetries(int maxRetries) {
+            this.maxRetries = maxRetries;
+        }
     }
 }

@@ -1,7 +1,5 @@
 package com.scindapsus.lock.support;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import org.springframework.context.expression.MethodBasedEvaluationContext;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.expression.ExpressionParser;
@@ -16,8 +14,10 @@ import java.lang.reflect.Method;
  * @author wyh
  * @since 1.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SpringExpressionLangParser {
+
+    private SpringExpressionLangParser() {
+    }
 
     private static final ExpressionParser PARSER = new SpelExpressionParser();
 

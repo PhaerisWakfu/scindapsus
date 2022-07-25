@@ -2,8 +2,6 @@ package com.scindapsus.surl;
 
 import com.scindapsus.surl.config.ShortUrlProperties;
 import com.scindapsus.surl.exception.UnknownMappingException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +15,6 @@ import java.io.IOException;
  * @since 1.0
  */
 @Controller
-@AllArgsConstructor
 @ConditionalOnProperty(prefix = ShortUrlProperties.PREFIX, name = "enabled", havingValue = "true")
 public class RouteController {
 
@@ -27,6 +24,11 @@ public class RouteController {
 
     private final HttpServletResponse response;
 
+    public RouteController(UrlMappingService urlMappingService, HttpServletRequest request, HttpServletResponse response) {
+        this.urlMappingService = urlMappingService;
+        this.request = request;
+        this.response = response;
+    }
 
     @PostMapping("${scindapsus.surl.path}")
     @ResponseBody
@@ -45,12 +47,21 @@ public class RouteController {
         return String.format("The mapping of [%s] was not found.", e.getMessage());
     }
 
-    @Data
     public static class ConvertRequestDTO {
 
         /**
          * 原始链接
          */
         private String originalUrl;
+
+
+
+        public String getOriginalUrl() {
+            return originalUrl;
+        }
+
+        public void setOriginalUrl(String originalUrl) {
+            this.originalUrl = originalUrl;
+        }
     }
 }

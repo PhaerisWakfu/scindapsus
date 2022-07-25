@@ -4,7 +4,6 @@ import com.scindapsus.lock.LockFallback;
 import com.scindapsus.lock.LockRegistryFactory;
 import com.scindapsus.lock.aspect.LockAspect;
 import com.scindapsus.lock.LockKeyPrefixGenerator;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -18,7 +17,6 @@ import java.util.Optional;
  * @author wyh
  * @since 1.0
  */
-@Slf4j
 @Configuration
 @EnableConfigurationProperties(LockProperties.class)
 public class LockConfiguration {

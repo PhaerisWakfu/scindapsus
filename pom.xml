@@ -89,12 +89,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <!--external-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
         <!--test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

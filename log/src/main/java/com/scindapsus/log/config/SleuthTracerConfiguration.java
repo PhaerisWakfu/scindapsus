@@ -2,7 +2,6 @@ package com.scindapsus.log.config;
 
 import brave.Tracer;
 import com.scindapsus.log.trace.TracerProvider;
-import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -34,10 +33,13 @@ public class SleuthTracerConfiguration {
     /**
      * spring cloud sleuth tracer
      */
-    @AllArgsConstructor
     public static class SleuthTracer implements TracerProvider {
 
         private final Tracer tracer;
+
+        public SleuthTracer(Tracer tracer) {
+            this.tracer = tracer;
+        }
 
         @Override
         public String getTraceId() {
