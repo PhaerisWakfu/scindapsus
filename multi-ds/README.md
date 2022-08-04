@@ -45,7 +45,13 @@ scindapsus:
         username: root
         password: root
         driver-class-name: com.mysql.cj.jdbc.Driver
-
+        #使用hikariCP来作数据库连接池，支持hikariCP的配置
+        connection-test-query: SELECT 1
+        connection-timeout: 60000
+        idle-timeout: 500000
+        max-lifetime: 540000
+        maximum-pool-size: 20
+        minimum-idle: 10
 ```
 
 ## 使用
