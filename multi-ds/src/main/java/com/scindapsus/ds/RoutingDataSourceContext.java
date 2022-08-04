@@ -1,6 +1,7 @@
 package com.scindapsus.ds;
 
 import com.scindapsus.ds.constants.DSConstants;
+import org.springframework.util.StringUtils;
 
 /**
  * @author Java课代表
@@ -17,9 +18,8 @@ public class RoutingDataSourceContext {
 
     public static String getRoutingKey() {
         String name = LOOKUP_KEY_HOLDER.get();
-        // 如果key不存在则返回默认数据源
-        String key = name == null ? DSConstants.DEFAULT_ROUTING_KEY : name;
-        return key + DSConstants.DS_NAME_SUFFIX;
+        // 如果routingKey不存在则返回默认数据源
+        return StringUtils.hasText(name) ? name + DSConstants.DS_NAME_SUFFIX : null;
     }
 
     public static void reset() {
