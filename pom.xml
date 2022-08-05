@@ -32,7 +32,7 @@
         <spring-boot.version>2.5.5</spring-boot.version>
         <spring-cloud.version>2020.0.4</spring-cloud.version>
         <hutool.version>5.7.11</hutool.version>
-        <fastjson.version>1.2.78</fastjson.version>
+        <fastjson.version>2.0.10</fastjson.version>
         <guava.version>31.0.1-jre</guava.version>
         <caffeine.version>2.9.2</caffeine.version>
         <annotation-processor.version>1.0</annotation-processor.version>

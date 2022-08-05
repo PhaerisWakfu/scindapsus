@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 1.0
  */
 @SpringBootApplication
-public class SurlApplication {
+public class ShortUrlApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SurlApplication.class, args);
+        SpringApplication.run(ShortUrlApplication.class, args);
     }
 }

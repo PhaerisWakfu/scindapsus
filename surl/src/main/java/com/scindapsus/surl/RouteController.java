@@ -55,7 +55,6 @@ public class RouteController {
         private String originalUrl;
 
 
-
         public String getOriginalUrl() {
             return originalUrl;
         }

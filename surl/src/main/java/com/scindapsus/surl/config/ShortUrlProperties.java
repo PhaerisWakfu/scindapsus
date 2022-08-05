@@ -22,7 +22,6 @@ public class ShortUrlProperties {
     private String path;
 
 
-
     public boolean isEnabled() {
         return enabled;
     }

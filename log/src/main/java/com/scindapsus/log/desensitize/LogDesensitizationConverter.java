@@ -3,13 +3,13 @@ package com.scindapsus.log.desensitize;
 import ch.qos.logback.classic.pattern.MessageConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Context;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.DesensitizedUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +46,7 @@ public class LogDesensitizationConverter extends MessageConverter {
         if (allowRun == null) {
             Context context = getContext();
             String isEnabled = context.getProperty(ENABLED_KEY);
-            allowRun = StringUtils.hasText(isEnabled) ? isEnabled : CLOSED;
+            allowRun = StrUtil.isNotBlank(isEnabled) ? isEnabled : CLOSED;
             try {
                 desensitizeRules = JSON.parseArray(context.getProperty(SENSITIVE_KEYS), DesensitizeRule.class);
             } catch (Exception e) {
@@ -58,7 +58,7 @@ public class LogDesensitizationConverter extends MessageConverter {
         String originalMessage = event.getFormattedMessage();
 
         //缺少必要参数不脱敏
-        if (!ENABLED.equals(allowRun) || CollectionUtils.isEmpty(desensitizeRules) || !StringUtils.hasText(originalMessage)) {
+        if (!ENABLED.equals(allowRun) || CollectionUtil.isEmpty(desensitizeRules) || StrUtil.isBlank(originalMessage)) {
             return originalMessage;
         }
 

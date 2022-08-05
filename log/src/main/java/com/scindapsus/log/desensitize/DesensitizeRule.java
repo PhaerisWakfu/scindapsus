@@ -19,8 +19,6 @@ public class DesensitizeRule {
     private DesensitizedUtil.DesensitizedType format;
 
 
-
-
     public String getFieldName() {
         return fieldName;
     }
