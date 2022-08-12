@@ -7,14 +7,13 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 /**
  * @author Java课代表
+ * @author wyh
  * @since 1.0
  */
 @Aspect
-@Component
 // 指定优先级高于@Transactional的默认优先级
 // 从而保证先切换数据源再进行事务操作
 @Order(Ordered.LOWEST_PRECEDENCE - 1)

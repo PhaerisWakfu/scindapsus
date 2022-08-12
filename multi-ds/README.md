@@ -1,8 +1,11 @@
 # Scindapsus DS
+
 根据<Java课代表>的文章[《看透，Spring是如何支持多数据源的》]
 封装成多数据源组件
 
+## 说明
 
+不支持mybatis-plus，其官方有自己的多数据源包[Dynamic-Datasource]，推荐使用官方的，功能更强大，支持更友好
 
 ## 依赖
 
@@ -13,17 +16,17 @@
     <artifactId>scindapsus-ds-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
-<!--根据自己需要引入orm依赖与驱动包ds-->
+        <!--根据自己需要引入orm依赖与驱动包ds-->
 <dependency>
-    <groupId>org.mybatis.spring.boot</groupId>
-    <artifactId>mybatis-spring-boot-starter</artifactId>
-    <version>2.2.2</version>
-    <scope>test</scope>
+<groupId>org.mybatis.spring.boot</groupId>
+<artifactId>mybatis-spring-boot-starter</artifactId>
+<version>2.2.2</version>
+<scope>test</scope>
 </dependency>
 <dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <scope>test</scope>
+<groupId>mysql</groupId>
+<artifactId>mysql-connector-java</artifactId>
+<scope>test</scope>
 </dependency>
 ```
 
@@ -55,7 +58,9 @@ scindapsus:
 ```
 
 ## 使用
+
 启动类添加启动多数据源的注解@EnableDS
+
 ```java
 /**
  * @author wyh
@@ -71,7 +76,9 @@ public class DSApplication {
     }
 }
 ```
+
 在操作库的地方使用注解@WithDataSource指定数据源，不加注解或者不写value默认为isDefault为true的数据源(写多个isDefault默认取第一个)
+
 ```java
 /**
  * @author wyh
@@ -98,3 +105,5 @@ public class CarService {
 ```
 
 [《看透，Spring是如何支持多数据源的》]:https://mp.weixin.qq.com/s/at-QJjpFi3PK7jyk0hCwcA
+
+[Dynamic-Datasource]:https://gitee.com/baomidou/dynamic-datasource-spring-boot-starter

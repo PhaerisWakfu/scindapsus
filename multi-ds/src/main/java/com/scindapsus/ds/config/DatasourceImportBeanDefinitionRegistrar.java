@@ -35,6 +35,9 @@ public class DatasourceImportBeanDefinitionRegistrar implements ImportBeanDefini
                 .bind(DatasourceProperties.PREFIX, DatasourceProperties.class);
         //如果没有配置数据源
         datasourceProperties = bind.orElseThrow(() -> new DatasourceException(String.format("Please config '%s'", DatasourceProperties.PREFIX)));
+        if (datasourceProperties.getMulti().isEmpty()) {
+            throw new DatasourceException("Please provide configuration for at least one datasource");
+        }
     }
 
     /**
