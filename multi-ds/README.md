@@ -77,7 +77,7 @@ public class DSApplication {
 }
 ```
 
-在操作库的地方使用注解@WithDataSource指定数据源，不加注解或者不写value默认为isDefault为true的数据源(写多个isDefault默认取第一个)
+在操作库的地方使用注解@WithDataSource指定数据源，不加注解或者不写value默认为primary指定的数据源(未指定取第一个配置的数据源)
 
 ```java
 /**
