@@ -81,7 +81,7 @@ public class TestController {
 
 ## 短网址存放SPI
 
-可以自行实现UrlMappingService注册为bean来设置短网址存取，例如mysql、redis等，默认使用guava cache存在内存中(详见源码com.scindapsus.surl.config.ShortUrlConfiguration.DefaultShortUrlServiceImpl)
+可以自行实现UrlMappingService注册为bean来设置短网址存取，例如mysql、redis等，默认使用Caffeine存在内存中(详见源码com.scindapsus.surl.config.ShortUrlConfiguration.DefaultShortUrlServiceImpl)
 
 ```java
 /**
