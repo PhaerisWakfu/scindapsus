@@ -5,6 +5,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 /**
  * 支持动态切换的数据源
  * 通过重写 determineCurrentLookupKey 实现数据源切换
+ * <p>说明：动态切换库的事务是支持单库的</>
  *
  * @author Java课代表
  * @author wyh

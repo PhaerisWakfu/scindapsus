@@ -5,7 +5,8 @@
 
 ## 说明
 
-不支持mybatis-plus，其官方有自己的多数据源包[Dynamic-Datasource]，推荐使用官方的，功能更强大，支持更友好
+- 不支持mybatis-plus，其官方有自己的多数据源包[Dynamic-Datasource]，推荐使用官方的，功能更强大，支持更友好
+- 仅支持单数据源事务（支持多数据源事务TODO中）
 
 ## 依赖
 
@@ -16,7 +17,7 @@
     <artifactId>scindapsus-ds-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
-        <!--根据自己需要引入orm依赖与驱动包ds-->
+<!--根据自己需要引入orm依赖与驱动包ds-->
 <dependency>
 <groupId>org.mybatis.spring.boot</groupId>
 <artifactId>mybatis-spring-boot-starter</artifactId>

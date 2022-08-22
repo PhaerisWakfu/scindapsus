@@ -26,7 +26,6 @@ public class Car {
     private Date updateTime;
 
 
-
     public Long getId() {
         return id;
     }
@@ -89,5 +88,19 @@ public class Car {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", age='" + age + '\'' +
+                ", area='" + area + '\'' +
+                ", color='" + color + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }
