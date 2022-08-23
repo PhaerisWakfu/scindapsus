@@ -29,8 +29,8 @@ public class TxCarService {
     public void tx1OffAndThrow() {
         String format = sdf.format(new Date());
         carMapper.update(1L, "hello1_" + format);
+        int i = 1 / 0;
         carMapper.update(2L, "world1_" + format);
-        throw new RuntimeException();
     }
 
     /**
@@ -63,7 +63,7 @@ public class TxCarService {
     public void tx2OnAndThrow() {
         String format = sdf.format(new Date());
         carMapper.update(1L, "hello2_" + format);
+        int i = 1 / 0;
         carMapper.update(2L, "world2_" + format);
-        throw new RuntimeException();
     }
 }

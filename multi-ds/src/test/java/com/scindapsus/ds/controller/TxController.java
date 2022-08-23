@@ -32,9 +32,18 @@ public class TxController {
     /**
      * 有声明式事务抛错
      */
+    @GetMapping("/on-throw")
+    public String txOnThrow() {
+        txCarService.tx2OnAndThrow();
+        return "success";
+    }
+
+    /**
+     * 有声明式事务
+     */
     @GetMapping("/on")
     public String txOn() {
-        txCarService.tx2OnAndThrow();
+        txCarService.tx2On();
         return "success";
     }
 
