@@ -6,28 +6,28 @@
 ## 说明
 
 - 不支持mybatis-plus，其官方有自己的多数据源包[Dynamic-Datasource]，推荐使用官方的，功能更强大，支持更友好
-- 仅支持单数据源事务，因为数据源切换要在开启事务之前执行，否则与声明式事务同用时会导致切换数据源出现问题（支持多数据源事务TODO中）
+- 仅支持单数据源事务，如果嵌套声明式事务，则会认为嵌套方法是方法调用，会走默认的primary的数据源（与AOP的嵌套特性有关）
 
 ## 依赖
 
 ```xml
-<!--快照版本-->
+ <!--快照版本-->
 <dependency>
     <groupId>com.phaeris.scindapsus</groupId>
     <artifactId>scindapsus-ds-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
-<!--根据自己需要引入orm依赖与驱动包ds-->
+ <!--根据自己需要引入orm依赖与驱动包ds-->
 <dependency>
-<groupId>org.mybatis.spring.boot</groupId>
-<artifactId>mybatis-spring-boot-starter</artifactId>
-<version>2.2.2</version>
-<scope>test</scope>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>2.2.2</version>
+    <scope>test</scope>
 </dependency>
 <dependency>
-<groupId>mysql</groupId>
-<artifactId>mysql-connector-java</artifactId>
-<scope>test</scope>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <scope>test</scope>
 </dependency>
 ```
 

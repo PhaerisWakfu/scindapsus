@@ -1,17 +1,20 @@
-### 不加事务更新两次ds1，并且抛错
-GET http://localhost:8080/ds/tx/off
+### 单数据源无事务抛错(ds1)
+GET http://localhost:8080/ds/tx/off/throw
 
-### 加事务更新两次ds2，并且抛错
-GET http://localhost:8080/ds/tx/on-throw
+### 单数据源有事务抛错(ds2)
+GET http://localhost:8080/ds/tx/on/throw
 
-### 加事务更新两次ds2
+### 单数据源有事务不抛错(ds2)
 GET http://localhost:8080/ds/tx/on
 
-### 不在调用处加嵌套事务正常更新ds1，更新ds2时抛错
-GET http://localhost:8080/ds/tx/mix-off
+### 多数据源无事务抛错([ds1] [ds2 throw])
+GET http://localhost:8080/ds/tx/mix/off/throw
 
-### 在调用处加嵌套事务正常更新ds1，ds2
-GET http://localhost:8080/ds/tx/mix
+### 多数据源无事务不抛错([ds1] [ds2])
+GET http://localhost:8080/ds/tx/mix/off
 
-### 在调用处加嵌套事务正常更新ds1，更新ds2时抛错
-GET http://localhost:8080/ds/tx/mix-on
+### 多数据源有事务不抛错([ds1] [ds2])
+GET http://localhost:8080/ds/tx/mix/on
+
+### 多数据源有事务抛错([ds1] [ds2 throw])
+GET http://localhost:8080/ds/tx/mix/on/throw

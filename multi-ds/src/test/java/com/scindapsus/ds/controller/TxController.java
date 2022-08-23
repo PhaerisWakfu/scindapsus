@@ -1,6 +1,6 @@
 package com.scindapsus.ds.controller;
 
-import com.scindapsus.ds.tx.TxCarService;
+import com.scindapsus.ds.tx.SpringTxCarService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,71 +14,82 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/ds/tx")
 public class TxController {
 
-    private final TxCarService txCarService;
+    private final SpringTxCarService springTxCarService;
 
-    public TxController(TxCarService txCarService) {
-        this.txCarService = txCarService;
+    public TxController(SpringTxCarService springTxCarService) {
+        this.springTxCarService = springTxCarService;
     }
 
     /**
-     * 无声明式事务抛错
+     * 单数据源无事务抛错
      */
-    @GetMapping("/off")
-    public String txOff() {
-        txCarService.tx1OffAndThrow();
+    @GetMapping("/off/throw")
+    public String txOffThrow() {
+        springTxCarService.tx1OffAndThrow();
         return "success";
     }
 
     /**
-     * 有声明式事务抛错
+     * 单数据源有事务抛错
      */
-    @GetMapping("/on-throw")
+    @GetMapping("/on/throw")
     public String txOnThrow() {
-        txCarService.tx2OnAndThrow();
+        springTxCarService.tx2OnAndThrow();
         return "success";
     }
 
     /**
-     * 有声明式事务
+     * 单数据源有事务不抛错
      */
     @GetMapping("/on")
     public String txOn() {
-        txCarService.tx2On();
+        springTxCarService.tx2On();
         return "success";
     }
 
     /**
-     * 混合事务抛错
+     * 多数据源无事务抛错
      */
-    @GetMapping("/mix-off")
+    @GetMapping("/mix/off/throw")
+    public String mixOffThrow() {
+        springTxCarService.tx1On();
+        springTxCarService.tx2OnAndThrow();
+        return "success";
+    }
+
+    /**
+     * 多数据源无事务不抛错
+     */
+    @GetMapping("/mix/off")
     public String mixOff() {
-        txCarService.tx1On();
-        txCarService.tx2OnAndThrow();
+        springTxCarService.tx1On();
+        springTxCarService.tx2On();
         return "success";
     }
 
     /*下面两个例子说明routingDs的事务是只支持单数据源的*/
-    /*并且有嵌套事务时候，不抛错的话只会执行最后一个的事务*/
+    /*有嵌套事务时候，会认为是走默认数据源*/
+    /*例如：更新ds1的id为1和2的数据与ds2的id为3和4的数据，会变成更新ds1的id为1、2、3、4的数据*/
 
     /**
-     * 混合事务
+     * 多数据源有事务不抛错
      */
-    @GetMapping("/mix")
+    @GetMapping("/mix/on")
     @Transactional
-    public String mix() {
-        txCarService.tx2On();
-        txCarService.tx1On();
+    public String mixOn() {
+        springTxCarService.tx1On();
+        springTxCarService.tx2On();
         return "success";
     }
 
     /**
-     * 混合事务嵌套抛错
+     * 多数据源有事务抛错
      */
-    @GetMapping("/mix-on")
+    @GetMapping("/mix/on/throw")
     @Transactional
-    public String mixOn() {
-        txCarService.tx2OnAndThrow();
-        txCarService.tx1On();
+    public String mixOnThrow() {
+        springTxCarService.tx1On();
+        springTxCarService.tx2OnAndThrow();
         return "success";
     }
 }
