@@ -1,7 +1,7 @@
-### 单数据源无事务抛错(ds1)
+### 单数据源无事务抛错(ds1 throw)
 GET http://localhost:8080/ds/tx/off/throw
 
-### 单数据源有事务抛错(ds2)
+### 单数据源有事务抛错(ds2 throw)
 GET http://localhost:8080/ds/tx/on/throw
 
 ### 单数据源有事务不抛错(ds2)
