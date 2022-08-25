@@ -14,6 +14,7 @@ public class UrlMappingHolder {
     private static UrlMappingService urlMappingService;
 
     @Autowired
+    @SuppressWarnings("all")
     public void setUp(UrlMappingService urlMappingService) {
         UrlMappingHolder.urlMappingService = urlMappingService;
     }

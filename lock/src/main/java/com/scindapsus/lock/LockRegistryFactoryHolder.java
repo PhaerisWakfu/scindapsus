@@ -15,6 +15,7 @@ public class LockRegistryFactoryHolder {
     private static LockRegistryFactory lockRegistryFactory;
 
     @Autowired
+    @SuppressWarnings("all")
     public void setUp(LockRegistryFactory lockRegistryFactory) {
         LockRegistryFactoryHolder.lockRegistryFactory = lockRegistryFactory;
     }

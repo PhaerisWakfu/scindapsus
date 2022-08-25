@@ -16,6 +16,7 @@ public class DroolsHolder {
     private static KieContainer kieContainer;
 
     @Autowired
+    @SuppressWarnings("all")
     public void setUp(KieContainer kieContainer) {
         DroolsHolder.kieContainer = kieContainer;
     }
