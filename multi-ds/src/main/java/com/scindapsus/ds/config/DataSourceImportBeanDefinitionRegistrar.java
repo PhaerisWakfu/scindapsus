@@ -1,7 +1,7 @@
 package com.scindapsus.ds.config;
 
 import com.scindapsus.ds.constants.DSConstants;
-import com.scindapsus.ds.exception.DatasourceException;
+import com.scindapsus.ds.exception.DataSourceException;
 import com.zaxxer.hikari.HikariConfig;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -19,9 +19,9 @@ import java.util.Map;
  * @author wyh
  * @date 2022/7/4 15:06
  */
-public class DatasourceImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar, EnvironmentAware {
+public class DataSourceImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar, EnvironmentAware {
 
-    private DatasourceProperties datasourceProperties;
+    private DataSourceProperties datasourceProperties;
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
@@ -31,12 +31,12 @@ public class DatasourceImportBeanDefinitionRegistrar implements ImportBeanDefini
 
     @Override
     public void setEnvironment(Environment environment) {
-        BindResult<DatasourceProperties> bind = Binder.get(environment)
-                .bind(DatasourceProperties.PREFIX, DatasourceProperties.class);
+        BindResult<DataSourceProperties> bind = Binder.get(environment)
+                .bind(DataSourceProperties.PREFIX, DataSourceProperties.class);
         //如果没有配置数据源
-        datasourceProperties = bind.orElseThrow(() -> new DatasourceException(String.format("Please config '%s'", DatasourceProperties.PREFIX)));
+        datasourceProperties = bind.orElseThrow(() -> new DataSourceException(String.format("Please config '%s'", DataSourceProperties.PREFIX)));
         if (datasourceProperties.getMulti().isEmpty()) {
-            throw new DatasourceException("Please provide configuration for at least one datasource");
+            throw new DataSourceException("Please provide configuration for at least one datasource");
         }
     }
 
@@ -49,7 +49,7 @@ public class DatasourceImportBeanDefinitionRegistrar implements ImportBeanDefini
      */
     public static void registerBean(String name, HikariConfig property, BeanDefinitionRegistry registry) {
         BeanDefinitionBuilder builder = BeanDefinitionBuilder
-                .genericBeanDefinition(DatasourceFactoryBean.class);
+                .genericBeanDefinition(DataSourceFactoryBean.class);
         builder.addConstructorArgValue(property);
         BeanDefinition definition = builder.getBeanDefinition();
         String beanName = name + DSConstants.DS_NAME_SUFFIX;

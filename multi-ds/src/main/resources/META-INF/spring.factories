@@ -1,3 +1,4 @@
 # Auto Configuration
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.scindapsus.ds.config.DatasourceConfiguration
+com.scindapsus.ds.config.DataSourceConfiguration,\
+com.scindapsus.ds.config.AutowireStaticSmartInitialization

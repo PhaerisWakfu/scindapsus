@@ -20,3 +20,8 @@ scindapsus:
         max-lifetime: 540000
         maximum-pool-size: 20
         minimum-idle: 10
+
+logging:
+  level:
+    root: info
+    com.scindapsus.ds: debug

@@ -4,21 +4,22 @@ import com.scindapsus.ds.tx.SpringTxCarService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author wyh
  * @date 2022/8/22 17:27
  */
-@RestController
+//@EnableTransactionManagement
+//@RestController
 @RequestMapping("/ds/tx")
-public class TxController {
+public class SpringTxController {
 
     private final SpringTxCarService springTxCarService;
 
-    public TxController(SpringTxCarService springTxCarService) {
+    public SpringTxController(SpringTxCarService springTxCarService) {
         this.springTxCarService = springTxCarService;
     }
+
 
     /**
      * 单数据源无事务抛错

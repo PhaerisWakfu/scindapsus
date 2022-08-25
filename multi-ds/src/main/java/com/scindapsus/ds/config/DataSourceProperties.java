@@ -10,8 +10,8 @@ import java.util.Map;
  * @author wyh
  * @date 2022/7/4 14:39
  */
-@ConfigurationProperties(prefix = DatasourceProperties.PREFIX)
-public class DatasourceProperties {
+@ConfigurationProperties(prefix = DataSourceProperties.PREFIX)
+public class DataSourceProperties {
 
     public static final String PREFIX = "scindapsus.ds";
 

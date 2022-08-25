@@ -1,12 +1,12 @@
 # Scindapsus DS
 
 根据<Java课代表>的文章[《看透，Spring是如何支持多数据源的》]
-封装成多数据源组件
+封装成多数据源组件，并且支持多数据源事务（参考baomidou团队[Dynamic-Datasource]的本地事务解决方案）
 
 ## 说明
 
 - 不支持mybatis-plus，其官方有自己的多数据源包[Dynamic-Datasource]，推荐使用官方的，功能更强大，支持更友好
-- 仅支持单数据源事务，如果嵌套声明式事务，则会认为嵌套方法是方法调用，会走默认的primary的数据源（与AOP的嵌套特性有关）
+- 如果使用spring声明式事务@Transactional，仅支持单数据源事务（推荐使用本地事务解决多数据源事务问题）
 
 ## 依赖
 
@@ -103,6 +103,85 @@ public class CarService {
         return carMapper.getOne(1L);
     }
 }
+```
+
+## 多数据源事务
+因为aop的特性原因，不支持同类中方法嵌套调用，直接嵌套调用会单纯认为是方法调用，aop辐射不到，这里使用AopContext来调用同类来保证都能被aop识别（也可以分两个类、自己调自己等来解决）
+```java
+/**
+ * 通过@WithDataSource(tx = true)来打开本地事务
+ * <p>使用aopContext来调用本类其他方法需要设置aop的exposeProxy为true，不然会抛错
+ *
+ * @author wyh
+ * @date 2022/8/24 14:37
+ */
+@EnableAspectJAutoProxy(exposeProxy = true)
+@Service
+public class LocalTxCarService {
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+
+    private final CarMapper carMapper;
+
+    public LocalTxCarService(CarMapper carMapper) {
+        this.carMapper = carMapper;
+    }
+
+    @WithDataSource(value = "second", tx = true)
+    public void ds2() {
+        String format = sdf.format(new Date());
+        carMapper.update(3L, "ds2_" + format);
+        carMapper.update(4L, "ds2_" + format);
+    }
+
+    @WithDataSource(value = "second", tx = true)
+    public void ds2Throw() {
+        String format = sdf.format(new Date());
+        carMapper.update(3L, "ds2_" + format);
+        int i = 1 / 0;
+        carMapper.update(4L, "ds2_" + format);
+    }
+
+    @WithDataSource(value = "first", tx = true)
+    public void nested() {
+        String format = sdf.format(new Date());
+        carMapper.update(1L, "ds1_" + format);
+        carMapper.update(2L, "ds1_" + format);
+        ((LocalTxCarService) AopContext.currentProxy()).ds2();
+    }
+
+    @WithDataSource(value = "first", tx = true)
+    public void nestedThrow() {
+        String format = sdf.format(new Date());
+        carMapper.update(1L, "ds1_" + format);
+        carMapper.update(2L, "ds1_" + format);
+        ((LocalTxCarService) AopContext.currentProxy()).ds2Throw();
+    }
+}
+
+```
+
+### 支持日志打印事务ID
+开启本地事务后会，会设置事务id到slf4j的MDC中，使用时直接添加`[%X{localTxId}]`即可
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration>
+    <!-- 控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                [%X{localTxId}][ %-5level] [%date{yyyy-MM-dd HH:mm:ss}] [%thread] %logger{96} [%line] - %msg%n
+            </pattern>
+            <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+        </encoder>
+    </appender>
+    <root>
+        <appender-ref ref="ALL_FILE"/>
+        <appender-ref ref="ERR_FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
 ```
 
 [《看透，Spring是如何支持多数据源的》]:https://mp.weixin.qq.com/s/at-QJjpFi3PK7jyk0hCwcA

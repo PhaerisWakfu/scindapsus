@@ -8,7 +8,7 @@ GET http://localhost:8080/ds/tx/on/throw
 GET http://localhost:8080/ds/tx/on
 
 ### 多数据源无事务抛错([ds1] [ds2 throw])
-GET http://localhost:8080/ds/tx/mix/off/throw
+GET http://localhost:8080/ds/tx/mix/off/throwspring-tx.http
 
 ### 多数据源无事务不抛错([ds1] [ds2])
 GET http://localhost:8080/ds/tx/mix/off

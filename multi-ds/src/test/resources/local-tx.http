@@ -1,0 +1,8 @@
+### 单数据源抛错
+GET http://localhost:8080/ds/tx/local/throw
+
+### 多数据源嵌套不抛错
+GET http://localhost:8080/ds/tx/local/nested
+
+### 多数据源嵌套抛错
+GET http://localhost:8080/ds/tx/local/nested/throw

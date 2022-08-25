@@ -10,11 +10,11 @@ import org.springframework.beans.factory.FactoryBean;
  * @author wyh
  * @since 1.0
  */
-public class DatasourceFactoryBean implements FactoryBean<HikariDataSource> {
+public class DataSourceFactoryBean implements FactoryBean<HikariDataSource> {
 
     private final HikariConfig properties;
 
-    public DatasourceFactoryBean(HikariConfig properties) {
+    public DataSourceFactoryBean(HikariConfig properties) {
         this.properties = properties;
     }
 

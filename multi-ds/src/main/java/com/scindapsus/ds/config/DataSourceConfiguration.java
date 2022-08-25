@@ -3,7 +3,7 @@ package com.scindapsus.ds.config;
 import com.scindapsus.ds.RoutingDataSource;
 import com.scindapsus.ds.aspect.DataSourceAspect;
 import com.scindapsus.ds.constants.DSConstants;
-import com.scindapsus.ds.exception.DatasourceException;
+import com.scindapsus.ds.exception.DataSourceException;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
  * @date 2022/7/4 14:45
  */
 @Configuration
-@EnableConfigurationProperties(DatasourceProperties.class)
-public class DatasourceConfiguration {
+@EnableConfigurationProperties(DataSourceProperties.class)
+public class DataSourceConfiguration {
 
     @Bean
     public DataSourceAspect dataSourceAspect() {
@@ -33,20 +33,20 @@ public class DatasourceConfiguration {
      */
     @Bean
     @Primary
-    public RoutingDataSource routingDataSource(Map<String, DataSource> dataSourceMap, DatasourceProperties datasourceProperties) {
-        //数据源路由器
-        RoutingDataSource routingDataSource = new RoutingDataSource();
+    public RoutingDataSource routingDataSource(Map<String, DataSource> dataSourceMap, DataSourceProperties datasourceProperties) {
         //第一个配置的数据源为默认数据源
         String defaultDataSourceKey = datasourceProperties.getMulti()
                 .keySet()
                 .stream().findFirst()
-                .orElseThrow(() -> new DatasourceException("Please set @EnableDS for your application"));
+                .orElseThrow(() -> new DataSourceException("Please set @EnableDS for your application"));
         //如果手动指定了默认数据源
         String primaryKey = datasourceProperties.getPrimary();
         if (StringUtils.hasText(primaryKey)
                 && dataSourceMap.containsKey(primaryKey + DSConstants.DS_NAME_SUFFIX)) {
             defaultDataSourceKey = primaryKey;
         }
+        //数据源路由器
+        RoutingDataSource routingDataSource = new RoutingDataSource(defaultDataSourceKey);
         //设置默认数据源
         routingDataSource.setDefaultTargetDataSource(dataSourceMap.get(defaultDataSourceKey + DSConstants.DS_NAME_SUFFIX));
         //设置总共支持哪些数据源切换
