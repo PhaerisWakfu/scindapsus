@@ -1,8 +1,6 @@
 package com.scindapsus.ds.tx;
 
 import com.scindapsus.ds.exception.DataSourceException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -15,8 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author wyh
  */
 public class ConnectionFactory {
-
-    private final static Logger LOGGER = LoggerFactory.getLogger(ConnectionFactory.class);
 
     private static final ThreadLocal<Map<String, ConnectionProxy>> CONNECTION_HOLDER =
             ThreadLocal.withInitial(() -> new ConcurrentHashMap<>(8));
