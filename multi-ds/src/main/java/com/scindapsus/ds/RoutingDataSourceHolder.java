@@ -26,7 +26,7 @@ public class RoutingDataSourceHolder {
      * @return 数据源
      */
     public static DataSource get(String name) {
-        return obtain(name + DSConstants.DS_NAME_SUFFIX);
+        return lookup(name + DSConstants.DS_NAME_SUFFIX);
 
     }
 
@@ -36,7 +36,7 @@ public class RoutingDataSourceHolder {
      * @return 数据源
      */
     public static DataSource current() {
-        return obtain(routingDataSource.determineCurrentLookupKey());
+        return lookup(routingDataSource.determineCurrentLookupKey());
     }
 
     /**
@@ -45,7 +45,7 @@ public class RoutingDataSourceHolder {
      * @param dataSourceName 数据源名称
      * @return 数据源
      */
-    private static DataSource obtain(Object dataSourceName) {
+    private static DataSource lookup(Object dataSourceName) {
         DataSource dataSource = routingDataSource.getResolvedDataSources().get(dataSourceName);
         return dataSource != null ? dataSource : routingDataSource.getResolvedDefaultDataSource();
     }
