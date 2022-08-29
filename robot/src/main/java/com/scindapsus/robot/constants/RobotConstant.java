@@ -9,5 +9,5 @@ public class RobotConstant {
 
     public static final String MARKDOWN_MESSAGE_TYPE = "markdown";
 
-    public static final String CARD_MESSAGE_TYPE = "car";
+    public static final String TEXT_MESSAGE_TYPE = "text";
 }

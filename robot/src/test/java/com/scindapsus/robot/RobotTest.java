@@ -14,7 +14,7 @@ public class RobotTest extends BaseTest {
 
     @Test
     public void send() {
-        System.out.println(myRobotServiceImpl.sendMsg("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=60e707a9-609d-4e24-9a95-de39660023e5",
-                "hello $brand$", "select brand from car where id=1"));
+        System.out.println(myRobotServiceImpl.sendTxtMsg("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=27dd9bf2-bc90-4b4a-a897-89c2a9fb3e62",
+                "hello $brand$", "select brand from car where id=1", "@all"));
     }
 }

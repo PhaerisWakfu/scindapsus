@@ -1,5 +1,7 @@
 package com.scindapsus.robot.dto;
 
+import java.util.List;
+
 /**
  * @author wyh
  * @date 2022/8/26 15:34
@@ -10,9 +12,16 @@ public class RobotRequestDTO {
 
     private Markdown markdown;
 
+    private Text text;
+
     public RobotRequestDTO(String msgtype, Markdown markdown) {
         this.msgtype = msgtype;
         this.markdown = markdown;
+    }
+
+    public RobotRequestDTO(String msgtype, Text text) {
+        this.msgtype = msgtype;
+        this.text = text;
     }
 
     public String getMsgtype() {
@@ -31,6 +40,14 @@ public class RobotRequestDTO {
         this.markdown = markdown;
     }
 
+    public Text getText() {
+        return text;
+    }
+
+    public void setText(Text text) {
+        this.text = text;
+    }
+
 
     public static class Markdown {
 
@@ -46,6 +63,39 @@ public class RobotRequestDTO {
 
         public void setContent(String content) {
             this.content = content;
+        }
+    }
+
+
+    public static class Text {
+
+        private String content;
+
+        private List<String> mentioned_mobile_list;
+
+        public Text(String content) {
+            this.content = content;
+        }
+
+        public Text(String content, List<String> mentionedMobileList) {
+            this.content = content;
+            this.mentioned_mobile_list = mentionedMobileList;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public List<String> getMentioned_mobile_list() {
+            return mentioned_mobile_list;
+        }
+
+        public void setMentioned_mobile_list(List<String> mentioned_mobile_list) {
+            this.mentioned_mobile_list = mentioned_mobile_list;
         }
     }
 }
