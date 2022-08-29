@@ -1,0 +1,44 @@
+package com.scindapsus.robot.dto;
+
+
+/**
+ * @author wyh
+ * @date 2021/12/24 16:12
+ */
+public class WorkWechatResponse {
+
+    /**
+     * 出错返回码，为0表示成功，非0表示调用失败
+     */
+    private String errcode;
+
+    /**
+     * 返回码提示语
+     */
+    private String errmsg;
+
+
+    public String getErrcode() {
+        return errcode;
+    }
+
+    public void setErrcode(String errcode) {
+        this.errcode = errcode;
+    }
+
+    public String getErrmsg() {
+        return errmsg;
+    }
+
+    public void setErrmsg(String errmsg) {
+        this.errmsg = errmsg;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkWechatResponse{" +
+                "errcode='" + errcode + '\'' +
+                ", errmsg='" + errmsg + '\'' +
+                '}';
+    }
+}

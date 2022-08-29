@@ -26,6 +26,7 @@
         <module>dependencies</module>
         <module>graalvm</module>
         <module>multi-ds</module>
+        <module>robot</module>
     </modules>
 
     <properties>
@@ -36,6 +37,7 @@
         <guava.version>31.0.1-jre</guava.version>
         <caffeine.version>2.9.2</caffeine.version>
         <annotation-processor.version>1.0</annotation-processor.version>
+        <string-template.version>4.3.1</string-template.version>
 
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -60,6 +62,11 @@
             </dependency>
 
             <!--tools-->
+            <dependency>
+                <groupId>org.antlr</groupId>
+                <artifactId>ST4</artifactId>
+                <version>${string-template.version}</version>
+            </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
