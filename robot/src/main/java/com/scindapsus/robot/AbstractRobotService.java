@@ -21,7 +21,7 @@ import java.util.Map;
  * @author wyh
  * @date 2022/8/26 14:38
  */
-public abstract class RobotService {
+public abstract class AbstractRobotService {
 
     /**
      * 设置jdbcTemplate

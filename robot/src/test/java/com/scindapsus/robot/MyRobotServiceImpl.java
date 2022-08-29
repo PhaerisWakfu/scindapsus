@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
  * @date 2022/8/29 15:04
  */
 @Service
-public class MyRobotServiceImpl extends RobotService {
+public class MyRobotServiceImpl extends AbstractRobotService {
 
     @Autowired
     private RestTemplate restTemplate;
