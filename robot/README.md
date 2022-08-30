@@ -2,7 +2,7 @@
 
 ## 依赖
 
-```
+```xml
 <dependencies>
     <dependency>
         <groupId>com.phaeris.scindapsus</groupId>
