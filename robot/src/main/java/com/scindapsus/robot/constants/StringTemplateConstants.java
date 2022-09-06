@@ -7,4 +7,6 @@ package com.scindapsus.robot.constants;
 public class StringTemplateConstants {
 
     public static final char DELIMITER = '$';
+
+    public static final String MULTI_RESULT_PARAM_NAME = "params";
 }

@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import org.stringtemplate.v4.ST;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,7 +43,7 @@ public abstract class AbstractRobotService {
      * @return 发送结果
      */
     public WorkWechatResponse sendMdMsg(String robotUrl, String template, @Nullable String sql) {
-        return sendTmpMsg(true, robotUrl, template, sql);
+        return sendTmpMsg(false, true, robotUrl, template, sql);
     }
 
     /**
@@ -54,35 +55,68 @@ public abstract class AbstractRobotService {
      * @return 发送结果
      */
     public WorkWechatResponse sendTxtMsg(String robotUrl, String template, @Nullable String sql, String... atMobiles) {
-        return sendTmpMsg(false, robotUrl, template, sql, atMobiles);
+        return sendTmpMsg(false, false, robotUrl, template, sql, atMobiles);
     }
 
     /**
-     * 发送模板消息（支持ST模板与SQL赋值）
+     * 发送多行结果集markdown模板消息（支持ST模板与SQL赋值）
      *
      * @param robotUrl 机器人hook地址
      * @param template string template模板或普通文本
      * @param sql      {@code nullable}模板参数sql,如果template只是普通文本可以不传
      * @return 发送结果
      */
-    private WorkWechatResponse sendTmpMsg(boolean markdown, String robotUrl, String template, @Nullable String sql, String... atMobiles) {
+    public WorkWechatResponse sendMultiResultMdMsg(String robotUrl, String template, @Nullable String sql) {
+        return sendTmpMsg(true, true, robotUrl, template, sql);
+    }
+
+    /**
+     * 发送多行结果集markdown模板消息（支持ST模板与SQL赋值）
+     *
+     * @param robotUrl 机器人hook地址
+     * @param template string template模板或普通文本
+     * @param sql      {@code nullable}模板参数sql,如果template只是普通文本可以不传
+     * @return 发送结果
+     */
+    public WorkWechatResponse sendMultiResultTxtMsg(String robotUrl, String template, @Nullable String sql, String... atMobiles) {
+        return sendTmpMsg(true, false, robotUrl, template, sql, atMobiles);
+    }
+
+    /**
+     * 发送模板消息（支持ST模板与SQL赋值）
+     *
+     * @param multiResult 是否是多行结果集
+     * @param markdown    是否是markdown格式的内容
+     * @param robotUrl    机器人hook地址
+     * @param template    string template模板或普通文本
+     * @param sql         {@code nullable}模板参数sql,如果template只是普通文本可以不传
+     * @param atMobiles   at人的手机号列表
+     * @return 发送结果
+     */
+    private WorkWechatResponse sendTmpMsg(boolean multiResult, boolean markdown, String robotUrl, String template, @Nullable String sql, String... atMobiles) {
         //发送内容
         String content = template;
         if (StringUtils.hasText(sql)) {
             JdbcTemplate jdbcTemplate = setJdbcTemplate();
-            Map<String, Object> param = jdbcTemplate.queryForMap(sql);
             ST st = new ST(template, StringTemplateConstants.DELIMITER, StringTemplateConstants.DELIMITER);
-            //填充模板
-            BeanUtil.beanToMap(param, false, true)
-                    .forEach((key, value) -> {
-                        if (value instanceof String) {
-                            if (StringUtils.hasText((String) value)) {
+            if (multiResult) {
+                List<Map<String, Object>> params = jdbcTemplate.queryForList(sql);
+                //填充模板
+                st.add(StringTemplateConstants.MULTI_RESULT_PARAM_NAME, params);
+            } else {
+                Map<String, Object> param = jdbcTemplate.queryForMap(sql);
+                //填充模板
+                BeanUtil.beanToMap(param, false, true)
+                        .forEach((key, value) -> {
+                            if (value instanceof String) {
+                                if (StringUtils.hasText((String) value)) {
+                                    st.add(key, value);
+                                }
+                            } else {
                                 st.add(key, value);
                             }
-                        } else {
-                            st.add(key, value);
-                        }
-                    });
+                        });
+            }
             //模板解析后的内容
             content = st.render();
         }
