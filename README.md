@@ -2,6 +2,8 @@
 
 [![OSCS Status](https://www.oscs1024.com/platform/badge/wyhtoString/scindapsus.git.svg?size=small)](https://www.murphysec.com/dr/MaXgg9K4i10g5JVjTI)
 
+------
+
 - [lock]：封装spring官方实现的分布式锁，支持注解及SPEL
 
 - [log]：一行配置引入日志脱敏
