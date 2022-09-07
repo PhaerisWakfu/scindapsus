@@ -6,7 +6,7 @@ import java.util.List;
  * @author wyh
  * @date 2022/8/26 15:34
  */
-public class RobotRequestDTO {
+public class CorpWechatRobotRequestDTO {
 
     private String msgtype;
 
@@ -14,12 +14,12 @@ public class RobotRequestDTO {
 
     private Text text;
 
-    public RobotRequestDTO(String msgtype, Markdown markdown) {
+    public CorpWechatRobotRequestDTO(String msgtype, Markdown markdown) {
         this.msgtype = msgtype;
         this.markdown = markdown;
     }
 
-    public RobotRequestDTO(String msgtype, Text text) {
+    public CorpWechatRobotRequestDTO(String msgtype, Text text) {
         this.msgtype = msgtype;
         this.text = text;
     }

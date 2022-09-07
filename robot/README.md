@@ -65,19 +65,29 @@ public class MyRobotServiceImpl extends RobotService {
   - sql结果不可以是list，只支持单行结果
 
 ```java
-/**
- * @author wyh
- * @date 2022/8/29 15:08
- */
 public class RobotTest extends BaseTest {
 
     @Autowired
     private MyRobotServiceImpl myRobotServiceImpl;
 
     @Test
-    public void send() {
-        System.out.println(myRobotServiceImpl.sendMsg("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=60e707a9-609d-4e24-9a95-de39660023e5",
-                "hello $brand$", "select brand from car where id=1"));
+    public void wechat() {
+        System.out.println(myRobotServiceImpl.wechatTxtMsg(
+                "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx",
+                "hello $brand$",
+                "select brand from car where id=1",
+                "@all"));
+    }
+
+    @Test
+    public void dingTalk() {
+        System.out.println(myRobotServiceImpl.dingTalkMsg(
+                "https://oapi.dingtalk.com/robot/send?access_token=xxx",
+                "scindapsus",
+                "hello $brand$",
+                "xxx",
+                "select brand from car where id=1",
+                "@all"));
     }
 }
 ```

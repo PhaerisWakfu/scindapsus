@@ -5,7 +5,7 @@ package com.scindapsus.robot.dto;
  * @author wyh
  * @date 2021/12/24 16:12
  */
-public class WorkWechatResponse {
+public class SendResultDTO {
 
     /**
      * 出错返回码，为0表示成功，非0表示调用失败
@@ -36,7 +36,7 @@ public class WorkWechatResponse {
 
     @Override
     public String toString() {
-        return "WorkWechatResponse{" +
+        return "SendResultDTO{" +
                 "errcode='" + errcode + '\'' +
                 ", errmsg='" + errmsg + '\'' +
                 '}';
