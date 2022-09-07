@@ -23,6 +23,7 @@ public class RobotTest extends BaseTest {
                 "hello $brand$",
                 "select brand from car where id=1",
                 "@all");
+        Optional.ofNullable(result).ifPresent(x -> Assertions.assertEquals("0", x.getErrcode()));
     }
 
     @Test
