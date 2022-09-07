@@ -72,22 +72,38 @@ public class RobotTest extends BaseTest {
 
     @Test
     public void wechat() {
-        System.out.println(myRobotServiceImpl.wechatTxtMsg(
+        SendResultDTO result = myRobotServiceImpl.wechatTxtMsg(
                 "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx",
                 "hello $brand$",
                 "select brand from car where id=1",
-                "@all"));
+                "@all");
     }
 
     @Test
     public void dingTalk() {
-        System.out.println(myRobotServiceImpl.dingTalkMsg(
+        SendResultDTO result = myRobotServiceImpl.dingTalkMsg(
                 "https://oapi.dingtalk.com/robot/send?access_token=xxx",
                 "scindapsus",
                 "hello $brand$",
                 "xxx",
                 "select brand from car where id=1",
-                "@all"));
+                "@all");
+        Optional.ofNullable(result).ifPresent(x -> Assertions.assertEquals("0", x.getErrcode()));
+    }
+
+    @Test
+    public void multiSQLResult() {
+        SendResultDTO result = myRobotServiceImpl.dingTalkMultiRetMsg(
+                "https://oapi.dingtalk.com/robot/send?access_token=xxx",
+                "scindapsus",
+                "#### 总数==>$first(params).ct$\n" +
+                        "$params:{p|\n" +
+                        "> 名称：$p.name$，品牌:$p.brand$\n" +
+                        "};separator=\"\\n\"$",
+                "xxx",
+                "SELECT t1.*, t2.* FROM( SELECT `name`, `brand` FROM `car` u) t1, (SELECT count(1) ct FROM `car`) t2",
+                "18321809917");
+        Optional.ofNullable(result).ifPresent(x -> Assertions.assertEquals("0", x.getErrcode()));
     }
 }
 ```
