@@ -59,7 +59,7 @@ public class MyRobotServiceImpl extends RobotService {
 ```
 
 ### 发送  
-  - template中获取参数使用分隔符$，例如$name$ 
+  - template中获取参数使用分隔符$，例如`$name$`
   - template支持markdown语法
   - sql语句查出的参数名称以sql字段名为准，注意别名，编写变量时要注意
   - sql结果不可以是list，只支持单行结果
