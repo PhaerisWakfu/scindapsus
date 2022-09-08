@@ -35,3 +35,21 @@
 [multi-ds]:/multi-ds/README.md
 
 [robot]:/robot/README.md
+
+
+### 使用
+
+`mvn clean install -DskipTests -T 1C`
+```xml
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.phaeris.scindapsus</groupId>
+                <artifactId>scindapsus-dependencies</artifactId>
+                <version>${scindapsus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+```

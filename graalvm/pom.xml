@@ -13,7 +13,7 @@
     <artifactId>scindapsus-graalvm</artifactId>
 
     <properties>
-        <graalvm.version>22.2.0</graalvm.version>
+        <graalvm.version>21.3.3</graalvm.version>
     </properties>
 
     <dependencies>
