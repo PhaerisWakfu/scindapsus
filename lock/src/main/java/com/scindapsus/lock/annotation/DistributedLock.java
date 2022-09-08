@@ -40,5 +40,5 @@ public @interface DistributedLock {
     /**
      * locked fallback, must implements {@link LockFallback}
      */
-    Class<? extends LockFallback> fallback() default LockFallback.DefaultLockFallback.class;
+    Class<? extends LockFallback<?>> fallback() default LockFallback.DefaultLockFallback.class;
 }

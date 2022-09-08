@@ -52,7 +52,6 @@ public class LockAspect {
      * @param point 切点
      * @param lock  分布式琐注解
      * @return 切点方法返回结果
-     * @throws Throwable
      */
     @Around("@annotation(lock)")
     public Object doAroundAdvice(ProceedingJoinPoint point, DistributedLock lock) {
@@ -64,7 +63,7 @@ public class LockAspect {
         String name = lock.name();
         String key = lock.key();
         long retryDuration = lock.retryDuration();
-        Class<? extends LockFallback> fallback = lock.fallback();
+        Class<? extends LockFallback<?>> fallback = lock.fallback();
 
         //生成实际锁名称
         String lockName = this.generateLockName(name, key, methodSignature, target, args);
@@ -108,11 +107,11 @@ public class LockAspect {
      * @param args            方法参数
      * @param throwable       加锁报错异常(如有)
      */
-    private Object invokeFallback(Class<? extends LockFallback> fallback, MethodSignature methodSignature, Object[] args,
+    private Object invokeFallback(Class<? extends LockFallback<?>> fallback, MethodSignature methodSignature, Object[] args,
                                   Throwable throwable) {
         try {
             //获取失败回调工厂
-            LockFallback target = applicationContext.getBean(fallback);
+            LockFallback<?> target = applicationContext.getBean(fallback);
             //获取失败回调类
             Object create = target.create(throwable);
             //调用回调方法
