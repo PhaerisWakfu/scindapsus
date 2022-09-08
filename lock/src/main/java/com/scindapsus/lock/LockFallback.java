@@ -9,6 +9,7 @@ import com.scindapsus.lock.exception.DistributedLockException;
  * @author wyh
  * @since 1.0
  */
+@FunctionalInterface
 public interface LockFallback<T> {
 
     /**
