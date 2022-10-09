@@ -3,7 +3,6 @@ package com.scindapsus.lock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.parallel.Execution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -12,13 +11,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import static org.junit.jupiter.api.parallel.ExecutionMode.CONCURRENT;
-
 /**
  * @author wyh
  * @since 1.0
  */
-@Execution(CONCURRENT)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = LockApplication.class)
 class LockTest {
@@ -36,6 +32,7 @@ class LockTest {
             future2.get();
         } catch (Exception e) {
             e.printStackTrace();
+            //期望调用回调方法时抛错throw new TryLockException
             Assertions.assertEquals("com.scindapsus.lock.exception.DistributedLockException: Invoke fallback exception.", e.getMessage());
         }
     }

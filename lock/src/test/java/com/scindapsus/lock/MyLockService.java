@@ -16,10 +16,10 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class MyLockService {
 
-    @DistributedLock(name = "#p0", key = "#a1", fallback = MyFallbackFactory.class, retryDuration = 1000 * 5)
+    @DistributedLock(name = "#p0", key = "#a1", fallback = MyFallbackFactory.class, retryDuration = 1000)
     public String getName(String name, String age) {
         try {
-            TimeUnit.SECONDS.sleep(10);
+            TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
             throw new DistributedLockException("sleep interrupted exception");
         }
@@ -36,8 +36,8 @@ public class MyLockService {
             return new MyLockService() {
                 @Override
                 public String getName(String name, String age) {
-                    log.error("回调cause {}", cause.getMessage());
-                    throw new TryLockException("业务报错信息", cause);
+                    log.error("加锁失败回调cause {}", cause.getMessage());
+                    throw new TryLockException("模拟加锁失败处理", cause);
                 }
             };
         }
