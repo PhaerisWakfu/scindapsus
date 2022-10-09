@@ -22,7 +22,7 @@ public class RobotTest extends BaseTest {
     @Test
     public void wechatNormalMsg() {
         SendResultDTO result = robotMsgSender.sendWxTxtMsg(
-                "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=60e707a9-609d-4e24-9a95-de39660023e5",
+                "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx",
                 "hello world",
                 null);
         Optional.ofNullable(result).ifPresent(x -> Assertions.assertEquals("0", x.getErrcode()));
