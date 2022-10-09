@@ -44,6 +44,8 @@ public abstract class AbstractRobotService {
     public abstract RestTemplate setRestTemplate();
 
 
+    /*钉钉*/
+
     /**
      * 发送钉钉消息
      *
@@ -54,8 +56,8 @@ public abstract class AbstractRobotService {
      * @return {@code nullable}发送结果,为空则不发送消息
      */
     @Nullable
-    public SendResultDTO dingTalkMsg(String robotUrl, String title, String template, @Nullable String secret, @Nullable String sql, String... atMobiles) {
-        return sendDingTalkTmpMsg(robotUrl, title, template, secret, sql, false, atMobiles);
+    public SendResultDTO sendDingMsg(String robotUrl, String title, String template, @Nullable String secret, @Nullable String sql, String... atMobiles) {
+        return dingTalkTmpMsg(robotUrl, title, template, secret, sql, false, atMobiles);
     }
 
     /**
@@ -68,8 +70,8 @@ public abstract class AbstractRobotService {
      * @return {@code nullable}发送结果,为空则不发送消息
      */
     @Nullable
-    public SendResultDTO dingTalkMultiRetMsg(String robotUrl, String title, String template, @Nullable String secret, @Nullable String sql, String... atMobiles) {
-        return sendDingTalkTmpMsg(robotUrl, title, template, secret, sql, true, atMobiles);
+    public SendResultDTO sendDingMultiRstMsg(String robotUrl, String title, String template, @Nullable String secret, @Nullable String sql, String... atMobiles) {
+        return dingTalkTmpMsg(robotUrl, title, template, secret, sql, true, atMobiles);
     }
 
     /**
@@ -84,19 +86,19 @@ public abstract class AbstractRobotService {
      * @return {@code nullable}发送结果,为空则不发送消息
      */
     @Nullable
-    private SendResultDTO sendDingTalkTmpMsg(String robotUrl, String title, String template,
-                                             String secret, @Nullable String sql, boolean multiResult, String... atMobiles) {
+    private SendResultDTO dingTalkTmpMsg(String robotUrl, String title, String template,
+                                         String secret, @Nullable String sql, boolean multiResult, String... atMobiles) {
         //获取发送内容
         String content = renderMessage(template, sql, multiResult);
         //发送
         return Optional.ofNullable(content)
-                .map(x -> sendDingTalkMsg(robotUrl, title, x, secret, atMobiles))
+                .map(x -> dingTalkMsg(robotUrl, title, x, secret, atMobiles))
                 //不发送消息
                 .orElse(null);
     }
 
     /**
-     * 发送钉钉普通markdown消息
+     * 发送钉钉markdown消息（支持at人，是txt的全集，故暂只支持markdown消息）
      *
      * @param robotUrl  机器人hook地址
      * @param title     内容标题
@@ -105,7 +107,7 @@ public abstract class AbstractRobotService {
      * @param atMobiles at人列表
      * @return 发送结果
      */
-    private SendResultDTO sendDingTalkMsg(String robotUrl, String title, String content, String secret, String... atMobiles) {
+    private SendResultDTO dingTalkMsg(String robotUrl, String title, String content, String secret, String... atMobiles) {
         DingTalkRobotRequestDTO request = new DingTalkRobotRequestDTO();
         request.setMsgtype(RobotConstant.MARKDOWN_MESSAGE_TYPE);
         if (ArrayUtil.isNotEmpty(atMobiles)) {
@@ -141,6 +143,9 @@ public abstract class AbstractRobotService {
         }
     }
 
+
+    /*企业微信*/
+
     /**
      * 发送企微markdown消息
      *
@@ -150,8 +155,8 @@ public abstract class AbstractRobotService {
      * @return {@code nullable}发送结果,为空则不发送消息
      */
     @Nullable
-    public SendResultDTO wechatMDMsg(String robotUrl, String template, @Nullable String sql) {
-        return sendWechatTmpMsg(true, robotUrl, template, sql, false);
+    public SendResultDTO sendWxMdMsg(String robotUrl, String template, @Nullable String sql) {
+        return corpWechatTmpMsg(true, robotUrl, template, sql, false);
     }
 
     /**
@@ -163,8 +168,8 @@ public abstract class AbstractRobotService {
      * @return {@code nullable}发送结果,为空则不发送消息
      */
     @Nullable
-    public SendResultDTO wechatTxtMsg(String robotUrl, String template, @Nullable String sql, String... atMobiles) {
-        return sendWechatTmpMsg(false, robotUrl, template, sql, false, atMobiles);
+    public SendResultDTO sendWxTxtMsg(String robotUrl, String template, @Nullable String sql, String... atMobiles) {
+        return corpWechatTmpMsg(false, robotUrl, template, sql, false, atMobiles);
     }
 
     /**
@@ -176,8 +181,8 @@ public abstract class AbstractRobotService {
      * @return {@code nullable}发送结果,为空则不发送消息
      */
     @Nullable
-    public SendResultDTO wechatMultiRstMDMsg(String robotUrl, String template, @Nullable String sql) {
-        return sendWechatTmpMsg(true, robotUrl, template, sql, true);
+    public SendResultDTO sendWxMultiRstMdMsg(String robotUrl, String template, @Nullable String sql) {
+        return corpWechatTmpMsg(true, robotUrl, template, sql, true);
     }
 
     /**
@@ -189,8 +194,8 @@ public abstract class AbstractRobotService {
      * @return {@code nullable}发送结果,为空则不发送消息
      */
     @Nullable
-    public SendResultDTO wechatMultiRstTxtMsg(String robotUrl, String template, @Nullable String sql, String... atMobiles) {
-        return sendWechatTmpMsg(false, robotUrl, template, sql, true, atMobiles);
+    public SendResultDTO sendWxMultiRstTxtMsg(String robotUrl, String template, @Nullable String sql, String... atMobiles) {
+        return corpWechatTmpMsg(false, robotUrl, template, sql, true, atMobiles);
     }
 
     /**
@@ -205,39 +210,39 @@ public abstract class AbstractRobotService {
      * @return {@code nullable}发送结果,为空则不发送消息
      */
     @Nullable
-    private SendResultDTO sendWechatTmpMsg(boolean markdown, String robotUrl, String template,
+    private SendResultDTO corpWechatTmpMsg(boolean markdown, String robotUrl, String template,
                                            @Nullable String sql, boolean multiResult, String... atMobiles) {
         //获取发送内容
         String content = renderMessage(template, sql, multiResult);
         //发送
         return Optional.ofNullable(content)
-                .map(x -> markdown ? sendWechatMarkdownMsg(robotUrl, x) : sendWechatTxtMsg(robotUrl, x, atMobiles))
+                .map(x -> markdown ? corpWechatMarkdownMsg(robotUrl, x) : corpWechatTxtMsg(robotUrl, x, atMobiles))
                 //不发送消息
                 .orElse(null);
     }
 
     /**
-     * 发送企微普通markdown消息
+     * 发送企微普通markdown消息（不支持at人）
      *
      * @param robotUrl        机器人hook地址
      * @param markdownContent markdown内容
      * @return 发送结果
      */
-    private SendResultDTO sendWechatMarkdownMsg(String robotUrl, String markdownContent) {
+    private SendResultDTO corpWechatMarkdownMsg(String robotUrl, String markdownContent) {
         CorpWechatRobotRequestDTO.Markdown markdown = new CorpWechatRobotRequestDTO.Markdown(markdownContent);
         CorpWechatRobotRequestDTO request = new CorpWechatRobotRequestDTO(RobotConstant.MARKDOWN_MESSAGE_TYPE, markdown);
         return setRestTemplate().postForObject(robotUrl, request, SendResultDTO.class);
     }
 
     /**
-     * 发送企微普通text消息
+     * 发送企微普通text消息（支持at人）
      *
      * @param robotUrl    机器人hook地址
      * @param textContent text内容
      * @param atMobiles   @群聊的某些人，手机号代表人，@all代表所有人
      * @return 发送结果
      */
-    private SendResultDTO sendWechatTxtMsg(String robotUrl, String textContent, String... atMobiles) {
+    private SendResultDTO corpWechatTxtMsg(String robotUrl, String textContent, String... atMobiles) {
         CorpWechatRobotRequestDTO.Text text = new CorpWechatRobotRequestDTO.Text(textContent);
         if (ArrayUtil.isNotEmpty(atMobiles)) {
             text = new CorpWechatRobotRequestDTO.Text(textContent, Arrays.asList(atMobiles));
@@ -245,6 +250,9 @@ public abstract class AbstractRobotService {
         CorpWechatRobotRequestDTO request = new CorpWechatRobotRequestDTO(RobotConstant.TEXT_MESSAGE_TYPE, text);
         return setRestTemplate().postForObject(robotUrl, request, SendResultDTO.class);
     }
+
+
+    /*通用模板解析*/
 
     /**
      * 加工获取消息内容

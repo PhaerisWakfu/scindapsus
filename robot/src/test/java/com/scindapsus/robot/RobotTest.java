@@ -18,7 +18,7 @@ public class RobotTest extends BaseTest {
 
     @Test
     public void wechat() {
-        SendResultDTO result = myRobotServiceImpl.wechatTxtMsg(
+        SendResultDTO result = myRobotServiceImpl.sendWxTxtMsg(
                 "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx",
                 "hello $brand$",
                 "select brand from car where id=1",
@@ -28,7 +28,7 @@ public class RobotTest extends BaseTest {
 
     @Test
     public void dingTalk() {
-        SendResultDTO result = myRobotServiceImpl.dingTalkMsg(
+        SendResultDTO result = myRobotServiceImpl.sendDingMsg(
                 "https://oapi.dingtalk.com/robot/send?access_token=xxx",
                 "scindapsus",
                 "hello $brand$",
@@ -40,7 +40,7 @@ public class RobotTest extends BaseTest {
 
     @Test
     public void multiSQLResult() {
-        SendResultDTO result = myRobotServiceImpl.dingTalkMultiRetMsg(
+        SendResultDTO result = myRobotServiceImpl.sendDingMultiRstMsg(
                 "https://oapi.dingtalk.com/robot/send?access_token=xxx",
                 "scindapsus",
                 "#### 总数==>$first(params).ct$\n" +
