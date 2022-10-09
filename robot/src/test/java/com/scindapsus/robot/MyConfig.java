@@ -13,11 +13,17 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class MyConfig {
 
+    /**
+     * 必须注册，需要向机器人hook地址发送http请求
+     */
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 
+    /**
+     * 只需要发送固定简单消息（不带SQL）的可以不注册jdbcTemplate
+     */
     @Bean
     public JdbcTemplate jdbcTemplate() {
         String url = "jdbc:mysql://localhost:3306/ds1?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT%2B8";

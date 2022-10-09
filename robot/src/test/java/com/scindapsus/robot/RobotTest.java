@@ -14,11 +14,26 @@ import java.util.Optional;
 public class RobotTest extends BaseTest {
 
     @Autowired
-    private MyRobotServiceImpl myRobotServiceImpl;
+    private RobotMsgSender robotMsgSender;
 
+    /**
+     * 固定简单消息
+     */
+    @Test
+    public void wechatNormalMsg() {
+        SendResultDTO result = robotMsgSender.sendWxTxtMsg(
+                "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=60e707a9-609d-4e24-9a95-de39660023e5",
+                "hello world",
+                null);
+        Optional.ofNullable(result).ifPresent(x -> Assertions.assertEquals("0", x.getErrcode()));
+    }
+
+    /**
+     * 带SQL变量的复杂消息,需要有jdbcTemplate
+     */
     @Test
     public void wechat() {
-        SendResultDTO result = myRobotServiceImpl.sendWxTxtMsg(
+        SendResultDTO result = robotMsgSender.sendWxTxtMsg(
                 "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx",
                 "hello $brand$",
                 "select brand from car where id=1",
@@ -26,9 +41,12 @@ public class RobotTest extends BaseTest {
         Optional.ofNullable(result).ifPresent(x -> Assertions.assertEquals("0", x.getErrcode()));
     }
 
+    /**
+     * 单行SQL变量的消息
+     */
     @Test
     public void dingTalk() {
-        SendResultDTO result = myRobotServiceImpl.sendDingMsg(
+        SendResultDTO result = robotMsgSender.sendDingMsg(
                 "https://oapi.dingtalk.com/robot/send?access_token=xxx",
                 "scindapsus",
                 "hello $brand$",
@@ -38,9 +56,12 @@ public class RobotTest extends BaseTest {
         Optional.ofNullable(result).ifPresent(x -> Assertions.assertEquals("0", x.getErrcode()));
     }
 
+    /**
+     * 多行SQL变量的消息
+     */
     @Test
     public void multiSQLResult() {
-        SendResultDTO result = myRobotServiceImpl.sendDingMultiRstMsg(
+        SendResultDTO result = robotMsgSender.sendDingMultiRstMsg(
                 "https://oapi.dingtalk.com/robot/send?access_token=xxx",
                 "scindapsus",
                 "#### 总数==>$first(params).ct$\n" +

@@ -10,7 +10,7 @@
 <dependencies>
     <dependency>
         <groupId>com.phaeris.scindapsus</groupId>
-        <artifactId>scindapsus-robot</artifactId>
+        <artifactId>scindapsus-robot-spring-boot-starter</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
@@ -33,38 +33,38 @@
 
 ## 使用
 
-### 配置自己的service
-实现RobotService,如果自己应用中有restTemplate直接注入,如果获取数据与项目自身数据源一致也直接注入
+### 配置所需的RestTemplate和JdbcTemplate
+如果自己应用中已经有所需要的bean可忽略这步
 
 ```java
-/**
- * @author wyh
- * @date 2022/8/29 15:04
- */
-@Service
-public class MyRobotServiceImpl extends RobotService {
+@Configuration
+public class MyConfig {
 
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Override
-    public JdbcTemplate setJdbcTemplate() {
-        return jdbcTemplate;
+    /**
+     * 必须注册，需要向机器人hook地址发送http请求
+     */
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
-    @Override
-    public RestTemplate setRestTemplate() {
-        return restTemplate;
+    /**
+     * 如果只需要发送固定简单消息（不带SQL）的可以不注册
+     */
+    @Bean
+    public JdbcTemplate jdbcTemplate() {
+        String url = "jdbc:mysql://localhost:3306/ds1?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT%2B8";
+        String username = "root";
+        String password = "root";
+        String driverClassName = "com.mysql.cj.jdbc.Driver";
+        return JdbcUtil.jdbcTemplate(url, driverClassName, username, password);
     }
 }
 ```
 
 ### 发送  
   - template中获取参数使用分隔符$，例如`$name$`
-  - template支持markdown语法
+  - 企微的markdown消息与钉钉消息支持markdown语法
   - sql语句查出的参数名称以sql字段名为准，注意别名，编写变量时要注意
   - sql结果可以是list，但是list的变量名固定为`params`，使用例子详见下面的multiSQLResult方法
 
@@ -72,11 +72,26 @@ public class MyRobotServiceImpl extends RobotService {
 public class RobotTest extends BaseTest {
 
     @Autowired
-    private MyRobotServiceImpl myRobotServiceImpl;
+    private RobotMsgSender robotMsgSender;
 
+    /**
+     * 固定简单消息
+     */
+    @Test
+    public void wechatNormalMsg() {
+        SendResultDTO result = robotMsgSender.sendWxTxtMsg(
+                "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=60e707a9-609d-4e24-9a95-de39660023e5",
+                "hello world",
+                null);
+        Optional.ofNullable(result).ifPresent(x -> Assertions.assertEquals("0", x.getErrcode()));
+    }
+
+    /**
+     * 带SQL变量的复杂消息,需要有jdbcTemplate
+     */
     @Test
     public void wechat() {
-        SendResultDTO result = myRobotServiceImpl.wechatTxtMsg(
+        SendResultDTO result = robotMsgSender.sendWxTxtMsg(
                 "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx",
                 "hello $brand$",
                 "select brand from car where id=1",
@@ -84,9 +99,12 @@ public class RobotTest extends BaseTest {
         Optional.ofNullable(result).ifPresent(x -> Assertions.assertEquals("0", x.getErrcode()));
     }
 
+    /**
+     * 单行SQL变量的消息
+     */
     @Test
     public void dingTalk() {
-        SendResultDTO result = myRobotServiceImpl.dingTalkMsg(
+        SendResultDTO result = robotMsgSender.sendDingMsg(
                 "https://oapi.dingtalk.com/robot/send?access_token=xxx",
                 "scindapsus",
                 "hello $brand$",
@@ -96,9 +114,12 @@ public class RobotTest extends BaseTest {
         Optional.ofNullable(result).ifPresent(x -> Assertions.assertEquals("0", x.getErrcode()));
     }
 
+    /**
+     * 多行SQL变量的消息
+     */
     @Test
     public void multiSQLResult() {
-        SendResultDTO result = myRobotServiceImpl.dingTalkMultiRetMsg(
+        SendResultDTO result = robotMsgSender.sendDingMultiRstMsg(
                 "https://oapi.dingtalk.com/robot/send?access_token=xxx",
                 "scindapsus",
                 "#### 总数==>$first(params).ct$\n" +

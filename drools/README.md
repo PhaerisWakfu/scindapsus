@@ -17,10 +17,6 @@ scindapsus:
 
 3. 使用
 ```java
-/**
- * @author wyh
- * @date 2021/11/15 16:36
- */
 @RequestMapping("/drools")
 @RestController
 public class DroolsController {

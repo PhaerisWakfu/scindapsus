@@ -66,10 +66,6 @@ logback配置文件中添加配置
 #### 使用
 
 ```java
-/**
- * @author wyh
- * @since 1.0
- */
 @RestController
 @RequestMapping("/log")
 public class LogController {

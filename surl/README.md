@@ -56,10 +56,6 @@ Content-Type: application/json
 不打开默认提供的API时，可以自行使用工具类UrlMappingHolder来实现
 
 ```java
-/**
- * @author wyh
- * @date 2021/11/4 17:53
- */
 @Controller
 public class TestController {
 
@@ -84,10 +80,6 @@ public class TestController {
 可以自行实现UrlMappingService注册为bean来设置短网址存取，例如mysql、redis等，默认使用Caffeine存在内存中(详见源码com.scindapsus.surl.config.ShortUrlConfiguration.DefaultShortUrlServiceImpl)
 
 ```java
-/**
- * @author wyh
- * @date 2021/11/5 16:07
- */
 @Component
 public class MyUrlMappingServiceImpl implements UrlMappingService {
 

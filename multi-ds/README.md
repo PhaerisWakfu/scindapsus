@@ -63,10 +63,6 @@ scindapsus:
 启动类添加启动多数据源的注解@EnableDS
 
 ```java
-/**
- * @author wyh
- * @date 2022/7/5 10:18
- */
 @MapperScan(basePackages = "com.scindapsus.ds.mapper")
 @SpringBootApplication
 @EnableDS
@@ -81,10 +77,6 @@ public class DSApplication {
 在操作库的地方使用注解@WithDataSource指定数据源，不加注解或者不写value默认为primary指定的数据源(未指定取第一个配置的数据源)
 
 ```java
-/**
- * @author wyh
- * @date 2022/7/5 15:34
- */
 @Service
 @AllArgsConstructor
 public class CarService {
@@ -114,9 +106,6 @@ public class CarService {
  * </p>ds组件上下文切换是用aop实现的，因为aop的特性原因，不支持同类中方法嵌套调用。直接嵌套调用会单纯认为是方法调用，aop辐射不到，
  * 所以可以用AopContext、自己注入自己、新建另一个类调用等方式来解决。
  * <p>例子这里使用AopContext来调用自己来保证都被aop识别（使用aopContext来调用本类其他方法需要设置aop的exposeProxy为true，不然会抛错）
- *
- * @author wyh
- * @date 2022/8/24 14:37
  */
 @EnableAspectJAutoProxy(exposeProxy = true)
 @Service

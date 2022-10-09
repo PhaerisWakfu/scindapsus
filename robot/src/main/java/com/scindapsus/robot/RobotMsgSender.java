@@ -26,23 +26,21 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * 暂时只支持text与markdown格式的消息
+ * 钉钉自定义机器人与企业微信群聊机器人发送消息
  *
  * @author wyh
  * @date 2022/8/26 14:38
  */
-public abstract class AbstractRobotService {
+public class RobotMsgSender {
 
-    /**
-     * 设置jdbcTemplate
-     */
-    public abstract JdbcTemplate setJdbcTemplate();
+    private final JdbcTemplate jdbcTemplate;
 
-    /**
-     * 设置restTemplate
-     */
-    public abstract RestTemplate setRestTemplate();
+    private final RestTemplate restTemplate;
 
+    public RobotMsgSender(@Nullable JdbcTemplate jdbcTemplate, RestTemplate restTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.restTemplate = restTemplate;
+    }
 
     /*钉钉*/
 
@@ -126,7 +124,7 @@ public abstract class AbstractRobotService {
         if (StrUtil.isNotBlank(secret)) {
             robotUrl = dingTalkUrlSigned(robotUrl, secret);
         }
-        return setRestTemplate().postForObject(robotUrl, request, SendResultDTO.class);
+        return restTemplate.postForObject(robotUrl, request, SendResultDTO.class);
     }
 
     private String dingTalkUrlSigned(String url, String secret) {
@@ -231,7 +229,7 @@ public abstract class AbstractRobotService {
     private SendResultDTO corpWechatMarkdownMsg(String robotUrl, String markdownContent) {
         CorpWechatRobotRequestDTO.Markdown markdown = new CorpWechatRobotRequestDTO.Markdown(markdownContent);
         CorpWechatRobotRequestDTO request = new CorpWechatRobotRequestDTO(RobotConstant.MARKDOWN_MESSAGE_TYPE, markdown);
-        return setRestTemplate().postForObject(robotUrl, request, SendResultDTO.class);
+        return restTemplate.postForObject(robotUrl, request, SendResultDTO.class);
     }
 
     /**
@@ -248,7 +246,7 @@ public abstract class AbstractRobotService {
             text = new CorpWechatRobotRequestDTO.Text(textContent, Arrays.asList(atMobiles));
         }
         CorpWechatRobotRequestDTO request = new CorpWechatRobotRequestDTO(RobotConstant.TEXT_MESSAGE_TYPE, text);
-        return setRestTemplate().postForObject(robotUrl, request, SendResultDTO.class);
+        return restTemplate.postForObject(robotUrl, request, SendResultDTO.class);
     }
 
 
@@ -268,8 +266,7 @@ public abstract class AbstractRobotService {
         String content = template;
         //发送标识
         boolean sendFlag = false;
-        if (StringUtils.hasText(sql)) {
-            JdbcTemplate jdbcTemplate = setJdbcTemplate();
+        if (StringUtils.hasText(sql) && jdbcTemplate != null) {
             ST st = new ST(template, StringTemplateConstants.DELIMITER, StringTemplateConstants.DELIMITER);
             if (sqlMultiResult) {
                 List<Map<String, Object>> params = jdbcTemplate.queryForList(sql);

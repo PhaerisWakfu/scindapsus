@@ -202,10 +202,6 @@ logging:
 添加注解@DistributedLock
 
 ```java
-/**
- * @Author: wyh
- * @Date: 2020/8/7 11:20
- */
 @Service
 public class LockService {
 
