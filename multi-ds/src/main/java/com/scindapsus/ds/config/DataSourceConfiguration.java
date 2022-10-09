@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author wyh
- * @date 2022/7/4 14:45
+ * @since 1.0
  */
 @Configuration
 @EnableConfigurationProperties(DataSourceProperties.class)

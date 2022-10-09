@@ -2,7 +2,7 @@ package com.scindapsus.graalvm;
 
 /**
  * @author wyh
- * @date 2022/7/25 10:55
+ * @since 1.0
  */
 public class ExecuteException extends RuntimeException {
 

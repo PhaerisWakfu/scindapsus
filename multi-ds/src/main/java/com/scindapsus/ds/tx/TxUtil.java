@@ -12,6 +12,7 @@ import java.util.UUID;
  *
  * @author funkye
  * @author wyh
+ * @since 1.0
  */
 public class TxUtil {
 

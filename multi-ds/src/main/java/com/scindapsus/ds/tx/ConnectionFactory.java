@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author funkye
  * @author wyh
+ * @since 1.0
  */
 public class ConnectionFactory {
 

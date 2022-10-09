@@ -3,7 +3,7 @@ package com.scindapsus.robot.dto;
 
 /**
  * @author wyh
- * @date 2021/12/24 16:12
+ * @since 1.0
  */
 public class SendResultDTO {
 

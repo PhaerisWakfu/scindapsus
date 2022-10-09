@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * @author wyh
- * @date 2022/7/4 14:39
+ * @since 1.0
  */
 @ConfigurationProperties(prefix = DataSourceProperties.PREFIX)
 public class DataSourceProperties {

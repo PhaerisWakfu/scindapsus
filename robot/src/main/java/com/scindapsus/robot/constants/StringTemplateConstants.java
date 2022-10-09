@@ -2,7 +2,7 @@ package com.scindapsus.robot.constants;
 
 /**
  * @author wyh
- * @date 2022/8/29 14:50
+ * @since 1.0
  */
 public class StringTemplateConstants {
 

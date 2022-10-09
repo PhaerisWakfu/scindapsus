@@ -29,7 +29,7 @@ import java.util.Optional;
  * 钉钉自定义机器人与企业微信群聊机器人发送消息
  *
  * @author wyh
- * @date 2022/8/26 14:38
+ * @since 1.0
  */
 public class RobotMsgSender {
 

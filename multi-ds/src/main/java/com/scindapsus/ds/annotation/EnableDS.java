@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * 注解开启多数据源功能
  *
  * @author wyh
- * @date 2022/7/5 11:01
+ * @since 1.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

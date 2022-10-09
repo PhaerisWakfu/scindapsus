@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * @author wyh
- * @date 2022/8/26 15:34
+ * @since 1.0
  */
 public class DingTalkRobotRequestDTO {
 

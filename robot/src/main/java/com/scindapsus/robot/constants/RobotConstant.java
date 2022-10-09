@@ -3,7 +3,7 @@ package com.scindapsus.robot.constants;
 
 /**
  * @author wyh
- * @date 2022/8/26 15:39
+ * @since 1.0
  */
 public class RobotConstant {
 

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * @author wyh
- * @date 2022/8/29 15:04
+ * @since 1.0
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class RobotApplication {

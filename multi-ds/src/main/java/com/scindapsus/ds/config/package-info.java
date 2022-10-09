@@ -2,7 +2,7 @@
  * 解决idea一直提示{@code Not annotated parameter overrides @NonNullApi parameter}
  *
  * @author wyh
- * @date 2022/3/18 14:53
+ * @since 1.0
  */
 @NonNullApi
 package com.scindapsus.ds.config;

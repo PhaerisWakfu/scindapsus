@@ -3,7 +3,7 @@ package com.scindapsus.ds.constants;
 
 /**
  * @author wyh
- * @date 2022/7/4 16:13
+ * @since 1.0
  */
 public class DSConstants {
 

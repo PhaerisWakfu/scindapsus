@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Update;
 
 /**
  * @author wyh
- * @date 2022/7/5 14:01
+ * @since 1.0
  */
 public interface CarMapper {
 
