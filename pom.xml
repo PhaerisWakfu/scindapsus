@@ -35,7 +35,6 @@
         <fastjson.version>2.0.10</fastjson.version>
         <guava.version>31.0.1-jre</guava.version>
         <caffeine.version>2.9.2</caffeine.version>
-        <annotation-processor.version>1.0</annotation-processor.version>
         <string-template.version>4.3.1</string-template.version>
 
         <maven.compiler.source>8</maven.compiler.source>
