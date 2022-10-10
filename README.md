@@ -12,8 +12,6 @@
 
 - [drools]：四个类封装Drools规则引擎,简化为工具类调用
 
-- [apt]：使用Java Annotation Processing Tool快速生成JpaRepository
-
 - [graalvm]：使用GraalVM调用其他语言方法
 
 - [multi-ds]：一个启动注解+数据源配置搞定多数据源
@@ -27,8 +25,6 @@
 [surl]:/surl/README.md
 
 [drools]:/drools/README.md
-
-[apt]:/apt/README.md
 
 [graalvm]:/graalvm/README.md
 

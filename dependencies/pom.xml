@@ -49,11 +49,6 @@
             <!--非starter组件-->
             <dependency>
                 <groupId>com.phaeris.scindapsus</groupId>
-                <artifactId>scindapsus-apt</artifactId>
-                <version>${scindapsus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.phaeris.scindapsus</groupId>
                 <artifactId>scindapsus-graalvm</artifactId>
                 <version>${scindapsus.version}</version>
             </dependency>

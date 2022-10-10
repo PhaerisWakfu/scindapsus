@@ -22,7 +22,6 @@
         <module>log</module>
         <module>surl</module>
         <module>drools</module>
-        <module>apt</module>
         <module>dependencies</module>
         <module>graalvm</module>
         <module>multi-ds</module>
@@ -91,11 +90,6 @@
                 <groupId>com.github.ben-manes.caffeine</groupId>
                 <artifactId>caffeine</artifactId>
                 <version>${caffeine.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.auto.service</groupId>
-                <artifactId>auto-service</artifactId>
-                <version>${annotation-processor.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
