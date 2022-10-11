@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @since 1.0
  */
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = DroolsApplication.class)
+@SpringBootTest(classes = DroolsTestApplication.class)
 @AutoConfigureMockMvc
 class DroolsTests {
 

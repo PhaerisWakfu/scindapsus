@@ -12,9 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan(basePackages = "com.scindapsus.ds.mapper")
 @SpringBootApplication
 @EnableDS
-public class DSApplication {
+public class DSTestApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DSApplication.class, args);
+        SpringApplication.run(DSTestApplication.class, args);
     }
 }

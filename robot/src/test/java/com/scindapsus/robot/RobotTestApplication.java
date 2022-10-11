@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @since 1.0
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-public class RobotApplication {
+public class RobotTestApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RobotApplication.class, args);
+        SpringApplication.run(RobotTestApplication.class, args);
     }
 }

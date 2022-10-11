@@ -16,7 +16,7 @@ import java.util.concurrent.Future;
  * @since 1.0
  */
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = LockApplication.class)
+@SpringBootTest(classes = LockTestApplication.class)
 class LockTest {
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.scindapsus.log;
+package com.scindapsus.surl;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 1.0
  */
 @SpringBootApplication
-public class LogApplication {
+public class ShortUrlTestApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LogApplication.class, args);
+        SpringApplication.run(ShortUrlTestApplication.class, args);
     }
 }

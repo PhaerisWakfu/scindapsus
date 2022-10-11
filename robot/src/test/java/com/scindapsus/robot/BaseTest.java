@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
  * @since 1.0
  */
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = RobotApplication.class)
+@SpringBootTest(classes = RobotTestApplication.class)
 @AutoConfigureMockMvc
 public abstract class BaseTest {
 

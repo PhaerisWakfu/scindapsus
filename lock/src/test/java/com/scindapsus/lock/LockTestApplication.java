@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 1.0
  */
 @SpringBootApplication
-public class LockApplication {
+public class LockTestApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LockApplication.class, args);
+        SpringApplication.run(LockTestApplication.class, args);
     }
 }
