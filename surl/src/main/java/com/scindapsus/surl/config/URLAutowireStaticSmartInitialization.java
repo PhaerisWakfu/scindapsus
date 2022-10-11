@@ -1,6 +1,6 @@
-package com.scindapsus.lock.config;
+package com.scindapsus.surl.config;
 
-import com.scindapsus.lock.LockRegistryFactoryHolder;
+import com.scindapsus.surl.UrlMappingHolder;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
@@ -10,11 +10,11 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
  * @author wyh
  * @since 1.0
  */
-public class AutowireStaticSmartInitialization implements SmartInitializingSingleton {
+public class URLAutowireStaticSmartInitialization implements SmartInitializingSingleton {
 
     private final AutowireCapableBeanFactory beanFactory;
 
-    public AutowireStaticSmartInitialization(AutowireCapableBeanFactory beanFactory) {
+    public URLAutowireStaticSmartInitialization(AutowireCapableBeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
 
@@ -24,6 +24,6 @@ public class AutowireStaticSmartInitialization implements SmartInitializingSingl
     @Override
     public void afterSingletonsInstantiated() {
         // 因为是给static静态属性赋值，因此这里new一个实例做注入是可行的
-        beanFactory.autowireBean(new LockRegistryFactoryHolder());
+        beanFactory.autowireBean(new UrlMappingHolder());
     }
 }

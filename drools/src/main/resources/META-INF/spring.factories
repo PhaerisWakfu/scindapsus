@@ -1,4 +1,4 @@
 # Auto Configuration
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.scindapsus.drools.DroolsConfiguration,\
-com.scindapsus.drools.AutowireStaticSmartInitialization
+com.scindapsus.drools.DroolsAutowireStaticSmartInitialization
