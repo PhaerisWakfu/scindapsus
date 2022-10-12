@@ -1,7 +1,7 @@
 scindapsus:
   tenant:
     #租户key
-    tenant-name: x-wyh-tenant
+    name: x-wyh-tenant
     #是否将租户放入slf4j的MDC中（默认true）
     mdc: true
     #租户设置与传播
