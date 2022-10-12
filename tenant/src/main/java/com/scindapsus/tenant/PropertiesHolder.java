@@ -1,0 +1,30 @@
+package com.scindapsus.tenant;
+
+import com.scindapsus.tenant.config.TenantProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ * @author wyh
+ * @since 1.0
+ */
+public class PropertiesHolder {
+
+    private static TenantProperties tenantProperties;
+
+    @Autowired
+    public void setUp(TenantProperties tenantProperties) {
+        PropertiesHolder.tenantProperties = tenantProperties;
+    }
+
+    public static String tenantName() {
+        return tenantProperties.getName();
+    }
+
+    public static boolean mdc() {
+        return tenantProperties.isMdc();
+    }
+
+    public static TenantProperties.Propagation propagation() {
+        return tenantProperties.getPropagation();
+    }
+}

@@ -16,7 +16,7 @@
 
 - [multi-ds]：一个启动注解+数据源配置搞定多数据源
 
-- [robot]：企业微信群聊机器人/钉钉自定义机器人简单封装，支持antlr的stringTemplate模板语法与从SQL中获取变量参数
+- [tenant]：调用链中自动传播租户与日志打印租户
 
 [lock]:/lock/README.md
 
@@ -32,20 +32,23 @@
 
 [robot]:/robot/README.md
 
+[tenant]:/tenant/README.md
 
-### 使用
 
+### 安装
 `mvn clean install -DskipTests -T 1C`
+
+### 引入pom依赖管理
 ```xml
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.phaeris.scindapsus</groupId>
-                <artifactId>scindapsus-dependencies</artifactId>
-                <version>${scindapsus.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.phaeris.scindapsus</groupId>
+            <artifactId>scindapsus-dependencies</artifactId>
+            <version>${scindapsus.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 ```

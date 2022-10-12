@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration>
+    <!--日志输出到文件-->
+    <property name="LOG_PATH" value="/scindapsus/tenant/logs/"/>
+
+    <!-- 全部日志 -->
+    <appender name="ALL_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>
+                [%X{traceId}][%X{spanId}][%X{x-wyh-tenant}][ %-5level] [%date{yyyy-MM-dd HH:mm:ss}] [%thread] %logger{96} [%line] - %msg%n
+            </pattern>
+            <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily 配置日志所生成的目录以及生成文件名的规则 -->
+            <fileNamePattern>${LOG_PATH}/log-total-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 除按日志记录之外，还配置了日志文件不能超过100M，若超过100M，日志文件会以索引0开始，
+            命名日志文件，例如log-error-2013-12-21.0.log -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- Safely log to the same file from multiple JVMs. Degrades performance! -->
+        <prudent>true</prudent>
+    </appender>
+
+    <!-- 错误日志 -->
+    <appender name="ERR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>
+                [%X{traceId}][%X{spanId}][%X{x-wyh-tenant}][ %-5level] [%date{yyyy-MM-dd HH:mm:ss}] [%thread] %logger{96} [%line] - %msg%n
+            </pattern>
+            <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily 配置日志所生成的目录以及生成文件名的规则 -->
+            <fileNamePattern>${LOG_PATH}/log-error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 除按日志记录之外，还配置了日志文件不能超过100M，若超过100M，日志文件会以索引0开始，
+            命名日志文件，例如log-error-2013-12-21.0.log -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <!-- 此日志文件只记录error级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>error</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!-- Safely log to the same file from multiple JVMs. Degrades performance! -->
+        <prudent>true</prudent>
+    </appender>
+
+    <!-- 控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                [%X{traceId}][%X{spanId}][%X{x-wyh-tenant}][ %-5level] [%date{yyyy-MM-dd HH:mm:ss}] [%thread] %logger{96} [%line] - %msg%n
+            </pattern>
+            <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+        </encoder>
+    </appender>
+
+    <root>
+        <appender-ref ref="ALL_FILE"/>
+        <appender-ref ref="ERR_FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

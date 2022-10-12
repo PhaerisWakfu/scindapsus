@@ -1,0 +1,16 @@
+scindapsus:
+  tenant:
+    #租户key
+    tenant-name: x-wyh-tenant
+    #是否将租户放入slf4j的MDC中（默认true）
+    mdc: true
+    #租户设置与传播
+    propagation:
+      #开关
+      enabled: true
+      #设置与传播的路径
+      patterns: /tenant/**,/company/**
+
+logging:
+  level:
+    root: info

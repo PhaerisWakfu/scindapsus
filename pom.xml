@@ -26,6 +26,7 @@
         <module>graalvm</module>
         <module>multi-ds</module>
         <module>robot</module>
+        <module>tenant</module>
     </modules>
 
     <properties>
