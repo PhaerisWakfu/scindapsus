@@ -1,6 +1,6 @@
 # Scindapsus
 
-[![OSCS Status](https://www.oscs1024.com/platform/badge/wyhtoString/scindapsus.git.svg?size=small)](https://www.murphysec.com/dr/MaXgg9K4i10g5JVjTI)
+[![OSCS Status](https://www.oscs1024.com/platform/badge/phaeris/scindapsus.git.svg?size=small)](https://www.murphysec.com/dr/AiSOYD4DrZnUzl4OvV)  
 
 ------
 
