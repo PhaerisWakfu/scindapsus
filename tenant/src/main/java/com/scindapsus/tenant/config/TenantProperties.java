@@ -20,7 +20,7 @@ public class TenantProperties {
     /**
      * 是否将租户放到slf4j mdc中
      */
-    private boolean mdc;
+    private boolean mdc = true;
 
     /**
      * 租户设置与传播
@@ -59,7 +59,7 @@ public class TenantProperties {
         /**
          * 是否打开设置与传播租户开关
          */
-        private boolean enabled;
+        private boolean enabled = false;
 
         /**
          * 设置租户拦截路径
