@@ -12,6 +12,7 @@ public class PropertiesHolder {
     private static TenantProperties tenantProperties;
 
     @Autowired
+    @SuppressWarnings("all")
     public void setUp(TenantProperties tenantProperties) {
         PropertiesHolder.tenantProperties = tenantProperties;
     }
