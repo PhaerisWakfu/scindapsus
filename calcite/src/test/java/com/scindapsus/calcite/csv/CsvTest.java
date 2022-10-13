@@ -11,7 +11,7 @@ public class CsvTest {
     public void select() throws SQLException {
         try (Connection connection = ConnectionHelper.getConnection("model.json")) {
             Statement statement = connection.createStatement();
-            print(statement.executeQuery("select name,age from userinfo where age<18"));
+            print(statement.executeQuery("select u.name,u.age,c.class from userinfo u inner join class c on u.name=c.name where u.age<18"));
         }
     }
 
