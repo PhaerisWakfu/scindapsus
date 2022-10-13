@@ -3,7 +3,6 @@ package com.scindapsus.tenant.config;
 import brave.Tracer;
 import brave.baggage.*;
 import brave.context.slf4j.MDCScopeDecorator;
-import brave.propagation.B3Propagation;
 import brave.propagation.CurrentTraceContext;
 import com.scindapsus.tenant.TenantProvider;
 import com.scindapsus.tenant.interceptor.TenantInterceptor;
@@ -17,6 +16,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.sleuth.autoconfig.SleuthBaggageProperties;
+import org.springframework.cloud.sleuth.brave.propagation.PropagationFactorySupplier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.Nullable;
@@ -44,8 +44,8 @@ public class TenantTraceAutoConfiguration {
      * 覆盖{@link org.springframework.cloud.sleuth.autoconfig.brave.BraveBaggageConfiguration#baggagePropagationFactoryBuilder}
      */
     @Bean
-    BaggagePropagation.FactoryBuilder propagationFactory(TenantProperties tenantProperties) {
-        BaggagePropagation.FactoryBuilder factoryBuilder = BaggagePropagation.newFactoryBuilder(B3Propagation.FACTORY);
+    BaggagePropagation.FactoryBuilder propagationFactory(PropagationFactorySupplier supplier, TenantProperties tenantProperties) {
+        BaggagePropagation.FactoryBuilder factoryBuilder = BaggagePropagation.newFactoryBuilder(supplier.get());
         //添加租户预定义key到sleuth中，使其可以在baggage中传播
         factoryBuilder.add(getPropagationKey(tenantProperties.getName()));
         return factoryBuilder;
