@@ -62,6 +62,11 @@
                 <artifactId>scindapsus-log</artifactId>
                 <version>${scindapsus.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.phaeris.scindapsus</groupId>
+                <artifactId>scindapsus-calcite</artifactId>
+                <version>${scindapsus.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultSchema": "CSV",
+  "schemas": [
+    {
+      "name": "CSV",
+      "type": "custom",
+      "factory": "com.scindapsus.calcite.csv.CsvSchemaFactory",
+      "operand": {
+        "directory": "csv"
+      }
+    }
+  ]
+}

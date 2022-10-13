@@ -27,6 +27,7 @@
         <module>multi-ds</module>
         <module>robot</module>
         <module>tenant</module>
+        <module>calcite</module>
     </modules>
 
     <properties>
