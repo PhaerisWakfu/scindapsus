@@ -18,6 +18,8 @@
 
 - [tenant]：调用链中自动传播租户与日志打印租户
 
+- [calcite]： Any data, Anywhere to SQL（TODO）
+
 [lock]:/lock/README.md
 
 [log]:/log/README.md
@@ -33,6 +35,8 @@
 [robot]:/robot/README.md
 
 [tenant]:/tenant/README.md
+
+[calcite]:/calcite/README.md
 
 
 ### 安装
