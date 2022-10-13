@@ -18,7 +18,7 @@
 
 - [tenant]：调用链中自动传播租户与日志打印租户
 
-- [calcite]： Any data, Anywhere to SQL（TODO）
+- [calcite]： Any data, Anywhere to SQL
 
 [lock]:/lock/README.md
 
