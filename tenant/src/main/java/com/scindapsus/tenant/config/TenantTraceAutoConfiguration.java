@@ -35,7 +35,7 @@ import java.util.TreeSet;
 @ConditionalOnClass(Tracer.class)
 @Configuration
 @EnableConfigurationProperties(TenantProperties.class)
-public class TenantTraceAutoConfiguration {
+class TenantTraceAutoConfiguration {
 
     static final Log logger = LogFactory.getLog(TenantTraceAutoConfiguration.class);
 
@@ -95,14 +95,14 @@ public class TenantTraceAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(TenantProvider.class)
-    public TenantProvider defaultTenantValueProvider(TenantProperties tenantProperties) {
+    TenantProvider defaultTenantValueProvider(TenantProperties tenantProperties) {
         return new DefaultTenantProvider(tenantProperties.getName());
     }
 
     @Bean
     @ConditionalOnProperty(prefix = TenantProperties.PREFIX, name = "propagation.enabled",
             havingValue = "true")
-    public TenantProviderConfigurer tenantValueConfigurer(TenantProvider tenantProvider, TenantProperties tenantProperties) {
+    TenantProviderConfigurer tenantValueConfigurer(TenantProvider tenantProvider, TenantProperties tenantProperties) {
         return new TenantProviderConfigurer(tenantProvider, tenantProperties.getPropagation());
     }
 

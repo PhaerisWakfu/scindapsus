@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  */
 @Configuration
 @EnableConfigurationProperties(DroolsProperties.class)
-public class DroolsConfiguration {
+class DroolsConfiguration {
 
     private final DroolsProperties properties;
 
@@ -33,7 +33,7 @@ public class DroolsConfiguration {
     }
 
     @Bean
-    public KieContainer kieContainer() throws IOException {
+    KieContainer kieContainer() throws IOException {
         KieServices kieServices = KieServices.Factory.get();
         KieRepository kieRepository = kieServices.getRepository();
         kieRepository.addKieModule(kieRepository::getDefaultReleaseId);

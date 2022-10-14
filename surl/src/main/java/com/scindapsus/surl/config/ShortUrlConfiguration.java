@@ -17,11 +17,11 @@ import java.time.Duration;
  */
 @Configuration
 @EnableConfigurationProperties(ShortUrlProperties.class)
-public class ShortUrlConfiguration {
+class ShortUrlConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(UrlMappingService.class)
-    public DefaultUrlMappingServiceImpl defaultUrlMappingService() {
+    DefaultUrlMappingServiceImpl defaultUrlMappingService() {
         return new DefaultUrlMappingServiceImpl();
     }
 

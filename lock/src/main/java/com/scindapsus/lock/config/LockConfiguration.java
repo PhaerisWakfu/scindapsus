@@ -19,22 +19,22 @@ import java.util.Optional;
  */
 @Configuration
 @EnableConfigurationProperties(LockProperties.class)
-public class LockConfiguration {
+class LockConfiguration {
 
     @Bean
-    public LockAspect lockAspect(LockRegistryFactory lockRegistryFactory, LockKeyPrefixGenerator lockKeyPrefixGenerator,
-                                        ApplicationContext applicationContext) {
+    LockAspect lockAspect(LockRegistryFactory lockRegistryFactory, LockKeyPrefixGenerator lockKeyPrefixGenerator,
+                          ApplicationContext applicationContext) {
         return new LockAspect(lockRegistryFactory, lockKeyPrefixGenerator, applicationContext);
     }
 
     @Bean
-    public LockFallback.DefaultLockFallback defaultLockFallback() {
+    LockFallback.DefaultLockFallback defaultLockFallback() {
         return new LockFallback.DefaultLockFallback();
     }
 
     @Bean
     @ConditionalOnMissingBean(LockKeyPrefixGenerator.class)
-    public LockKeyPrefixGenerator defaultKeyPrefixGenerator() {
+    LockKeyPrefixGenerator defaultKeyPrefixGenerator() {
         return (region, key) -> {
             String regionName = Optional.ofNullable(region).map(x -> x + LockKeyPrefixGenerator.SEPARATOR)
                     .orElse(LockKeyPrefixGenerator.EMPTY_STR);
@@ -44,7 +44,7 @@ public class LockConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(LockRegistryFactory.class)
-    public LockRegistryFactory defaultLockRegistryFactory() {
+    LockRegistryFactory defaultLockRegistryFactory() {
         return DefaultLockRegistry::new;
     }
 }

@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
  */
 @Configuration
 @EnableConfigurationProperties(DataSourceProperties.class)
-public class DataSourceConfiguration {
+class DataSourceConfiguration {
 
     @Bean
-    public DataSourceAspect dataSourceAspect() {
+    DataSourceAspect dataSourceAspect() {
         return new DataSourceAspect();
     }
 
@@ -33,7 +33,7 @@ public class DataSourceConfiguration {
      */
     @Bean
     @Primary
-    public RoutingDataSource routingDataSource(Map<String, DataSource> dataSourceMap, DataSourceProperties datasourceProperties) {
+    RoutingDataSource routingDataSource(Map<String, DataSource> dataSourceMap, DataSourceProperties datasourceProperties) {
         //第一个配置的数据源为默认数据源
         String defaultDataSourceKey = datasourceProperties.getMulti()
                 .keySet()
