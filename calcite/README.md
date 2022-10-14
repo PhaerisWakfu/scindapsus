@@ -202,6 +202,7 @@ public class CsvTest extends BaseTest {
      */
     private static final String SQL = "SELECT u.name, u.age, c.class, p.phone, a.area FROM csv.userinfo u " +
             "INNER JOIN csv.class c ON u.name = c.name " +
+            //自己在windows创建的csv文件记得要修改字符集格式为UTF-8
             "INNER JOIN csv2.phone p ON u.name = p.name " +
             //这里是mysql的表，注意，添加mysql schema的时候，库中的表名与字段一定要大写，不然无法识别
             "INNER JOIN my.address a ON u.name = a.name " +
