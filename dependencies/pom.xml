@@ -50,6 +50,11 @@
                 <artifactId>scindapsus-tenant-spring-cloud-starter</artifactId>
                 <version>${scindapsus.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.phaeris.scindapsus</groupId>
+                <artifactId>scindapsus-calcite-spring-boot-starter</artifactId>
+                <version>${scindapsus.version}</version>
+            </dependency>
 
             <!--非starter组件-->
             <dependency>
@@ -60,11 +65,6 @@
             <dependency>
                 <groupId>com.phaeris.scindapsus</groupId>
                 <artifactId>scindapsus-log</artifactId>
-                <version>${scindapsus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.phaeris.scindapsus</groupId>
-                <artifactId>scindapsus-calcite</artifactId>
                 <version>${scindapsus.version}</version>
             </dependency>
         </dependencies>
