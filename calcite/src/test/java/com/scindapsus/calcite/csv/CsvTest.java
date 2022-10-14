@@ -9,9 +9,13 @@ public class CsvTest {
 
     @Test
     public void select() throws SQLException {
+        String sql = "SELECT u. NAME, u.age, c.class, p.phone FROM csv.userinfo u " +
+                "INNER JOIN csv.class c ON u. NAME = c. NAME " +
+                "INNER JOIN csv2.phone p ON u. NAME = p. NAME " +
+                "WHERE u.age < 18";
         try (Connection connection = ConnectionHelper.getConnection("model.json")) {
             Statement statement = connection.createStatement();
-            print(statement.executeQuery("select u.name,u.age,c.class from userinfo u inner join class c on u.name=c.name where u.age<18"));
+            print(statement.executeQuery(sql));
         }
     }
 

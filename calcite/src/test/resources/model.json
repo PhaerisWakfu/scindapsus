@@ -9,6 +9,14 @@
       "operand": {
         "directory": "csv"
       }
+    },
+    {
+      "name": "CSV2",
+      "type": "custom",
+      "factory": "com.scindapsus.calcite.csv.CsvSchemaFactory",
+      "operand": {
+        "directory": "csv2"
+      }
     }
   ]
 }
