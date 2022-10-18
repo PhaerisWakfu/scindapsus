@@ -1,4 +1,4 @@
-package com.scindapsus.calcite.file;
+package com.scindapsus.calcite.mix;
 
 import com.scindapsus.calcite.BaseTest;
 import com.scindapsus.calcite.ConnectionHelper;
@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.*;
 
-public class FileTest extends BaseTest {
+public class MixTest extends BaseTest {
 
     private static final String SQL = "SELECT u.name, u.age, c.class, p.phone, a.area FROM csv.userinfo u " +
             //自己在windows创建的csv文件记得要修改字符集格式为UTF-8

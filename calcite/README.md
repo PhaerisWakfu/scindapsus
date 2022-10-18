@@ -221,6 +221,14 @@ INSERT INTO `ds1`.`ADDRESS` (`ID`, `NAME`, `AREA`) VALUES ('3', '王五', '上�
 INSERT INTO `ds1`.`ADDRESS` (`ID`, `NAME`, `AREA`) VALUES ('4', '赵六', '北京');
 ```
 
+#### redis数据
+```shell
+redis-cli LPUSH json {"DEPTNO":1,"NAME":"张三"}
+redis-cli LPUSH json {"DEPTNO":2,"NAME":"李四"}
+redis-cli LPUSH json {"DEPTNO":3,"NAME":"王五"}
+redis-cli LPUSH json {"DEPTNO":4,"NAME":"赵六"}
+```
+
 ### 查询
 
 #### 直接使用静态工具类
@@ -255,7 +263,7 @@ public class CsvTest {
 
 #### 注册bean使用orm操作类
 ```java
-public class FileTest extends BaseTest {
+public class MixTest extends BaseTest {
 
     private static final String SQL = "SELECT u.name, u.age, c.class, p.phone, a.area FROM csv.userinfo u " +
             //自己在windows创建的csv文件记得要修改字符集格式为UTF-8

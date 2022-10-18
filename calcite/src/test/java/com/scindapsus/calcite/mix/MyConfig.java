@@ -1,4 +1,4 @@
-package com.scindapsus.calcite.file;
+package com.scindapsus.calcite.mix;
 
 import com.scindapsus.calcite.CalciteDatasource;
 import org.springframework.context.annotation.Bean;

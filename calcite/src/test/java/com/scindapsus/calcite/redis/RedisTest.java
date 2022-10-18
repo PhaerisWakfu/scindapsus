@@ -12,10 +12,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class RedisTest extends BaseTest {
 
-    /**
-     * LPUSH json {"DEPTNO":1,"NAME":"张三1"}
-     * LPUSH json {"DEPTNO":2,"NAME":"张三2"}
-     */
     private static final String SQL = "select * from redis.json where deptno=2";
 
     @Test
