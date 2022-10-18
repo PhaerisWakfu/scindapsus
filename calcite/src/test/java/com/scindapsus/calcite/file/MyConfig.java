@@ -1,4 +1,4 @@
-package com.scindapsus.calcite.csv;
+package com.scindapsus.calcite.file;
 
 import com.scindapsus.calcite.CalciteDatasource;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ public class MyConfig {
      */
     @Bean
     public CalciteDatasource calciteDatasource() {
-        return new CalciteDatasource("model.json");
+        return new CalciteDatasource("mix.json");
     }
 
     /**

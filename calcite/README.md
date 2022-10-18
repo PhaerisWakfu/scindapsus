@@ -1,6 +1,6 @@
 # Scindapsus Calcite
 
-> 利用ApacheCalcite通过SQL读取csv数据
+> 利用ApacheCalcite通过SQL读取数据
 
 ## 使用
 
@@ -19,11 +19,23 @@
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
 </dependency>
+<!--根据需要引入不同的包-->
+<dependency>
+    <groupId>org.apache.calcite</groupId>
+    <artifactId>calcite-file</artifactId>
+    <version>${calcite.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.calcite</groupId>
+    <artifactId>calcite-redis</artifactId>
+    <version>${calcite.version}</version>
+</dependency>
 ```
 
 ### 编写数据源配置文件
 
-csvSchema 通过${directory}指定csv表路径
+#### csv
+file类型通过${directory}指定表路径
 
 ```json
 {
@@ -33,7 +45,7 @@ csvSchema 通过${directory}指定csv表路径
     {
       "name": "CSV",
       "type": "custom",
-      "factory": "com.scindapsus.calcite.csv.CsvSchemaFactory",
+      "factory": "org.apache.calcite.adapter.file.FileSchemaFactory",
       "operand": {
         "directory": "csv"
       }
@@ -41,32 +53,35 @@ csvSchema 通过${directory}指定csv表路径
   ]
 }
 ```
-
-也可以使用calcite内置的mysql schema
+#### json
+file类型通过${directory}指定表路径
 
 ```json
 {
   "version": "1.0",
-  "defaultSchema": "CSV",
+  "defaultSchema": "JSON",
   "schemas": [
     {
-      "name": "CSV",
+      "name": "JSON",
       "type": "custom",
-      "factory": "com.scindapsus.calcite.csv.CsvSchemaFactory",
+      "factory": "org.apache.calcite.adapter.file.FileSchemaFactory",
       "operand": {
-        "directory": "csv"
+        "directory": "json"
       }
-    },
+    }
+  ]
+}
+```
+
+#### mysql
+
+```json
+{
+  "version": "1.0",
+  "defaultSchema": "MY",
+  "schemas": [
     {
-      "name": "CSV2",
-      "type": "custom",
-      "factory": "com.scindapsus.calcite.csv.CsvSchemaFactory",
-      "operand": {
-        "directory": "csv2"
-      }
-    },
-    {
-      "name": "MSQ",
+      "name": "MY",
       "type": "custom",
       "factory": "org.apache.calcite.adapter.jdbc.JdbcSchema$Factory",
       "operand": {
@@ -80,6 +95,51 @@ csvSchema 通过${directory}指定csv表路径
 }
 ```
 
+#### redis
+
+```json
+{
+  "version": "1.0",
+  "defaultSchema": "REDIS",
+  "schemas": [
+    {
+      "type": "custom",
+      "name": "REDIS",
+      "factory": "org.apache.calcite.adapter.redis.RedisSchemaFactory",
+      "operand": {
+        "host": "localhost",
+        "port": 6379,
+        "database": 0,
+        "password": ""
+      },
+      "tables": [
+        {
+          "name": "JSON",
+          "factory": "org.apache.calcite.adapter.redis.RedisTableFactory",
+          "operand": {
+            "dataFormat": "json",
+            "fields": [
+              {
+                "name": "DEPTNO",
+                "type": "varchar",
+                "mapping": "DEPTNO"
+              },
+              {
+                "name": "NAME",
+                "type": "varchar",
+                "mapping": "NAME"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+
+
 ### 添加yml配置
 
 ```yaml
@@ -88,7 +148,7 @@ scindapsus:
     #是否使用自动装配注册数据源
     enabled: true
     #数据源配置文件所在路径
-    config-path: model.json
+    config-path: mix.json
 ```
 
 ### 添加配置类
@@ -101,7 +161,7 @@ public class MyConfig {
      */
     @Bean
     public CalciteDatasource calciteDatasource() {
-        return new CalciteDatasource("model.json");
+        return new CalciteDatasource("mix.json");
     }
 
     /**
@@ -116,7 +176,7 @@ public class MyConfig {
 
 ### 测试数据
 
-#### schema[csv]
+#### csv数据
 
 USERINFO
 ```
@@ -134,7 +194,7 @@ NAME:string,CLASS:string
 王五,高一二班
 赵六,高三一班
 ```
-#### schema[csv2]
+#### json数据
 
 PHONE
 ```
@@ -145,7 +205,7 @@ NAME:string,PHONE:string
 赵六,114
 ```
 
-#### schema[my]
+#### mysql数据
 
 ```sql
 CREATE TABLE `ADDRESS` (
@@ -169,7 +229,7 @@ public class CsvTest {
 
     @Test
     public void select() throws SQLException {
-        try (Connection connection = ConnectionHelper.getConnection("model.json")) {
+        try (Connection connection = ConnectionHelper.getConnection("mix.json")) {
             Statement statement = connection.createStatement();
             print(statement.executeQuery("select name,age from userinfo where age<18"));
         }
@@ -195,15 +255,13 @@ public class CsvTest {
 
 #### 注册bean使用orm操作类
 ```java
-public class CsvTest extends BaseTest {
+public class FileTest extends BaseTest {
 
-    /**
-     * csv与mysql join
-     */
     private static final String SQL = "SELECT u.name, u.age, c.class, p.phone, a.area FROM csv.userinfo u " +
-            "INNER JOIN csv.class c ON u.name = c.name " +
             //自己在windows创建的csv文件记得要修改字符集格式为UTF-8
-            "INNER JOIN csv2.phone p ON u.name = p.name " +
+            "INNER JOIN csv.class c ON u.name = c.name " +
+            //数据文件中的key注意大写
+            "INNER JOIN json.phone p ON u.name = p.name " +
             //这里是mysql的表，注意，添加mysql schema的时候，库中的表名与字段一定要大写，不然无法识别
             "INNER JOIN my.address a ON u.name = a.name " +
             "WHERE u.age < 18";

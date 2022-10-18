@@ -3,4 +3,4 @@ scindapsus:
     #是否使用自动装配注册数据源
     enabled: true
     #数据源配置文件所在路径
-    config-path: model.json
+    config-path: mix.json

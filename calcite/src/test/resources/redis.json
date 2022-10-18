@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "defaultSchema": "REDIS",
+  "schemas": [
+    {
+      "type": "custom",
+      "name": "REDIS",
+      "factory": "org.apache.calcite.adapter.redis.RedisSchemaFactory",
+      "operand": {
+        "host": "localhost",
+        "port": 6379,
+        "database": 0,
+        "password": ""
+      },
+      "tables": [
+        {
+          "name": "JSON",
+          "factory": "org.apache.calcite.adapter.redis.RedisTableFactory",
+          "operand": {
+            "dataFormat": "json",
+            "fields": [
+              {
+                "name": "DEPTNO",
+                "type": "varchar",
+                "mapping": "DEPTNO"
+              },
+              {
+                "name": "NAME",
+                "type": "varchar",
+                "mapping": "NAME"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

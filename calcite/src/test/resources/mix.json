@@ -5,17 +5,17 @@
     {
       "name": "CSV",
       "type": "custom",
-      "factory": "com.scindapsus.calcite.csv.CsvSchemaFactory",
+      "factory": "org.apache.calcite.adapter.file.FileSchemaFactory",
       "operand": {
         "directory": "csv"
       }
     },
     {
-      "name": "CSV2",
+      "name": "JSON",
       "type": "custom",
-      "factory": "com.scindapsus.calcite.csv.CsvSchemaFactory",
+      "factory": "org.apache.calcite.adapter.file.FileSchemaFactory",
       "operand": {
-        "directory": "csv2"
+        "directory": "json"
       }
     },
     {

@@ -13,18 +13,13 @@
     <artifactId>scindapsus-calcite-spring-boot-starter</artifactId>
 
     <properties>
-        <calcite.version>1.32.0</calcite.version>
+        <calcite.version>1.31.0</calcite.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.apache.calcite</groupId>
             <artifactId>calcite-core</artifactId>
-            <version>${calcite.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.calcite</groupId>
-            <artifactId>calcite-file</artifactId>
             <version>${calcite.version}</version>
         </dependency>
 
@@ -47,6 +42,24 @@
         </dependency>
 
         <!--test-->
+        <dependency>
+            <groupId>org.apache.calcite</groupId>
+            <artifactId>calcite-file</artifactId>
+            <version>${calcite.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.calcite</groupId>
+            <artifactId>calcite-redis</artifactId>
+            <version>${calcite.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.calcite</groupId>
+            <artifactId>calcite-testkit</artifactId>
+            <version>${calcite.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
