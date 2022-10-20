@@ -6,6 +6,7 @@ import com.scindapsus.lock.LockRegistryFactory;
 import com.scindapsus.lock.annotation.DistributedLock;
 import com.scindapsus.lock.exception.DistributedLockException;
 import com.scindapsus.lock.support.SpringExpressionLangParser;
+import org.apache.commons.lang.ArrayUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,6 +19,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
@@ -61,7 +63,7 @@ public class LockAspect {
         Object[] args = point.getArgs();
 
         String name = lock.name();
-        String key = lock.key();
+        String[] key = lock.key();
         long retryDuration = lock.retryDuration();
         Class<? extends LockFallback<?>> fallback = lock.fallback();
 
@@ -136,19 +138,19 @@ public class LockAspect {
      * @param target          method所在的对象
      * @param args            入参
      * @return lock name
-     * @throws DistributedLockException
      */
-    private String generateLockName(String inputName, String inputKey, MethodSignature methodSignature,
+    private String generateLockName(String inputName, String[] inputKey, MethodSignature methodSignature,
                                     Object target, Object[] args) {
         String name = null;
         if (!ObjectUtils.isEmpty(inputName)) {
             name = explainWithExpression(inputName, methodSignature, target, args);
         }
-
-        String key = ObjectUtils.isEmpty(inputKey)
-                ? defaultLockKey(methodSignature)
-                : explainWithExpression(inputKey, methodSignature, target, args);
-
+        String[] key = {defaultLockKey(methodSignature)};
+        if (ArrayUtils.isNotEmpty(inputKey)) {
+            key = Arrays.stream(inputKey)
+                    .map(k -> explainWithExpression(k, methodSignature, target, args))
+                    .toArray(String[]::new);
+        }
         return lockKeyPrefixGenerator.compute(name, key);
     }
 
@@ -160,7 +162,6 @@ public class LockAspect {
      * @param target          method所在的对象
      * @param args            入参
      * @return spring expression language explain
-     * @throws DistributedLockException
      */
     private String explainWithExpression(String expression, MethodSignature methodSignature, Object target, Object[] args) {
         String parse = SpringExpressionLangParser.parse(target, expression, methodSignature.getMethod(), args);

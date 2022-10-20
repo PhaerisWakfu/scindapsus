@@ -30,7 +30,7 @@ public @interface DistributedLock {
     /**
      * lock key
      */
-    String key() default "";
+    String[] key() default {};
 
     /**
      * retry duration(milliseconds)

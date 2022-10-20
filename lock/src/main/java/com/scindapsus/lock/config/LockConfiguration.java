@@ -4,6 +4,7 @@ import com.scindapsus.lock.LockFallback;
 import com.scindapsus.lock.LockRegistryFactory;
 import com.scindapsus.lock.aspect.LockAspect;
 import com.scindapsus.lock.LockKeyPrefixGenerator;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.support.locks.DefaultLockRegistry;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -35,10 +37,13 @@ class LockConfiguration {
     @Bean
     @ConditionalOnMissingBean(LockKeyPrefixGenerator.class)
     LockKeyPrefixGenerator defaultKeyPrefixGenerator() {
-        return (region, key) -> {
-            String regionName = Optional.ofNullable(region).map(x -> x + LockKeyPrefixGenerator.SEPARATOR)
-                    .orElse(LockKeyPrefixGenerator.EMPTY_STR);
-            return regionName + key;
+        return (region, keys) -> {
+            StringBuilder keyAppender = new StringBuilder();
+            Optional.ofNullable(region)
+                    .ifPresent(keyAppender::append);
+            Arrays.stream(keys).filter(StringUtils::isNotBlank)
+                    .forEach(k -> keyAppender.append(LockKeyPrefixGenerator.SEPARATOR).append(k));
+            return keyAppender.toString();
         };
     }
 

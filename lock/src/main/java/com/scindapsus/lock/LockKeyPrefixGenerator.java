@@ -12,14 +12,12 @@ public interface LockKeyPrefixGenerator {
 
     String SEPARATOR = ":";
 
-    String EMPTY_STR = "";
-
     /**
      * 组装缓存key
      *
      * @param region 域
-     * @param key    键名
+     * @param keys   键名
      * @return 组装后的琐名
      */
-    String compute(String region, String key);
+    String compute(String region, String... keys);
 }
