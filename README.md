@@ -16,6 +16,8 @@
 
 - [multi-ds]：一个启动注解+数据源配置搞定多数据源
 
+- [robot]：企业微信群聊机器人/钉钉自定义机器人简单封装，支持antlr的stringTemplate模板语法与从SQL中获取变量参数
+
 - [tenant]：调用链中自动传播租户与日志打印租户
 
 - [calcite]： Any data, Anywhere to SQL
