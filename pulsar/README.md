@@ -12,7 +12,7 @@
 ```xml
 <dependency>
     <groupId>com.phaeris.scindapsus</groupId>
-    <artifactId>scindapsus-pulsar-spring-cloud-starter</artifactId>
+    <artifactId>scindapsus-pulsar-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
