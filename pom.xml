@@ -28,6 +28,7 @@
         <module>robot</module>
         <module>tenant</module>
         <module>calcite</module>
+        <module>pulsar</module>
     </modules>
 
     <properties>

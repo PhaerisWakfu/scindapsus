@@ -55,6 +55,11 @@
                 <artifactId>scindapsus-calcite-spring-boot-starter</artifactId>
                 <version>${scindapsus.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.phaeris.scindapsus</groupId>
+                <artifactId>scindapsus-pulsar-spring-boot-starter</artifactId>
+                <version>${scindapsus.version}</version>
+            </dependency>
 
             <!--非starter组件-->
             <dependency>

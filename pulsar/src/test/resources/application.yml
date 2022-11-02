@@ -1,0 +1,45 @@
+scindapsus:
+  pulsar:
+    #客户端
+    client:
+      #名称（必填）
+      name: test
+      #认证className
+      auth-class-name: com.scindapsus.pulsar.MyAuthenticationProvider
+      #client端相关配置
+      property:
+        #连接地址
+        service-url: pulsar://localhost:6650
+    #消费者配置支持多个（名称:配置）
+    consumer:
+      consumer1:
+        #message schema类名(实现{@link org.apache.pulsar.client.api.Schema}或{@link com.scindapsus.pulsar.PulsarSchemaProvider})
+        schema-class-name: com.scindapsus.pulsar.MyPulsarSchemaProvider
+        #listener类名
+        listener-class-name: com.scindapsus.pulsar.ProducerListener
+        subscription-type: Shared
+        subscription-initial-position: Latest
+        property:
+          topic-names: test-str
+          subscription-name: MyConsumer
+      consumer2:
+        schema-class-name: com.scindapsus.pulsar.MyPulsarSchemaProvider
+        listener-class-name: com.scindapsus.pulsar.ProducerListener
+        subscription-type: Shared
+        subscription-initial-position: Latest
+        property:
+          topic-names: test-str
+          subscription-name: MyConsumer
+    #生产者配置支持多个（名称:配置）
+    producer:
+      producer1:
+        #message schema类名(实现{@link org.apache.pulsar.client.api.Schema}或{@link com.scindapsus.pulsar.PulsarSchemaProvider})
+        schema-class-name: com.scindapsus.pulsar.MyPulsarSchemaProvider
+        access-mode: Shared
+        compression-type: LZ4
+        property:
+          topic-name: test-str
+          producer-name: MyProducer
+
+server:
+  port: 7070

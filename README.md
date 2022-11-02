@@ -20,6 +20,8 @@
 
 - [calcite]： Any data, Anywhere to SQL
 
+- [pulsar]： apache pulsar spring boot starter
+
 [lock]:/lock/README.md
 
 [log]:/log/README.md
@@ -37,6 +39,8 @@
 [tenant]:/tenant/README.md
 
 [calcite]:/calcite/README.md
+
+[pulsar]:/pulsar/README.md
 
 
 ### 安装
