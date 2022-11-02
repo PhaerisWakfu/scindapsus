@@ -15,5 +15,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Import(PulsarImportBeanDefinitionRegistrar.class)
-public @interface EnabledPulsar {
+public @interface EnablePulsar {
 }

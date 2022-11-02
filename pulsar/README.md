@@ -66,7 +66,7 @@ scindapsus:
 
 ### 开启自动装配
 ```java
-@EnabledPulsar
+@EnablePulsar
 @SpringBootApplication
 public class PulsarTestApplication {
 
