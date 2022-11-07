@@ -1,10 +1,13 @@
 package com.scindapsus.pulsar.factory;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.scindapsus.pulsar.PulsarSchemaProvider;
 import com.scindapsus.pulsar.config.PulsarProperties;
 import com.scindapsus.pulsar.exception.PulsarConfigException;
-import org.apache.pulsar.client.api.*;
+import com.scindapsus.pulsar.tools.ClassUtil;
+import org.apache.pulsar.client.api.Producer;
+import org.apache.pulsar.client.api.ProducerBuilder;
+import org.apache.pulsar.client.api.PulsarClient;
+import org.apache.pulsar.client.api.Schema;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,7 +33,7 @@ public class PulsarProducerFactoryBean implements FactoryBean<Producer<?>> {
     public Producer<?> getObject() throws Exception {
         Schema<?> schema;
         try {
-            schema = getSchema(config.getSchemaClassName());
+            schema = ClassUtil.getSchema(config.getSchemaClassName());
         } catch (Exception e) {
             throw new PulsarConfigException("schema class is not found");
         }
@@ -39,19 +42,6 @@ public class PulsarProducerFactoryBean implements FactoryBean<Producer<?>> {
         Optional.ofNullable(config.getCompressionType()).ifPresent(builder::compressionType);
         Optional.ofNullable(config.getAccessMode()).ifPresent(builder::accessMode);
         return builder.create();
-    }
-
-    static Schema<?> getSchema(String schemaClassName) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-        Schema<?> schema;
-        Object schemaObj = Class.forName(schemaClassName).newInstance();
-        if (schemaObj instanceof Schema) {
-            schema = (Schema<?>) schemaObj;
-        } else if (schemaObj instanceof PulsarSchemaProvider) {
-            schema = ((PulsarSchemaProvider<?>) schemaObj).get();
-        } else {
-            throw new PulsarConfigException("unsuitable schema class");
-        }
-        return schema;
     }
 
     @Override

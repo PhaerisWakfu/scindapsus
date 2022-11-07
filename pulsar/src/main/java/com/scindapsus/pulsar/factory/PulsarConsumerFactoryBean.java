@@ -1,9 +1,10 @@
 package com.scindapsus.pulsar.factory;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.scindapsus.pulsar.PulsarSchemaProvider;
+import cn.hutool.core.util.ReflectUtil;
 import com.scindapsus.pulsar.config.PulsarProperties;
 import com.scindapsus.pulsar.exception.PulsarConfigException;
+import com.scindapsus.pulsar.tools.ClassUtil;
 import org.apache.pulsar.client.api.*;
 import org.springframework.beans.factory.SmartFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class PulsarConsumerFactoryBean implements SmartFactoryBean<Consumer<?>> 
         Schema<?> schema;
         MessageListener listener;
         try {
-            schema = PulsarProducerFactoryBean.getSchema(config.getSchemaClassName());
-            listener = (MessageListener) Class.forName(config.getListenerClassName()).newInstance();
+            schema = ClassUtil.getSchema(config.getSchemaClassName());
+            listener = ReflectUtil.newInstance(config.getListenerClassName());
         } catch (Exception e) {
             throw new PulsarConfigException("schema or listener class is not found");
         }
