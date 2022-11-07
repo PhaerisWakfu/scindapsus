@@ -4,6 +4,7 @@ import com.scindapsus.pulsar.config.PulsarProperties;
 import com.scindapsus.pulsar.exception.PulsarConfigException;
 import com.scindapsus.pulsar.factory.PulsarConsumerFactoryBean;
 import com.scindapsus.pulsar.factory.PulsarProducerFactoryBean;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -25,7 +26,10 @@ public class PulsarImportBeanDefinitionRegistrar implements ImportBeanDefinition
 
     @Override
     public void registerBeanDefinitions(@NonNull AnnotationMetadata importingClassMetadata, @NonNull BeanDefinitionRegistry registry) {
-        registerBean(properties, registry);
+        //注册消费者bean
+        properties.getConsumer().forEach((name, config) -> registerFactoryBean(PulsarConsumerFactoryBean.class, registry, name, config));
+        //注册生产者bean
+        properties.getProducer().forEach((name, config) -> registerFactoryBean(PulsarProducerFactoryBean.class, registry, name, config));
     }
 
     @Override
@@ -38,25 +42,16 @@ public class PulsarImportBeanDefinitionRegistrar implements ImportBeanDefinition
     /**
      * 注册bean
      *
-     * @param config   broker配置
-     * @param registry 注册器
+     * @param factoryBeanClass bean的factoryBeanClass
+     * @param registry         注册器
+     * @param name             beanName
+     * @param config           factoryBean构造bean所需的配置
      */
-    public void registerBean(PulsarProperties config, BeanDefinitionRegistry registry) {
-        //注册消费者bean
-        config.getConsumer().forEach((k, v) -> {
-            BeanDefinitionBuilder consumerBuilder = BeanDefinitionBuilder
-                    .genericBeanDefinition(PulsarConsumerFactoryBean.class);
-            consumerBuilder.addConstructorArgValue(v);
-            BeanDefinition consumerDefinition = consumerBuilder.getBeanDefinition();
-            registry.registerBeanDefinition(k, consumerDefinition);
-        });
-        //注册生产者bean
-        config.getProducer().forEach((k, v) -> {
-            BeanDefinitionBuilder producerBuilder = BeanDefinitionBuilder
-                    .genericBeanDefinition(PulsarProducerFactoryBean.class);
-            producerBuilder.addConstructorArgValue(v);
-            BeanDefinition producerDefinition = producerBuilder.getBeanDefinition();
-            registry.registerBeanDefinition(k, producerDefinition);
-        });
+    private <T> void registerFactoryBean(Class<? extends FactoryBean<?>> factoryBeanClass, BeanDefinitionRegistry registry, String name, T config) {
+        BeanDefinitionBuilder consumerBuilder = BeanDefinitionBuilder
+                .genericBeanDefinition(factoryBeanClass);
+        consumerBuilder.addConstructorArgValue(config);
+        BeanDefinition consumerDefinition = consumerBuilder.getBeanDefinition();
+        registry.registerBeanDefinition(name, consumerDefinition);
     }
 }

@@ -9,4 +9,8 @@ public class PulsarConfigException extends RuntimeException {
     public PulsarConfigException(String message) {
         super(message);
     }
+
+    public PulsarConfigException(String message, Throwable throwable) {
+        super(message, throwable);
+    }
 }
