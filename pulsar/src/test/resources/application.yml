@@ -1,21 +1,21 @@
 scindapsus:
   pulsar:
-    #¿Í»§¶Ë
+    #å®¢æˆ·ç«¯
     client:
-      #Ãû³Æ£¨±ØÌî£©
+      #åç§°ï¼ˆå¿…å¡«ï¼‰
       name: test
-      #ÈÏÖ¤className
+      #è®¤è¯className
       auth-class-name: com.scindapsus.pulsar.MyAuthenticationProvider
-      #client¶ËÏà¹ØÅäÖÃ
+      #clientç«¯ç›¸å…³é…ç½®
       property:
-        #Á¬½ÓµØÖ·
+        #è¿æ¥åœ°å€
         service-url: pulsar://localhost:6650
-    #Ïû·ÑÕßÅäÖÃÖ§³Ö¶à¸ö£¨Ãû³Æ:ÅäÖÃ£©
+    #æ¶ˆè´¹è€…é…ç½®æ”¯æŒå¤šä¸ªï¼ˆåç§°:é…ç½®ï¼‰
     consumer:
       consumer1:
-        #message schemaÀàÃû(ÊµÏÖ{@link org.apache.pulsar.client.api.Schema}»ò{@link com.scindapsus.pulsar.PulsarSchemaProvider})
+        #message schemaç±»å(å®ç°{@link org.apache.pulsar.client.api.Schema}æˆ–{@link com.scindapsus.pulsar.PulsarSchemaProvider})
         schema-class-name: com.scindapsus.pulsar.MyPulsarSchemaProvider
-        #listenerÀàÃû
+        #listenerç±»å
         listener-class-name: com.scindapsus.pulsar.ProducerListener
         subscription-type: Shared
         subscription-initial-position: Latest
@@ -30,10 +30,10 @@ scindapsus:
         property:
           topic-names: test-str
           subscription-name: MyConsumer
-    #Éú²úÕßÅäÖÃÖ§³Ö¶à¸ö£¨Ãû³Æ:ÅäÖÃ£©
+    #ç”Ÿäº§è€…é…ç½®æ”¯æŒå¤šä¸ªï¼ˆåç§°:é…ç½®ï¼‰
     producer:
       producer1:
-        #message schemaÀàÃû(ÊµÏÖ{@link org.apache.pulsar.client.api.Schema}»ò{@link com.scindapsus.pulsar.PulsarSchemaProvider})
+        #message schemaç±»å(å®ç°{@link org.apache.pulsar.client.api.Schema}æˆ–{@link com.scindapsus.pulsar.PulsarSchemaProvider})
         schema-class-name: com.scindapsus.pulsar.MyPulsarSchemaProvider
         access-mode: Shared
         compression-type: LZ4
