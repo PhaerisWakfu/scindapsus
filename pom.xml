@@ -29,6 +29,7 @@
         <module>tenant</module>
         <module>calcite</module>
         <module>pulsar</module>
+        <module>cli</module>
     </modules>
 
     <properties>
@@ -76,6 +77,11 @@
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-bloomFilter</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-jwt</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
             <dependency>
