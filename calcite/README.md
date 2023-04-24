@@ -1,6 +1,6 @@
 # Scindapsus Calcite
 
-> 利用ApacheCalcite通过SQL读取数据
+> 无需懂calcite语法，简单配置通过SQL读取异构数据
 
 ## 使用
 
@@ -19,20 +19,29 @@
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
 </dependency>
-<!--根据需要引入不同的包-->
-<dependency>
-    <groupId>org.apache.calcite</groupId>
-    <artifactId>calcite-file</artifactId>
-    <version>${calcite.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.calcite</groupId>
-    <artifactId>calcite-redis</artifactId>
-    <version>${calcite.version}</version>
-</dependency>
 ```
 
-### 编写数据源配置文件
+### 直接使用可添加yml配置
+
+```yaml
+#暂不支持redis
+scindapsus:
+  calcite:
+    schemas:
+      - name: json
+        file:
+          dir: json
+      - name: csv
+        file:
+          dir: csv
+      - name: my
+        jdbc:
+          driver: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/ds1
+          user: root
+          password: root
+```
+### 也可自行使用calcite语法创建数据源
 
 #### csv
 file类型通过${directory}指定表路径
@@ -137,39 +146,14 @@ file类型通过${directory}指定表路径
   ]
 }
 ```
-
-
-
-### 添加yml配置
-
-```yaml
-scindapsus:
-  calcite:
-    #是否使用自动装配注册数据源
-    enabled: true
-    #数据源配置文件所在路径
-    config-path: mix.json
-```
-
-### 添加配置类
+#### 自行添加配置读取自定义的数据源配置文件
 ```java
 @Configuration
 public class MyConfig {
 
-    /**
-     * 不想使用yml配置，也可以手动注册bean
-     */
     @Bean
     public CalciteDatasource calciteDatasource() {
-        return new CalciteDatasource("mix.json");
-    }
-
-    /**
-     * 不想通过静态工具类调用，可以注册方便操作SQL的ORM操作类
-     */
-    @Bean
-    public JdbcTemplate jdbcTemplate(CalciteDatasource calciteDatasource) {
-        return new JdbcTemplate(calciteDatasource);
+        return new CalciteDatasource("mix.json", false);
     }
 }
 ```

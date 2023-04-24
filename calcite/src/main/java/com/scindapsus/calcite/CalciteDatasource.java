@@ -18,13 +18,19 @@ public class CalciteDatasource extends AbstractDataSource {
      */
     private final String configPath;
 
-    public CalciteDatasource(String configPath) {
+    /**
+     * 是否是绝对路径
+     */
+    private final boolean absolute;
+
+    public CalciteDatasource(String configPath, boolean absolute) {
         this.configPath = configPath;
+        this.absolute = absolute;
     }
 
     @Override
     public Connection getConnection() throws SQLException {
-        return ConnectionHelper.getConnection(configPath);
+        return absolute ? ConnectionHelper.getConnectionByAbsolutePath(configPath) : ConnectionHelper.getConnection(configPath);
     }
 
     @Override

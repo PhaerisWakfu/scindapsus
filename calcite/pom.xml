@@ -17,10 +17,36 @@
     </properties>
 
     <dependencies>
+
+        <!--core-->
         <dependency>
             <groupId>org.apache.calcite</groupId>
             <artifactId>calcite-core</artifactId>
             <version>${calcite.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.calcite</groupId>
+            <artifactId>calcite-file</artifactId>
+            <version>${calcite.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.calcite</groupId>
+            <artifactId>calcite-redis</artifactId>
+            <version>${calcite.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>ST4</artifactId>
+        </dependency>
+
+        <!--tools-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
         </dependency>
 
         <!--spring-->
@@ -35,31 +61,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!--tools-->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
-        </dependency>
-
         <!--test-->
-        <dependency>
-            <groupId>org.apache.calcite</groupId>
-            <artifactId>calcite-file</artifactId>
-            <version>${calcite.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.calcite</groupId>
-            <artifactId>calcite-redis</artifactId>
-            <version>${calcite.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.calcite</groupId>
-            <artifactId>calcite-testkit</artifactId>
-            <version>${calcite.version}</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

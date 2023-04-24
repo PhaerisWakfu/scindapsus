@@ -19,8 +19,12 @@ public class ConnectionHelper {
     private static final String JDBC_PREFIX = "jdbc:calcite:";
 
     public static Connection getConnection(String path) throws SQLException {
+        return getConnectionByAbsolutePath(Sources.of(ResourceUtil.getResource(path)).file().getAbsolutePath());
+    }
+
+    public static Connection getConnectionByAbsolutePath(String absolutePath) throws SQLException {
         Properties info = new Properties();
-        info.put(MODEL_NAME, Sources.of(ResourceUtil.getResource(path)).file().getAbsolutePath());
+        info.put(MODEL_NAME, absolutePath);
         return DriverManager.getConnection(JDBC_PREFIX, info);
     }
 }

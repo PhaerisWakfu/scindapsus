@@ -2,13 +2,12 @@ package com.scindapsus.calcite;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * @author wyh
  * @since 2022/10/14
  */
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication
 public class CalciteTestApplication {
 
     public static void main(String[] args) {

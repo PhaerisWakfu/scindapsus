@@ -16,7 +16,7 @@ public class RedisTest extends BaseTest {
 
     @Test
     public void select() {
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(new CalciteDatasource("redis.json"));
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(new CalciteDatasource("redis.json", false));
         System.out.println(jdbcTemplate.queryForList(SQL));
     }
 }
