@@ -24,7 +24,6 @@
 ### 直接使用可添加yml配置
 
 ```yaml
-#暂不支持redis
 scindapsus:
   calcite:
     schemas:
@@ -40,6 +39,23 @@ scindapsus:
           url: jdbc:mysql://localhost:3306/ds1
           user: root
           password: root
+        #redis使用中文有问题，例如使用联表或者where条件时会匹配不上，暂时无解决办法
+      - name: redis
+        redis:
+          host: localhost
+          port: 6379
+          database: 0
+          password:
+          tables:
+            - name: json
+              data-format: json
+              fields:
+                - name: deptno
+                  type: varchar
+                  mapping: deptno
+                - name: name
+                  type: varchar
+                  mapping: name
 ```
 ### 也可自行使用calcite语法创建数据源
 
@@ -207,56 +223,28 @@ INSERT INTO `ds1`.`ADDRESS` (`ID`, `NAME`, `AREA`) VALUES ('4', '赵六', '北�
 
 #### redis数据
 ```shell
-redis-cli LPUSH json {"DEPTNO":1,"NAME":"张三"}
-redis-cli LPUSH json {"DEPTNO":2,"NAME":"李四"}
-redis-cli LPUSH json {"DEPTNO":3,"NAME":"王五"}
-redis-cli LPUSH json {"DEPTNO":4,"NAME":"赵六"}
+redis-cli LPUSH JSON {"DEPTNO":1,"NAME":"张三"}
+redis-cli LPUSH JSON {"DEPTNO":2,"NAME":"李四"}
+redis-cli LPUSH JSON {"DEPTNO":3,"NAME":"王五"}
+redis-cli LPUSH JSON {"DEPTNO":4,"NAME":"赵六"}
 ```
 
 ### 查询
-
-#### 直接使用静态工具类
-```java
-public class CsvTest {
-
-    @Test
-    public void select() throws SQLException {
-        try (Connection connection = ConnectionHelper.getConnection("mix.json")) {
-            Statement statement = connection.createStatement();
-            print(statement.executeQuery("select name,age from userinfo where age<18"));
-        }
-    }
-
-    private static void print(ResultSet resultSet) throws SQLException {
-        final ResultSetMetaData metaData = resultSet.getMetaData();
-        final int columnCount = metaData.getColumnCount();
-        while (resultSet.next()) {
-            for (int i = 1; ; i++) {
-                System.out.print(resultSet.getString(i));
-                if (i < columnCount) {
-                    System.out.print(", ");
-                } else {
-                    System.out.println();
-                    break;
-                }
-            }
-        }
-    }
-}
-```
 
 #### 注册bean使用orm操作类
 ```java
 public class MixTest extends BaseTest {
 
-    private static final String SQL = "SELECT u.name, u.age, c.class, p.phone, a.area FROM csv.userinfo u " +
+    private static final String SQL = "SELECT u.name, u.age, c.class, p.phone, a.area, r.deptno FROM csv.userinfo u " +
             //自己在windows创建的csv文件记得要修改字符集格式为UTF-8
             "INNER JOIN csv.class c ON u.name = c.name " +
             //数据文件中的key注意大写
             "INNER JOIN json.phone p ON u.name = p.name " +
             //这里是mysql的表，注意，添加mysql schema的时候，库中的表名与字段一定要大写，不然无法识别
             "INNER JOIN my.address a ON u.name = a.name " +
-            "WHERE u.age < 18";
+            //这是redis的表
+            "INNER JOIN redis.json r on u.name = r.name " +
+            "WHERE u.age = 18";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

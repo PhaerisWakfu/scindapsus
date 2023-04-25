@@ -20,7 +20,7 @@
 
 - [tenant]：调用链中自动传播租户与日志打印租户
 
-- [calcite]： Any data, Anywhere to SQL
+- [calcite]：无需懂calcite语法，简单配置通过SQL读取异构数据
 
 - [pulsar]： apache pulsar spring boot starter
 

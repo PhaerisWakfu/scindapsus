@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Locale;
 
 import static com.scindapsus.calcite.constants.CommonConstants.CONFIG_PATH;
 
@@ -34,7 +33,6 @@ class CalciteAutoConfiguration {
         if (schemas == null || schemas.isEmpty()) {
             throw new IllegalArgumentException("Please set your schema config.");
         }
-        schemas.forEach(s -> s.setName(s.getName().toUpperCase(Locale.ROOT)));
         String content = STHolder.getConfig(schemas, schemas.get(0).getName());
         String path = getPath();
         FileUtil.appendString(content, path, StandardCharsets.UTF_8);

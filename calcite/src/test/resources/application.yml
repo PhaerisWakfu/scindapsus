@@ -1,4 +1,3 @@
-#暂不支持redis
 scindapsus:
   calcite:
     schemas:
@@ -14,3 +13,20 @@ scindapsus:
           url: jdbc:mysql://localhost:3306/ds1
           user: root
           password: root
+        #redis使用中文有问题，例如使用联表或者where条件时会匹配不上，暂时无解决办法
+      - name: redis
+        redis:
+          host: localhost
+          port: 6379
+          database: 0
+          password:
+          tables:
+            - name: json
+              data-format: json
+              fields:
+                - name: deptno
+                  type: varchar
+                  mapping: deptno
+                - name: name
+                  type: varchar
+                  mapping: name

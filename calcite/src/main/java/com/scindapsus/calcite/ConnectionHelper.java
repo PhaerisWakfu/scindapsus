@@ -18,6 +18,11 @@ public class ConnectionHelper {
 
     private static final String JDBC_PREFIX = "jdbc:calcite:";
 
+    static {
+        //解决非redis数据源下中文映射不对的问题
+        System.setProperty("saffron.default.charset", "UTF-8");
+    }
+
     public static Connection getConnection(String path) throws SQLException {
         return getConnectionByAbsolutePath(Sources.of(ResourceUtil.getResource(path)).file().getAbsolutePath());
     }

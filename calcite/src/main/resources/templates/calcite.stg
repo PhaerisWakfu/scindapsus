@@ -7,13 +7,15 @@ getConfig(schemas, def)
   "version": "1.0",
   "defaultSchema": "<def>",
   "schemas": [
-  <schemas:{schema|
-    <if(schema.file)>
-        <file(schema.name, schema.file.dir)>
-    <elseif(schema.jdbc)>
-        <jdbc(schema.name, schema.jdbc.driver, schema.jdbc.url, schema.jdbc.user, schema.jdbc.password)>
-    <endif>
-  }; separator=",">
+      <schemas:{schema|
+        <if(schema.jdbc)>
+            <jdbc(schema.name, schema.jdbc.driver, schema.jdbc.url, schema.jdbc.user, schema.jdbc.password)>
+        <elseif(schema.redis)>
+            <redis(schema.name, schema.redis.host, schema.redis.port, schema.redis.database, schema.redis.password, schema.redis.tables)>
+        <else>
+            <file(schema.name, schema.file.dir)>
+        <endif>
+      }; separator=",">
   ]
 }
 >>
@@ -42,5 +44,50 @@ jdbc(name, driver, url, user, password)
     "jdbcUser": "<user>",
     "jdbcPassword": "<password>"
   }
+}
+>>
+
+redis(name, host, port, database, password, tables)
+::=<<
+{
+  "name": "<name>",
+  "type": "custom",
+  "factory": "org.apache.calcite.adapter.redis.RedisSchemaFactory",
+  "operand": {
+    "host": "<host>",
+    "port": <port>,
+    "database": <database>,
+    "password": "<password>"
+  },
+  "tables": [
+      <tables:{table|
+            <redisTable(table.name, table.dataFormat, table.fields)>
+       }; separator=",">
+  ]
+}
+>>
+
+redisTable(name, dataFormat, fields)
+::=<<
+{
+  "name": "<name>",
+  "factory": "org.apache.calcite.adapter.redis.RedisTableFactory",
+  "operand": {
+    "dataFormat": "<dataFormat>",
+    "fields": [
+        <fields:{field|
+            <redisTableField(field.name, field.type, field.mapping)>
+        }; separator=",">
+    ]
+  }
+}
+>>
+
+redisTableField(name, type, mapping)
+::=<<
+{
+    "name": "<name>",
+    "type": "<type>",
+    "mapping": "<mapping>"
 }
 >>

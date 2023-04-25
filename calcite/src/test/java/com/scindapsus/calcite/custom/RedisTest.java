@@ -1,4 +1,4 @@
-package com.scindapsus.calcite.redis;
+package com.scindapsus.calcite.custom;
 
 import com.scindapsus.calcite.BaseTest;
 import com.scindapsus.calcite.CalciteDatasource;
@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class RedisTest extends BaseTest {
 
-    private static final String SQL = "select * from redis.json where deptno=2";
+    private static final String SQL = "select * from redis.json where deptno=1";
 
     @Test
     public void select() {
