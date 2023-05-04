@@ -7,7 +7,7 @@ import com.scindapsus.lock.exception.DistributedLockException;
  * 琐失败回调
  *
  * @author wyh
- * @since 1.0
+ * @since 2021/10/9
  */
 @FunctionalInterface
 public interface LockFallback<T> {

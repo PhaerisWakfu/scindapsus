@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  * distributed lock
  *
  * @author wyh
- * @since 1.0
+ * @since 2021/10/9
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

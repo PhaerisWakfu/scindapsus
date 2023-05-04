@@ -2,7 +2,7 @@ package com.scindapsus.lock.exception;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/10/9
  */
 public class DistributedLockException extends RuntimeException {
 

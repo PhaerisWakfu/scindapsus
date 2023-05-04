@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2022/10/12
  */
 public class TenantInterceptor implements HandlerInterceptor {
 

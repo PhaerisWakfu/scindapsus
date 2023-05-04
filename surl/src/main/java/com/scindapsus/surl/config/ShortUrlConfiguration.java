@@ -13,7 +13,7 @@ import java.time.Duration;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/11/5
  */
 @Configuration
 @EnableConfigurationProperties(ShortUrlProperties.class)

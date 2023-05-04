@@ -3,7 +3,7 @@ package com.scindapsus.surl;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/11/5
  */
 public class ShortUrl {
 

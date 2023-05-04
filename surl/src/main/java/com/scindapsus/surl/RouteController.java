@@ -12,7 +12,7 @@ import java.io.IOException;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/11/5
  */
 @Controller
 @ConditionalOnProperty(prefix = ShortUrlProperties.PREFIX, name = "enabled", havingValue = "true")

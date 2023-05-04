@@ -18,7 +18,7 @@ import org.springframework.lang.NonNull;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2022/11/2
  */
 public class PulsarImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar, EnvironmentAware {
 

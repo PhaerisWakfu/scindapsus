@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/11/15
  */
 @ConfigurationProperties(prefix = DroolsProperties.PREFIX)
 @Validated

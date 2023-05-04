@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2022/10/12
  */
 @ConfigurationProperties(prefix = TenantProperties.PREFIX)
 public class TenantProperties {

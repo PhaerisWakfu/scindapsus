@@ -8,7 +8,7 @@ import org.springframework.beans.factory.FactoryBean;
  * datasource factory bean
  *
  * @author wyh
- * @since 1.0
+ * @since 2022/7/4
  */
 public class DataSourceFactoryBean implements FactoryBean<HikariDataSource> {
 

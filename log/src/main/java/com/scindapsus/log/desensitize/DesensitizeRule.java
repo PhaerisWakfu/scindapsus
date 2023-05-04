@@ -4,7 +4,7 @@ import cn.hutool.core.util.DesensitizedUtil;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/10/11
  */
 public class DesensitizeRule {
 

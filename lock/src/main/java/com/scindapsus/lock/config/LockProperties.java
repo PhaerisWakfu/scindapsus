@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/10/9
  */
 @ConfigurationProperties(prefix = LockProperties.PREFIX)
 public class LockProperties {

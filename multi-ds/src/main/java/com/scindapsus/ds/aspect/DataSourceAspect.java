@@ -14,7 +14,7 @@ import org.springframework.core.annotation.Order;
 /**
  * @author Java课代表
  * @author wyh
- * @since 1.0
+ * @since 2022/7/4
  */
 @Aspect
 // 指定优先级高于@Transactional的默认优先级

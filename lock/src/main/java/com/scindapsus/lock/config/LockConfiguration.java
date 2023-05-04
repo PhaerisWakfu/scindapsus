@@ -17,7 +17,7 @@ import java.util.Optional;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/10/9
  */
 @Configuration
 @EnableConfigurationProperties(LockProperties.class)

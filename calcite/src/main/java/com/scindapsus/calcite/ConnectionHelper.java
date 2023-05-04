@@ -10,7 +10,7 @@ import java.util.Properties;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2022/10/14
  */
 public class ConnectionHelper {
 

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/11/15
  */
 @Configuration
 @EnableConfigurationProperties(DroolsProperties.class)

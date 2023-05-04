@@ -16,7 +16,7 @@ import java.util.Optional;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/10/9
  */
 @ConditionalOnClass({CuratorFramework.class, ZookeeperLockRegistry.class})
 @ConditionalOnProperty(prefix = LockProperties.PREFIX, name = "type", havingValue = "zookeeper")

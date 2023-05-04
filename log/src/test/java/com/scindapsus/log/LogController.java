@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/10/11
  */
 @RestController
 @RequestMapping("/log")

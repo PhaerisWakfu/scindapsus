@@ -9,7 +9,7 @@ import cn.hutool.core.util.RadixUtil;
  * 短网址长转短工具类
  *
  * @author wyh
- * @since 1.0
+ * @since 2021/11/5
  */
 public class ShortUrlHelper {
 

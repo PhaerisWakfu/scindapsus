@@ -2,7 +2,7 @@ package com.scindapsus.ds.exception;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2022/7/4
  */
 public class DataSourceException extends RuntimeException {
 

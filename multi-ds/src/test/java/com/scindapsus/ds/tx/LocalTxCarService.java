@@ -17,7 +17,7 @@ import java.util.Date;
  * <p>例子这里使用AopContext来调用自己来保证都被aop识别（使用aopContext来调用本类其他方法需要设置aop的exposeProxy为true，不然会抛错）
  *
  * @author wyh
- * @since 1.0
+ * @since 2022/7/4
  */
 @EnableAspectJAutoProxy(exposeProxy = true)
 @Service

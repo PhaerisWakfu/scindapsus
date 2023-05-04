@@ -2,7 +2,7 @@ package com.scindapsus.surl.exception;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/11/5
  */
 public class UnknownMappingException extends RuntimeException {
 

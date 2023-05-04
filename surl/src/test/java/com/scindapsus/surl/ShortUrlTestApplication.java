@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/11/5
  */
 @SpringBootApplication
 public class ShortUrlTestApplication {

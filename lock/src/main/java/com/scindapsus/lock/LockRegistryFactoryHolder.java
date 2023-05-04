@@ -8,7 +8,7 @@ import org.springframework.integration.support.locks.LockRegistry;
  * 手动获取琐
  *
  * @author wyh
- * @since 1.0
+ * @since 2021/10/9
  */
 public class LockRegistryFactoryHolder {
 

@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2021/11/5
  */
 @ConfigurationProperties(prefix = ShortUrlProperties.PREFIX)
 public class ShortUrlProperties {

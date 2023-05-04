@@ -13,7 +13,7 @@ import java.util.concurrent.Executor;
  *
  * @author funkye
  * @author wyh
- * @since 1.0
+ * @since 2022/7/4
  */
 public class ConnectionProxy implements Connection {
 

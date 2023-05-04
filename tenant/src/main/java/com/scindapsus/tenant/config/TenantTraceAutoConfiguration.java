@@ -30,7 +30,7 @@ import java.util.TreeSet;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2022/10/12
  */
 @ConditionalOnClass(Tracer.class)
 @Configuration

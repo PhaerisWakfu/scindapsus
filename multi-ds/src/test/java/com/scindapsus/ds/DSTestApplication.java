@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2022/7/4
  */
 @MapperScan(basePackages = "com.scindapsus.ds.mapper")
 @SpringBootApplication

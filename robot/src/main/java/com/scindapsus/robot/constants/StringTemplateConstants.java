@@ -2,7 +2,7 @@ package com.scindapsus.robot.constants;
 
 /**
  * @author wyh
- * @since 1.0
+ * @since 2022/8/29
  */
 public class StringTemplateConstants {
 

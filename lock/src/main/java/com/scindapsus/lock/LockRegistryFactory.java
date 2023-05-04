@@ -6,7 +6,7 @@ import org.springframework.integration.support.locks.LockRegistry;
  * 琐注册工厂,根据琐类型会创建不同的工厂
  *
  * @author wyh
- * @since 1.0
+ * @since 2021/10/9
  */
 @FunctionalInterface
 public interface LockRegistryFactory {
