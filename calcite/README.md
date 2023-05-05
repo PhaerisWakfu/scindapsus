@@ -39,7 +39,6 @@ scindapsus:
           url: jdbc:mysql://localhost:3306/ds1
           user: root
           password: root
-        #redis使用中文有问题，例如使用联表或者where条件时会匹配不上，暂时无解决办法
       - name: redis
         redis:
           host: localhost
@@ -223,10 +222,10 @@ INSERT INTO `ds1`.`ADDRESS` (`ID`, `NAME`, `AREA`) VALUES ('4', '赵六', '北�
 
 #### redis数据
 ```shell
-redis-cli LPUSH JSON {"DEPTNO":1,"NAME":"张三"}
-redis-cli LPUSH JSON {"DEPTNO":2,"NAME":"李四"}
-redis-cli LPUSH JSON {"DEPTNO":3,"NAME":"王五"}
-redis-cli LPUSH JSON {"DEPTNO":4,"NAME":"赵六"}
+redis-cli LPUSH JSON '{"DEPTNO":1,"NAME":"张三"}'
+redis-cli LPUSH JSON '{"DEPTNO":2,"NAME":"李四"}'
+redis-cli LPUSH JSON '{"DEPTNO":3,"NAME":"王五"}'
+redis-cli LPUSH JSON '{"DEPTNO":4,"NAME":"赵六"}'
 ```
 
 ### 查询
