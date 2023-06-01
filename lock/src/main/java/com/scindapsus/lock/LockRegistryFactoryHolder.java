@@ -15,7 +15,7 @@ public class LockRegistryFactoryHolder {
     private static LockRegistryFactory lockRegistryFactory;
 
     @Autowired
-    @SuppressWarnings("all")
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     public void setUp(LockRegistryFactory lockRegistryFactory) {
         LockRegistryFactoryHolder.lockRegistryFactory = lockRegistryFactory;
     }

@@ -20,7 +20,7 @@ import java.util.Optional;
 public class PulsarProducerFactoryBean implements FactoryBean<Producer<?>> {
 
     @Autowired
-    @SuppressWarnings("all")
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private PulsarClient client;
 
     private final PulsarProperties.Producer config;

@@ -35,7 +35,7 @@ public class RoutingDataSource extends AbstractRoutingDataSource {
     }
 
     @Override
-    @SuppressWarnings("all")
+    @SuppressWarnings("NullableProblems")
     public Connection getConnection() throws SQLException {
         if (TxUtil.getTxId() == null) {
             return super.getConnection();
@@ -44,7 +44,7 @@ public class RoutingDataSource extends AbstractRoutingDataSource {
     }
 
     @Override
-    @SuppressWarnings("all")
+    @SuppressWarnings("NullableProblems")
     public Connection getConnection(String username, String password) throws SQLException {
         if (TxUtil.getTxId() == null) {
             return super.getConnection(username, password);

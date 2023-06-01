@@ -18,7 +18,7 @@ import java.util.Optional;
 public class PulsarConsumerFactoryBean implements SmartFactoryBean<Consumer<?>> {
 
     @Autowired
-    @SuppressWarnings("all")
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private PulsarClient client;
 
     private final PulsarProperties.Consumer config;

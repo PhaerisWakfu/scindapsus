@@ -76,8 +76,8 @@ class TenantTraceAutoConfiguration {
                                                                        @Nullable List<CorrelationScopeCustomizer> correlationScopeCustomizers,
                                                                        CorrelationScopeDecorator.Builder tenantCorrelationScopeDecoratorBuilder) {
 
-        Set<String> correlationFields = redirectOldPropertyToNew("spring.sleuth.log.slf4j.whitelisted-mdc-keys", whiteListedMDCKeys,
-                "spring.sleuth.baggage.correlation-fields", sleuthBaggageProperties.getCorrelationFields());
+        Set<String> correlationFields = redirectOldPropertyToNew(whiteListedMDCKeys,
+                sleuthBaggageProperties.getCorrelationFields());
 
         // Add fields from properties
         for (String field : correlationFields) {
@@ -110,13 +110,12 @@ class TenantTraceAutoConfiguration {
     /**
      * refer{@link org.springframework.cloud.sleuth.autoconfig.brave.BraveBaggageConfiguration#redirectOldPropertyToNew}
      */
-    @SuppressWarnings("all")
-    static Set<String> redirectOldPropertyToNew(String oldProperty, List<String> oldValue, String newProperty,
+    static Set<String> redirectOldPropertyToNew(List<String> oldValue,
                                                 List<String> newValue) {
         Set<String> result = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         result.addAll(newValue);
         if (!oldValue.isEmpty()) {
-            logger.warn("'" + oldProperty + "' has been renamed to '" + newProperty
+            logger.warn("'" + "spring.sleuth.log.slf4j.whitelisted-mdc-keys" + "' has been renamed to '" + "spring.sleuth.baggage.correlation-fields"
                     + "' and will be removed in a future release.");
             result.addAll(oldValue); // dedupes
         }

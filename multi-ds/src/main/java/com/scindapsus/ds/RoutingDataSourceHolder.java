@@ -14,7 +14,7 @@ public class RoutingDataSourceHolder {
     private static RoutingDataSource routingDataSource;
 
     @Autowired
-    @SuppressWarnings("all")
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     public void setUp(RoutingDataSource routingDataSource) {
         RoutingDataSourceHolder.routingDataSource = routingDataSource;
     }

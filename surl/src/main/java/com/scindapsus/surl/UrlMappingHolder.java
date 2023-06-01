@@ -14,7 +14,7 @@ public class UrlMappingHolder {
     private static UrlMappingService urlMappingService;
 
     @Autowired
-    @SuppressWarnings("all")
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     public void setUp(UrlMappingService urlMappingService) {
         UrlMappingHolder.urlMappingService = urlMappingService;
     }
