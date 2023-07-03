@@ -1,6 +1,8 @@
 package com.scindapsus.calcite;
 
 import cn.hutool.core.io.resource.ResourceUtil;
+import org.apache.calcite.config.CalciteConnectionProperty;
+import org.apache.calcite.jdbc.Driver;
 import org.apache.calcite.util.Sources;
 
 import java.sql.Connection;
@@ -14,9 +16,7 @@ import java.util.Properties;
  */
 public class ConnectionHelper {
 
-    private static final String MODEL_NAME = "model";
-
-    private static final String JDBC_PREFIX = "jdbc:calcite:";
+    private static final String DEFAULT_LEX = "mysql";
 
     static {
         //解决非redis数据源下中文映射不对的问题
@@ -29,7 +29,10 @@ public class ConnectionHelper {
 
     public static Connection getConnectionByAbsolutePath(String absolutePath) throws SQLException {
         Properties info = new Properties();
-        info.put(MODEL_NAME, absolutePath);
-        return DriverManager.getConnection(JDBC_PREFIX, info);
+        // 配置文件路径
+        info.setProperty(CalciteConnectionProperty.MODEL.camelName(), absolutePath);
+        // 设置SQL解析器
+        info.setProperty(CalciteConnectionProperty.LEX.camelName(), DEFAULT_LEX);
+        return DriverManager.getConnection(Driver.CONNECT_STRING_PREFIX, info);
     }
 }
