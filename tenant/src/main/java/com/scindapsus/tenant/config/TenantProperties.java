@@ -1,5 +1,7 @@
 package com.scindapsus.tenant.config;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -7,6 +9,8 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
  * @author wyh
  * @since 2022/10/12
  */
+@Getter
+@Setter
 @ConfigurationProperties(prefix = TenantProperties.PREFIX)
 public class TenantProperties {
 
@@ -29,31 +33,8 @@ public class TenantProperties {
     private Propagation propagation = new Propagation();
 
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isMdc() {
-        return mdc;
-    }
-
-    public void setMdc(boolean mdc) {
-        this.mdc = mdc;
-    }
-
-    public Propagation getPropagation() {
-        return propagation;
-    }
-
-    public void setPropagation(Propagation propagation) {
-        this.propagation = propagation;
-    }
-
-
+    @Getter
+    @Setter
     public static class Propagation {
 
         /**
@@ -65,22 +46,5 @@ public class TenantProperties {
          * 设置租户拦截路径
          */
         private String[] patterns = {"/**"};
-
-
-        public boolean isEnabled() {
-            return enabled;
-        }
-
-        public void setEnabled(boolean enabled) {
-            this.enabled = enabled;
-        }
-
-        public String[] getPatterns() {
-            return patterns;
-        }
-
-        public void setPatterns(String[] patterns) {
-            this.patterns = patterns;
-        }
     }
 }

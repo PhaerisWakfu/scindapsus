@@ -47,7 +47,7 @@ public interface UrlMappingService {
         //获取短链key
         String key = ShortUrlHelper.long2Short(originalUrl);
         //持久化
-        save(ShortUrl.getInstance()
+        save(new ShortUrl()
                 .setOriginalUrl(originalUrl)
                 .setKey(key));
         //生成短网址

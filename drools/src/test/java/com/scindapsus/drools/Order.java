@@ -1,37 +1,18 @@
 package com.scindapsus.drools;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 /**
  * @author wyh
  * @since 2022/7/25
  */
+@Data
+@AllArgsConstructor
 public class Order {
 
     private Double originalPrice;
 
     private Double realPrice;
-
-    public Order() {
-    }
-
-    public Order(Double originalPrice, Double realPrice) {
-        this.originalPrice = originalPrice;
-        this.realPrice = realPrice;
-    }
-
-    public Double getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(Double originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public Double getRealPrice() {
-        return realPrice;
-    }
-
-    public void setRealPrice(Double realPrice) {
-        this.realPrice = realPrice;
-    }
 }

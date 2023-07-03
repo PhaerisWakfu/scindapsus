@@ -1,10 +1,13 @@
 package com.scindapsus.robot.dto;
 
 
+import lombok.Data;
+
 /**
  * @author wyh
  * @since 2022/8/29
  */
+@Data
 public class SendResultDTO {
 
     /**
@@ -16,29 +19,4 @@ public class SendResultDTO {
      * 返回码提示语
      */
     private String errmsg;
-
-
-    public String getErrcode() {
-        return errcode;
-    }
-
-    public void setErrcode(String errcode) {
-        this.errcode = errcode;
-    }
-
-    public String getErrmsg() {
-        return errmsg;
-    }
-
-    public void setErrmsg(String errmsg) {
-        this.errmsg = errmsg;
-    }
-
-    @Override
-    public String toString() {
-        return "SendResultDTO{" +
-                "errcode='" + errcode + '\'' +
-                ", errmsg='" + errmsg + '\'' +
-                '}';
-    }
 }

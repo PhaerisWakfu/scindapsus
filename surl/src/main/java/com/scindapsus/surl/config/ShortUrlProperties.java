@@ -1,11 +1,15 @@
 package com.scindapsus.surl.config;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author wyh
  * @since 2021/11/5
  */
+@Setter
+@Getter
 @ConfigurationProperties(prefix = ShortUrlProperties.PREFIX)
 public class ShortUrlProperties {
 
@@ -20,21 +24,4 @@ public class ShortUrlProperties {
      * 自带接口的path
      */
     private String path;
-
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
 }
