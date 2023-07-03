@@ -75,7 +75,7 @@ public class LogDesensitizationConverter extends MessageConverter {
      */
     private static String regexFilterMessage(String message, List<DesensitizeRule> desensitizeRules) {
         try {
-            String regEx = "(?=(\\[|\\{)).*([\\\\\\]$]|[\\}$])";
+            String regEx = "(?=(\\[|\\{)).*([\\]$]|[\\}$])";
             Pattern pat = Pattern.compile(regEx);
             Matcher mat = pat.matcher(message);
             if (mat.find()) {

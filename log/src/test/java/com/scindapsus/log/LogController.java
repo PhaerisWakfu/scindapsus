@@ -1,6 +1,7 @@
 package com.scindapsus.log;
 
 import com.alibaba.fastjson.JSON;
+import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,32 +21,20 @@ public class LogController {
 
     @GetMapping
     public String test(Request request) {
-        log.info("request is {}", JSON.toJSONString(request));
+        log.info("toJson {},haha", JSON.toJSONString(request));
         log.info(JSON.toJSONString(request));
         return "ok";
     }
 
+    @Data
     public static class Request {
 
         private String name;
 
-        private String age;
+        private String phone;
 
+        private String idCard;
 
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getAge() {
-            return age;
-        }
-
-        public void setAge(String age) {
-            this.age = age;
-        }
+        private String email;
     }
 }

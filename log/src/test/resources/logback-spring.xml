@@ -28,7 +28,12 @@
         //银行卡
         BANK_CARD
     -->
-    <property scope="context" name="SensitiveDataKeys" value='[{"fieldName":"name","format":"CHINESE_NAME"}]'/>
+    <property scope="context" name="SensitiveDataKeys" value='[
+    {"fieldName":"name","format":"CHINESE_NAME"},
+    {"fieldName":"phone","format":"MOBILE_PHONE"},
+    {"fieldName":"idCard","format":"ID_CARD"},
+    {"fieldName":"email","format":"EMAIL"}
+    ]'/>
 
 
     <!--日志输出到文件-->

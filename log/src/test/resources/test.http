@@ -1,2 +1,2 @@
 ###
-GET http://localhost:8080/log?name=wyh&age=18
+GET http://localhost:8080/log?name=wyh&phone=18333333333&idCard=410311199311111111&email=243409312@qq.com
