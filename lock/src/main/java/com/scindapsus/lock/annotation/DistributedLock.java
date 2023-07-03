@@ -20,7 +20,7 @@ public @interface DistributedLock {
      * aliasFor {@link #key()}
      */
     @AliasFor("key")
-    String value() default "";
+    String[] value() default {};
 
     /**
      * region name
