@@ -9,12 +9,12 @@ Debezium提供了模块为你做这些复杂的工作。一些模块是通用的
 ```xml
 <dependency>
     <groupId>com.phaeris.scindapsus</groupId>
-    <artifactId>scindapsus-debezium-spring-boot-starter</artifactId>
+    <artifactId>scindapsus-dbzm-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
 <dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
+    <groupId>io.debezium</groupId>
+    <artifactId>debezium-connector-mysql</artifactId>
 </dependency>
 ```
 

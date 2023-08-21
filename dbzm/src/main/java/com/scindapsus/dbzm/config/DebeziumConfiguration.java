@@ -40,7 +40,7 @@ public class DebeziumConfiguration {
     }
 
     @Configuration
-    @ConditionalOnClass({com.mysql.cj.jdbc.Driver.class, io.debezium.connector.mysql.MySqlConnector.class})
+    @ConditionalOnClass(io.debezium.connector.mysql.MySqlConnector.class)
     static class Mysql {
 
         @Bean
@@ -51,7 +51,7 @@ public class DebeziumConfiguration {
     }
 
     @Configuration
-    @ConditionalOnClass({org.postgresql.Driver.class, io.debezium.connector.postgresql.PostgresConnector.class})
+    @ConditionalOnClass(io.debezium.connector.postgresql.PostgresConnector.class)
     static class Postgres {
 
         @Bean
