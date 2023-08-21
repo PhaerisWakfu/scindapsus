@@ -1,0 +1,12 @@
+scindapsus:
+  dbzm:
+    hostname: 127.0.0.1
+    port: 3306
+    user: root
+    password: root
+    storageFile: F:/debezium/storage.dat
+    historyFile: F:/debezium/history.dat
+    flushInterval: 10000
+    serverId: 1
+    serverName: name-1
+    database-whitelist: show

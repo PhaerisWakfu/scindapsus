@@ -30,6 +30,7 @@
         <module>calcite</module>
         <module>pulsar</module>
         <module>cli</module>
+        <module>dbzm</module>
     </modules>
 
     <properties>

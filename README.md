@@ -24,6 +24,8 @@
 
 - [pulsar]： apache pulsar spring boot starter
 
+- [dbzm]： debezium, 比canal更强大易用，支持数据库类型更多的的cdc框架
+
 [lock]:/lock/README.md
 
 [log]:/log/README.md
@@ -43,6 +45,8 @@
 [calcite]:/calcite/README.md
 
 [pulsar]:/pulsar/README.md
+
+[dbzm]:/dbzm/README.md
 
 
 ### 安装
