@@ -22,12 +22,13 @@ public class ConfigurationImportBeanDefinitionRegistrar implements ImportBeanDef
 
     @Override
     public void registerBeanDefinitions(@NonNull AnnotationMetadata importingClassMetadata, @NonNull BeanDefinitionRegistry registry) {
-        properties.getDatasource().forEach(cfg -> {
+        properties.getDatasource().forEach((name, cfg) -> {
             BeanDefinitionBuilder consumerBuilder = BeanDefinitionBuilder
                     .genericBeanDefinition(ConfigurationFactoryBean.class);
+            consumerBuilder.addConstructorArgValue(name);
             consumerBuilder.addConstructorArgValue(cfg);
             BeanDefinition consumerDefinition = consumerBuilder.getBeanDefinition();
-            registry.registerBeanDefinition(cfg.getServerName(), consumerDefinition);
+            registry.registerBeanDefinition(name, consumerDefinition);
         });
 
     }

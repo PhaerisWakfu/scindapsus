@@ -11,15 +11,18 @@ import org.springframework.beans.factory.FactoryBean;
  */
 public class ConfigurationFactoryBean implements FactoryBean<Configuration> {
 
+    private final String name;
+
     private final DebeziumProperties.DatasourceProperties properties;
 
-    public ConfigurationFactoryBean(DebeziumProperties.DatasourceProperties properties) {
+    public ConfigurationFactoryBean(String name, DebeziumProperties.DatasourceProperties properties) {
+        this.name = name;
         this.properties = properties;
     }
 
     @Override
     public Configuration getObject() throws Exception {
-        return DebeziumConfigBuilder.build(properties);
+        return DebeziumConfigBuilder.build(name, properties);
     }
 
     @Override

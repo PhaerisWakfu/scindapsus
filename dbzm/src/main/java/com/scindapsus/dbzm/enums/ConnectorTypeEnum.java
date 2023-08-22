@@ -1,4 +1,4 @@
-package com.scindapsus.dbzm;
+package com.scindapsus.dbzm.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
