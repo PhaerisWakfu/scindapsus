@@ -1,6 +1,7 @@
 package com.scindapsus.dbzm;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import io.debezium.config.Configuration;
 import io.debezium.engine.ChangeEvent;
 import io.debezium.engine.DebeziumEngine;
@@ -20,6 +21,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ChangeDataCaptureListener {
 
+    private static final String CHANGE_DATA_PAYLOAD = "payload";
+
     private final List<DebeziumEngine<ChangeEvent<String, String>>> engineList = new CopyOnWriteArrayList<>();
 
     private final Executor taskExecutor;
@@ -33,7 +36,7 @@ public class ChangeDataCaptureListener {
         List<DebeziumEngine<ChangeEvent<String, String>>> engines = configurations.stream()
                 .map(configuration -> DebeziumEngine.create(Json.class)
                         .using(configuration.asProperties())
-                        .notifying(record -> receiveChangeEvent(record.value()))
+                        .notifying(this::receiveChangeEvent)
                         .build()).collect(Collectors.toList());
         this.engineList.addAll(engines);
     }
@@ -58,11 +61,12 @@ public class ChangeDataCaptureListener {
         }
     }
 
-    private void receiveChangeEvent(String value) {
-        Optional.ofNullable(value).ifPresent(v -> {
-            ChangeData changeData = JSON.parseObject(v).getObject("payload", ChangeData.class);
+    private void receiveChangeEvent(ChangeEvent<String, String> changeEvent) {
+        Optional.ofNullable(changeEvent).ifPresent(ce -> {
+            JSONObject key = JSON.parseObject(ce.key()).getJSONObject(CHANGE_DATA_PAYLOAD);
+            ChangeData changeData = JSON.parseObject(ce.value()).getObject(CHANGE_DATA_PAYLOAD, ChangeData.class);
             if (StringUtils.hasText(changeData.getOp())) {
-                events.forEach(e -> e.listen(changeData));
+                events.forEach(e -> e.onMessage(ce.destination(), key, changeData));
             }
         });
     }
