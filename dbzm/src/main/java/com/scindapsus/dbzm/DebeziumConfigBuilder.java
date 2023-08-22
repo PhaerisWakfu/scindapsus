@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -19,6 +17,7 @@ import java.util.Map;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DebeziumConfigBuilder {
 
+
     /**
      * 获取数据源debezium连接配置
      * <p>
@@ -27,10 +26,8 @@ public class DebeziumConfigBuilder {
      * @param name       连接器名称
      * @param properties 连接器配置
      * @return debezium连接配置
-     * @throws Exception 可能抛出的异常
      */
-    public static Configuration build(String name, DebeziumProperties.DatasourceProperties properties) throws Exception {
-        checkFile(properties.getStorageFile());
+    public static Configuration build(String name, DebeziumProperties.DatasourceProperties properties) {
         Configuration.Builder builder = Configuration.create()
                 .with("name", name)
                 .with("snapshot.mode", properties.getSnapshotMode())
@@ -56,18 +53,5 @@ public class DebeziumConfigBuilder {
                 ? builder.with("database.whitelist", properties.getDatabaseWhitelist())
                 : builder.with("table.whitelist", properties.getTableWhitelist());
         return builder.build();
-    }
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    private static void checkFile(String storageFile) throws IOException {
-        String dir = storageFile.substring(0, storageFile.lastIndexOf("/"));
-        File dirFile = new File(dir);
-        if (!dirFile.exists()) {
-            dirFile.mkdirs();
-        }
-        File file = new File(storageFile);
-        if (!file.exists()) {
-            file.createNewFile();
-        }
     }
 }

@@ -21,7 +21,7 @@ public class ConfigurationFactoryBean implements FactoryBean<Configuration> {
     }
 
     @Override
-    public Configuration getObject() throws Exception {
+    public Configuration getObject() {
         return DebeziumConfigBuilder.build(name, properties);
     }
 

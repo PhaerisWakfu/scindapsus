@@ -14,3 +14,6 @@ scindapsus:
         user: root
         password: root
         database-whitelist: show
+logging:
+  level:
+    com.scindapsus.dbzm: debug
