@@ -10,7 +10,6 @@ Debezium提供了模块为你做这些复杂的工作。一些模块是通用的
 <dependency>
     <groupId>com.phaeris.scindapsus</groupId>
     <artifactId>scindapsus-dbzm-spring-boot-starter</artifactId>
-    <version>1.0-SNAPSHOT</version>
 </dependency>
 <dependency>
     <groupId>io.debezium</groupId>
@@ -22,16 +21,18 @@ Debezium提供了模块为你做这些复杂的工作。一些模块是通用的
 ```yaml
 scindapsus:
   dbzm:
-    hostname: localhost
-    port: 3306
-    user: root
-    password: root
-    storageFile: F:/debezium/storage.dat
-    historyFile: F:/debezium/history.dat
-    flushInterval: 10000
-    serverId: 1
-    serverName: name-1
-    database-whitelist: show
+    datasource:
+      - server-id: 1
+        server-name: name-1
+        connector-type: mysql
+        hostname: 127.0.0.1
+        port: 3306
+        user: root
+        password: root
+        storage-file: F:/debezium/storage.dat
+        history-file: F:/debezium/history.dat
+        flush-interval: 10000
+        database-whitelist: show
 ```
 
 ### 注册自己的CDCEvent  

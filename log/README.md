@@ -19,7 +19,6 @@
 <dependency>
     <groupId>com.phaeris.scindapsus</groupId>
     <artifactId>scindapsus-log</artifactId>
-    <version>1.0-SNAPSHOT</version>
 </dependency>
 <dependency>
     <groupId>org.springframework.boot</groupId>

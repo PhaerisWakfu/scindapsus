@@ -52,16 +52,6 @@
             <groupId>io.debezium</groupId>
             <artifactId>debezium-embedded</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.debezium</groupId>
-            <artifactId>debezium-connector-mysql</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>io.debezium</groupId>
-            <artifactId>debezium-connector-postgres</artifactId>
-            <optional>true</optional>
-        </dependency>
     </dependencies>
 
 </project>

@@ -111,7 +111,6 @@
 <dependency>
     <groupId>com.phaeris.scindapsus</groupId>
     <artifactId>scindapsus-lock-spring-boot-starter</artifactId>
-    <version>1.0-SNAPSHOT</version>
 </dependency>
 <!--redis琐实现-->
 <dependency>

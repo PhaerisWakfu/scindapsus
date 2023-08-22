@@ -11,7 +11,6 @@
     <dependency>
         <groupId>com.phaeris.scindapsus</groupId>
         <artifactId>scindapsus-robot-spring-boot-starter</artifactId>
-        <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
         <groupId>org.springframework.boot</groupId>

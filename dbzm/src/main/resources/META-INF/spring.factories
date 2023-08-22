@@ -1,3 +1,4 @@
 # Auto Configuration
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.scindapsus.dbzm.config.DebeziumConfiguration
+com.scindapsus.dbzm.config.DebeziumConfiguration,\
+com.scindapsus.dbzm.registrar.ConfigurationImportBeanDefinitionRegistrar

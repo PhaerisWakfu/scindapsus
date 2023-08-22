@@ -15,13 +15,11 @@
 <dependency>
     <groupId>com.phaeris.scindapsus</groupId>
     <artifactId>scindapsus-ds-spring-boot-starter</artifactId>
-    <version>1.0-SNAPSHOT</version>
 </dependency>
  <!--根据自己需要引入orm依赖与驱动包ds-->
 <dependency>
     <groupId>org.mybatis.spring.boot</groupId>
     <artifactId>mybatis-spring-boot-starter</artifactId>
-    <version>2.2.2</version>
     <scope>test</scope>
 </dependency>
 <dependency>

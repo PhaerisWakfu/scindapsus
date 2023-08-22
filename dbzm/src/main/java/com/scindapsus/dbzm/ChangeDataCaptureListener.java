@@ -15,11 +15,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class ChangeDataCaptureListener {
-
-    private static final String CHANGE_DATA_NAME = "payload";
 
     private final List<DebeziumEngine<ChangeEvent<String, String>>> engineList = new CopyOnWriteArrayList<>();
 
@@ -28,13 +27,15 @@ public class ChangeDataCaptureListener {
     private final List<CDCEvent> events;
 
 
-    public ChangeDataCaptureListener(Executor taskExecutor, List<CDCEvent> events, Configuration configuration) {
+    public ChangeDataCaptureListener(Executor taskExecutor, List<CDCEvent> events, List<Configuration> configurations) {
         this.taskExecutor = taskExecutor;
         this.events = events;
-        this.engineList.add(DebeziumEngine.create(Json.class)
-                .using(configuration.asProperties())
-                .notifying(record -> receiveChangeEvent(record.value()))
-                .build());
+        List<DebeziumEngine<ChangeEvent<String, String>>> engines = configurations.stream()
+                .map(configuration -> DebeziumEngine.create(Json.class)
+                        .using(configuration.asProperties())
+                        .notifying(record -> receiveChangeEvent(record.value()))
+                        .build()).collect(Collectors.toList());
+        this.engineList.addAll(engines);
     }
 
     @PostConstruct
@@ -59,7 +60,7 @@ public class ChangeDataCaptureListener {
 
     private void receiveChangeEvent(String value) {
         Optional.ofNullable(value).ifPresent(v -> {
-            ChangeData changeData = JSON.parseObject(v).getObject(CHANGE_DATA_NAME, ChangeData.class);
+            ChangeData changeData = JSON.parseObject(v).getObject("payload", ChangeData.class);
             if (StringUtils.hasText(changeData.getOp())) {
                 events.forEach(e -> e.listen(changeData));
             }
