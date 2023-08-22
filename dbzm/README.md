@@ -22,16 +22,18 @@ Debezium提供了模块为你做这些复杂的工作。一些模块是通用的
 scindapsus:
   dbzm:
     datasource:
-      - server-id: 1
-        server-name: name-1
+      my-connector:
+        snapshot-mode: schema_only
         connector-type: mysql
+        storage-file: F:/debezium/storage_my.dat
+        history-file: F:/debezium/history_my.dat
+        flush-interval: 10000
+        server-id: 1
+        server-name: mysql-1
         hostname: 127.0.0.1
         port: 3306
         user: root
         password: root
-        storage-file: F:/debezium/storage.dat
-        history-file: F:/debezium/history.dat
-        flush-interval: 10000
         database-whitelist: show
 ```
 
