@@ -35,6 +35,21 @@ scindapsus:
         user: root
         password: root
         database-whitelist: show
+# 根据需求设置cdc engine的线程池参数
+# 不想使用spring的线程池可自己配置一个{@link java.util.concurrent.Executor}注册为bean
+spring:
+  task:
+    execution:
+      thread-name-prefix: avatar-
+      pool:
+        core-size: 8
+        max-size: 16
+        queue-capacity: 10
+        keep-alive: 30s
+        allow-core-thread-timeout: false
+      shutdown:
+        await-termination: true
+        await-termination-period: 60s
 ```
 
 ### 注册自己的CDCEvent  
