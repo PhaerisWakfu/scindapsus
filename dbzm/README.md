@@ -25,6 +25,7 @@ scindapsus:
       my-connector:
         snapshot-mode: schema_only
         connector-type: mysql
+        offset-backing-store-type: file
         storage-file: F:/debezium/storage_my.dat
         history-file: F:/debezium/history_my.dat
         flush-interval: 10000

@@ -29,6 +29,8 @@ public class DebeziumProperties {
 
         /**
          * 快照模式（不同connector支持的mode不同）
+         * <p>
+         * 请参考官方文档配置自己所需的模式
          */
         private String snapshotMode;
 
