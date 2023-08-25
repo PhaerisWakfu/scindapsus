@@ -35,7 +35,7 @@ public class DebeziumProperties {
         /**
          * 连接器类型
          */
-        private ConnectorTypeEnum connectorType;
+        private ConnectorTypeEnum connectorType = ConnectorTypeEnum.MYSQL;
 
         /**
          * 服务id

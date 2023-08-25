@@ -40,7 +40,7 @@ scindapsus:
 spring:
   task:
     execution:
-      thread-name-prefix: avatar-
+      thread-name-prefix: scindapsus-
       pool:
         core-size: 8
         max-size: 16

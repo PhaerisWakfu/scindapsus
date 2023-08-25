@@ -6,7 +6,6 @@ import io.debezium.relational.history.FileDatabaseHistory;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.Map;
 
@@ -42,16 +41,15 @@ public class DebeziumConfigBuilder {
                 .with("database.hostname", properties.getHostname())
                 .with("database.port", properties.getPort())
                 .with("database.user", properties.getUser())
-                .with("database.password", properties.getPassword());
+                .with("database.password", properties.getPassword())
+                .with("table.whitelist", properties.getTableWhitelist())
+                .with("database.whitelist", properties.getDatabaseWhitelist());
         Map<String, String> directProperties = properties.getDirectProperties();
         if (!CollectionUtils.isEmpty(directProperties)) {
             for (Map.Entry<String, String> entry : directProperties.entrySet()) {
                 builder.with(entry.getKey(), entry.getValue());
             }
         }
-        builder = StringUtils.hasText(properties.getDatabaseWhitelist())
-                ? builder.with("database.whitelist", properties.getDatabaseWhitelist())
-                : builder.with("table.whitelist", properties.getTableWhitelist());
         return builder.build();
     }
 }
