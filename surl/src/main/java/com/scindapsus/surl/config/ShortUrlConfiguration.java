@@ -35,10 +35,8 @@ class ShortUrlConfiguration {
                 Caffeine.newBuilder()
                         //最后一次访问后1天过期
                         .expireAfterAccess(Duration.ofDays(1))
-                        //弱引用key
-                        .weakKeys()
-                        //弱引用value
-                        .weakValues()
+                        //软引用value(内存不足时再被垃圾回收)
+                        .softValues()
                         .build();
 
         @Override
