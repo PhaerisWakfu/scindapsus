@@ -13,7 +13,7 @@
 - [multi-ds]：一个启动注解+数据源配置搞定多数据源
 - [pulsar]： apache pulsar spring boot starter
 - [robot]：企业微信群聊机器人/钉钉自定义机器人简单封装，支持antlr的stringTemplate模板语法与从SQL中获取变量参数
-- [screenshot]: 截图工具, 输入网址即可获取实时截图
+- [screenshot]: 截图工具, 使用无头浏览器实现输入网址获取实时截图
 - [surl]：一键配置短网址服务
 - [tenant]：调用链中自动传播租户与日志打印租户
 
