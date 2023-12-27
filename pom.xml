@@ -31,6 +31,7 @@
         <module>pulsar</module>
         <module>cli</module>
         <module>dbzm</module>
+        <module>screenshot</module>
     </modules>
 
     <properties>

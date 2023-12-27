@@ -22,7 +22,22 @@
         <dependencies>
             <dependency>
                 <groupId>com.phaeris.scindapsus</groupId>
+                <artifactId>scindapsus-calcite-spring-boot-starter</artifactId>
+                <version>${scindapsus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.phaeris.scindapsus</groupId>
+                <artifactId>scindapsus-dbzm-spring-boot-starter</artifactId>
+                <version>${scindapsus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.phaeris.scindapsus</groupId>
                 <artifactId>scindapsus-drools-spring-boot-starter</artifactId>
+                <version>${scindapsus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.phaeris.scindapsus</groupId>
+                <artifactId>scindapsus-graalvm</artifactId>
                 <version>${scindapsus.version}</version>
             </dependency>
             <dependency>
@@ -32,7 +47,7 @@
             </dependency>
             <dependency>
                 <groupId>com.phaeris.scindapsus</groupId>
-                <artifactId>scindapsus-surl-spring-boot-starter</artifactId>
+                <artifactId>scindapsus-log</artifactId>
                 <version>${scindapsus.version}</version>
             </dependency>
             <dependency>
@@ -42,39 +57,27 @@
             </dependency>
             <dependency>
                 <groupId>com.phaeris.scindapsus</groupId>
-                <artifactId>scindapsus-robot-spring-boot-starter</artifactId>
-                <version>${scindapsus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.phaeris.scindapsus</groupId>
-                <artifactId>scindapsus-tenant-spring-cloud-starter</artifactId>
-                <version>${scindapsus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.phaeris.scindapsus</groupId>
-                <artifactId>scindapsus-calcite-spring-boot-starter</artifactId>
-                <version>${scindapsus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.phaeris.scindapsus</groupId>
                 <artifactId>scindapsus-pulsar-spring-boot-starter</artifactId>
                 <version>${scindapsus.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.phaeris.scindapsus</groupId>
-                <artifactId>scindapsus-dbzm-spring-boot-starter</artifactId>
-                <version>${scindapsus.version}</version>
-            </dependency>
-
-            <!--非starter组件-->
-            <dependency>
-                <groupId>com.phaeris.scindapsus</groupId>
-                <artifactId>scindapsus-graalvm</artifactId>
+                <artifactId>scindapsus-robot-spring-boot-starter</artifactId>
                 <version>${scindapsus.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.phaeris.scindapsus</groupId>
-                <artifactId>scindapsus-log</artifactId>
+                <artifactId>scindapsus-screenshot</artifactId>
+                <version>${scindapsus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.phaeris.scindapsus</groupId>
+                <artifactId>scindapsus-surl-spring-boot-starter</artifactId>
+                <version>${scindapsus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.phaeris.scindapsus</groupId>
+                <artifactId>scindapsus-tenant-spring-cloud-starter</artifactId>
                 <version>${scindapsus.version}</version>
             </dependency>
         </dependencies>
