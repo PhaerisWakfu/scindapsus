@@ -61,13 +61,18 @@ public class ChangeDataCaptureListener {
         }
     }
 
-    private void receiveChangeEvent(ChangeEvent<String, String> changeEvent) {
-        Optional.ofNullable(changeEvent).ifPresent(ce -> {
-            JSONObject key = JSON.parseObject(ce.key()).getJSONObject(CHANGE_DATA_PAYLOAD);
-            ChangeData changeData = JSON.parseObject(ce.value()).getObject(CHANGE_DATA_PAYLOAD, ChangeData.class);
-            if (StringUtils.hasText(changeData.getOp())) {
+    private void receiveChangeEvent(ChangeEvent<String, String> event) {
+        Optional.ofNullable(event).ifPresent(ce -> {
+            JSONObject key = Optional.ofNullable(ce.key())
+                    .map(k -> JSON.parseObject(k).getJSONObject(CHANGE_DATA_PAYLOAD))
+                    .orElse(null);
+            Optional.ofNullable(ce.value()).ifPresent(v -> {
+                ChangeData changeData = JSON.parseObject(v).getObject(CHANGE_DATA_PAYLOAD, ChangeData.class);
+                if (!StringUtils.hasText(changeData.getOp())) {
+                    return;
+                }
                 events.forEach(e -> e.onMessage(ce.destination(), key, changeData));
-            }
+            });
         });
     }
 }
