@@ -112,7 +112,7 @@
     <groupId>com.phaeris.scindapsus</groupId>
     <artifactId>scindapsus-lock-spring-boot-starter</artifactId>
 </dependency>
-<!--redis琐实现-->
+<!--redis锁实现-->
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -133,9 +133,9 @@ scindapsus:
     #锁类型
     type: redis
     redis:
-      #琐过期时间
+      #锁过期时间
       expire: 60000
-      #琐前缀
+      #锁前缀
       registry-key: test
 spring:
   redis:
@@ -163,7 +163,7 @@ logging:
     <artifactId>scindapsus-lock-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
-<!--zk琐实现-->
+<!--zk锁实现-->
 <dependency>
     <groupId>org.springframework.integration</groupId>
     <artifactId>spring-integration-zookeeper</artifactId>

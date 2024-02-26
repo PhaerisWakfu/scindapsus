@@ -8,7 +8,7 @@
 - [dbzm]： debezium, 比canal更强大易用，支持数据库类型更多的的cdc框架
 - [drools]：drools spring boot starter
 - [graalvm]：使用GraalVM调用其他语言方法
-- [lock]：封装spring官方实现的分布式锁，支持静态获取琐、注解式加琐与动态代理加锁
+- [lock]：封装spring官方实现的分布式锁，支持静态获取锁、注解式加锁与动态代理加锁
 - [log]：一行配置引入日志脱敏
 - [multi-ds]：一个启动注解+数据源配置搞定多数据源
 - [pulsar]： apache pulsar spring boot starter
