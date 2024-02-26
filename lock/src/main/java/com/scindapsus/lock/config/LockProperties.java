@@ -19,18 +19,18 @@ public class LockProperties {
     public static final String PREFIX = "scindapsus.lock";
 
     /**
-     * 琐类型
+     * 锁类型
      */
     private LockTypeEnum type;
 
     /**
-     * redis琐额外配置
+     * redis锁额外配置
      */
     @NestedConfigurationProperty
     private Redis redis = new Redis();
 
     /**
-     * zk琐额外配置
+     * zk锁额外配置
      */
     @NestedConfigurationProperty
     private Zookeeper zookeeper = new Zookeeper();
@@ -45,7 +45,7 @@ public class LockProperties {
         private String registryKey = "scindapsus";
 
         /**
-         * 琐过期时间(milliseconds)
+         * 锁过期时间(milliseconds)
          */
         private long expire = 60000;
     }

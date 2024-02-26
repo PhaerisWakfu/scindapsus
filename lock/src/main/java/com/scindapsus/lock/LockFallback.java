@@ -4,7 +4,7 @@ package com.scindapsus.lock;
 import com.scindapsus.lock.exception.DistributedLockException;
 
 /**
- * 琐失败回调
+ * 锁失败回调
  *
  * @author wyh
  * @since 2021/10/9

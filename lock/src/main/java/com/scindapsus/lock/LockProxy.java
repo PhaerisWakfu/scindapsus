@@ -41,7 +41,7 @@ public class LockProxy implements InvocationHandler {
      * jdk动态代理方法加锁，只适用于类实现了interface的方法的代理
      *
      * @param target  实现类
-     * @param express 琐key表达式（支持spel）
+     * @param express 锁key表达式（支持spel）
      * @param <T>     实现类类型
      * @return 代理后的类
      */
@@ -53,8 +53,8 @@ public class LockProxy implements InvocationHandler {
      * jdk动态代理方法加锁，只适用于类实现了interface的方法的代理
      *
      * @param target        实现类
-     * @param express       琐key表达式（支持spel）
-     * @param retryDuration 尝试获取琐多少时间,获取不到抛{@link DistributedLockException}
+     * @param express       锁key表达式（支持spel）
+     * @param retryDuration 尝试获取锁多少时间,获取不到抛{@link DistributedLockException}
      * @param <T>           实现类类型
      * @return 代理后的类
      */
@@ -73,7 +73,7 @@ public class LockProxy implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) {
         //解析表达式
         String key = SpringExpressionLangParser.parse(target, express, method, args);
-        //获取琐对象
+        //获取锁对象
         Lock lock = LockRegistryFactoryHolder.getLock().obtain(key);
         return Optional.ofNullable(retryDuration)
                 .map(r -> tryLock(lock, method, args, r))
@@ -81,7 +81,7 @@ public class LockProxy implements InvocationHandler {
     }
 
     private Object lock(Lock lock, Method method, Object[] args) {
-        //阻塞式获取琐
+        //阻塞式获取锁
         lock.lock();
         try {
             log.debug("---get lock succeed");

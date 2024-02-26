@@ -5,7 +5,7 @@ import org.springframework.integration.support.locks.LockRegistry;
 
 
 /**
- * 手动获取琐
+ * 手动获取锁
  *
  * @author wyh
  * @since 2021/10/9
@@ -21,9 +21,9 @@ public class LockRegistryFactoryHolder {
     }
 
     /**
-     * 获取琐注册器
+     * 获取锁注册器
      *
-     * @return 琐注册器
+     * @return 锁注册器
      */
     public static LockRegistry getLock() {
         return lockRegistryFactory.generate();

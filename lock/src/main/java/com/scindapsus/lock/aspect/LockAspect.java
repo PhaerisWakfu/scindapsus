@@ -52,7 +52,7 @@ public class LockAspect {
      * try lock
      *
      * @param point 切点
-     * @param lock  分布式琐注解
+     * @param lock  分布式锁注解
      * @return 切点方法返回结果
      */
     @Around("@annotation(lock)")
