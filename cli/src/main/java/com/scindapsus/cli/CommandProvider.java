@@ -39,6 +39,33 @@ public class CommandProvider {
         System.out.println(new String(Base64.decode(str)));
     }
 
+    @ShellMethod(group = "secret", key = "64ue")
+    public void base64UrlEncode(String str) {
+        String s = Base64.encode(str);
+        s = s.replaceAll("\\+", "-");
+        s = s.replaceAll("/", "_");
+        s = s.replaceAll("=", "");
+        System.out.println(s);
+    }
+
+    @ShellMethod(group = "secret", key = "64ud")
+    public void base64UrlDecode(String str) {
+        String s = str;
+        s = s.replaceAll("-", "+");
+        s = s.replaceAll("_", "/");
+        switch (s.length() % 4) {
+            case 2:
+                s += "==";
+                break;
+            case 3:
+                s += "=";
+                break;
+            default:
+                break;
+        }
+        System.out.println(new String(Base64.decode(s)));
+    }
+
     @ShellMethod(group = "cmd", key = "ip")
     public void ip() {
         System.out.println(RuntimeUtil.execForStr("ipconfig"));
