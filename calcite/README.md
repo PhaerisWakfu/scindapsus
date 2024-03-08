@@ -195,12 +195,25 @@ NAME:string,CLASS:string
 #### json数据
 
 PHONE
-```
-NAME:string,PHONE:string
-张三,110
-李四,120
-王五,119
-赵六,114
+```json
+[
+  {
+    "NAME": "张三",
+    "PHONE": "110"
+  },
+  {
+    "NAME": "李四",
+    "PHONE": "120"
+  },
+  {
+    "NAME": "王五",
+    "PHONE": "119"
+  },
+  {
+    "NAME": "赵六",
+    "PHONE": "114"
+  }
+]
 ```
 
 #### mysql数据
