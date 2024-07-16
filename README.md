@@ -35,7 +35,7 @@
 
 [robot]:/robot/README.md
 
-[screenshot]:/screenshot/README.md
+[screenshot]:https://github.com/PhaerisWakfu/leica
 
 [surl]:/surl/README.md
 
